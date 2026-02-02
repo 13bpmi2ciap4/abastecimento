@@ -309,8 +309,13 @@
                     // NOME: 2026-02-02_11-05_VTR-13204.jpg
                     const customFileName = `${dataOcorrencia}_${horas}-${minutos}_VTR-${viatura}.jpg`;
 
+                    function formatarData(dataISO) {
+                        const [ano, mes, dia] = dataISO.split("-");
+                        return `${dia}-${mes}-${ano}`;
+                    }
+
                     // Marca d'água na imagem
-                    const textoMarca = `VTR: ${viatura} | ${dataOcorrencia} ${horas}:${minutos}`;
+                    const textoMarca = `VTR: ${viatura} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
                     ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
                     ctx.fillRect(0, height - 40, width, 40);
                     ctx.font = "bold 20px Arial";
