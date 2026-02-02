@@ -250,11 +250,13 @@
             messageDiv.style.display = "block";
             overlay.style.display = "block";
 
-            if (type !== 'is-warning') { // Se não for o de "enviando", some após 3s
+            // Se for sucesso ou erro, agende para sumir. 
+            // Se for 'is-warning' (enviando), não coloca timeout, deixa ela lá até o próximo showStatus.
+            if (type === 'is-success' || type === 'is-danger') {
                 setTimeout(() => {
                     messageDiv.style.display = "none";
                     overlay.style.display = "none";
-                }, 3000);
+                }, 3000); // 3 segundos é um tempo bom para leitura
             }
         }
 
@@ -326,19 +328,24 @@
 
         form.addEventListener("submit", async function (e) {
             e.preventDefault();
+
+            // 1. Bloqueia o botão e mostra o status de carregamento
             submitBtn.disabled = true;
-            showStatus("🚀 Enviando dados, aguarde...", "is-warning is-light");
+            submitBtn.classList.add("is-loading"); // Se estiver usando Bulma
+            showStatus("🚀 Enviando dados para o sistema... Aguarde.", "is-warning is-light");
 
             try {
                 const formData = new FormData(this);
                 const obj = Object.fromEntries(formData.entries());
 
                 if (fileInput.files.length > 0) {
+                    // Aguarda o processamento da imagem (redimensionamento + marca d'água)
                     obj.fileData = await processImage(fileInput.files[0], obj.Viatura, obj.Data);
                 }
 
                 const scriptURL = "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
 
+                // 2. Faz o envio e ESPERA (await) a resposta real do Google
                 const response = await fetch(scriptURL, {
                     method: "POST",
                     body: JSON.stringify(obj),
@@ -347,16 +354,25 @@
 
                 const result = await response.json();
 
+                // 3. Só entra aqui DEPOIS que o Google respondeu
                 if (result.status === "success") {
-                    showStatus("✅ Abastecimento registrado!", "is-success");
-                    setTimeout(resetForm, 1000);
+                    showStatus("✅ Abastecimento registrado com sucesso!", "is-success");
+
+                    // Limpa o formulário apenas após o sucesso
+                    setTimeout(() => {
+                        resetForm();
+                    }, 2500);
                 } else {
-                    throw new Error();
+                    throw new Error("Erro no servidor");
                 }
+
             } catch (error) {
-                showStatus("❌ Erro ao enviar. Verifique a conexão.", "is-danger");
+                console.error(error);
+                showStatus("❌ Erro ao enviar. Tente novamente ou verifique a conexão.", "is-danger");
             } finally {
+                // 4. Libera o botão independente de ter dado erro ou sucesso
                 submitBtn.disabled = false;
+                submitBtn.classList.remove("is-loading");
             }
         });
     </script>
