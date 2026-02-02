@@ -2,362 +2,364 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Abastecimentos 2ª Cia PM</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abastecimentos - 2ª Cia PM</title>
 
-  <!-- Bulma -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --pm-blue-dark: #002147;
+            --pm-blue-light: #003366;
+            --pm-gray: #333333;
+            --bg-body: #f5f7fa;
+        }
 
-  <style>
-    .field {
-      margin-bottom: 1.25rem;
-    }
+        body {
+            background-color: var(--bg-body);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    @media (max-width: 768px) {
-      .has-text-centered-mobile {
-        text-align: center;
-      }
+        .hero.is-pm {
+            background-color: var(--pm-blue-dark);
+            color: white;
+            border-bottom: 4px solid #ccaa00;
+        }
 
-      .title.has-text-centered-mobile {
-        font-size: 1.4rem;
-      }
-    }
-  </style>
+        .box-custom {
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: -1.5rem;
+            background: #ffffff;
+        }
+
+        /* Estilo da Mensagem Flutuante Centralizada */
+        #message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            min-width: 300px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            font-weight: bold;
+        }
+
+        /* Overlay para escurecer o fundo quando a mensagem aparece (opcional) */
+        .msg-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 999;
+        }
+
+        .label {
+            color: var(--pm-gray);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+        }
+
+        #preview-container {
+            display: none;
+            margin-top: 15px;
+            border: 2px solid #dbdbdb;
+            border-radius: 6px;
+            padding: 8px;
+            background: #fafafa;
+            position: relative;
+        }
+
+        #image-preview {
+            width: 100%;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .btn-remove {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .button.is-pm-send {
+            background-color: var(--pm-blue-dark);
+            color: white;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .hero-body {
+                padding: 1.5rem 1rem 3rem !important;
+            }
+
+            .title {
+                font-size: 1.5rem !important;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- HERO -->
-  <section class="hero is-primary is-bold">
-    <div class="hero-body py-4">
-      <div class="container">
-        <h1 class="title has-text-centered-mobile">
-          Abastecimentos 2ª Cia PM
-        </h1>
-      </div>
-    </div>
-  </section>
+    <div id="overlay" class="msg-overlay"></div>
+    <div id="message" class="notification"></div>
 
-  <!-- FORM -->
-  <form id="form" class="container is-max-desktop px-4 py-4">
+    <section class="hero is-pm">
+        <div class="hero-body py-5">
+            <div class="container">
+                <h1 class="title has-text-white">
+                    <i class="fas fa-shield-halved mr-2"></i> 2ª CIA - Abastecimentos
+                </h1>
+            </div>
+        </div>
+    </section>
 
-    <!-- DATA -->
-    <div class="field">
-      <label class="label">Data</label>
-      <div class="control">
-        <input class="input" type="date" name="Data" id="dataAtual" required />
-      </div>
-    </div>
+    <main class="container is-max-desktop px-4">
+        <form id="form" class="box box-custom p-5">
+            <div class="field">
+                <label class="label"><i class="fas fa-calendar-alt mr-1"></i> Data da Ocorrência</label>
+                <div class="control has-icons-left">
+                    <input class="input" type="date" name="Data" id="dataAtual" required />
+                    <span class="icon is-small is-left"><i class="fas fa-calendar"></i></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label"><i class="fas fa-car-side mr-1"></i> Prefixo da Viatura</label>
+                <div class="control has-icons-left">
+                    <div class="select is-fullwidth">
+                        <select name="Viatura" id="viaturaSelect" required>
+                            <option value="">Selecione a Viatura</option>
+
+                            <option value="13200">13200</option>
+                            <option value="13201">13201</option>
+                            <option value="13202">13202</option>
+                            <option value="13203">13203</option>
+                            <option value="13204">13204</option>
+                            <option value="13205">13205</option>
+                            <option value="13206">13206</option>
+                            <option value="13207">13207</option>
+                            <option value="13208">13208</option>
+                            <option value="13209">13209</option>
+                            <option value="13210">13210</option>
+                            <option value="13211">13211</option>
+                            <option value="13213">13213</option>
+                            <option value="13214">13214</option>
+                            <option value="13219">13219</option>
+                            <option value="13220">13220</option>
+                            <option value="13223">13223</option>
+                            <option value="13225">13225</option>
+                            <option value="13226">13226</option>
+                            <option value="13228">13228</option>
+                            <option value="13229">13229</option>
+                            <option value="13230">13230</option>
+                            <option value="13231">13231</option>
+                            <option value="13232">13232</option>
+                            <option value="13233">13233</option>
+                            <option value="13234">13234</option>
+                            <option value="13280">13280</option>
+                            <option value="13281">13281</option>
+                            </optgroup>
+                            <option value="outra">Outra (especificar em obs)</option>
+                        </select>
+                    </div>
+                    <span class="icon is-small is-left"><i class="fas fa-hashtag"></i></span>
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label"><i class="fas fa-camera mr-1"></i> Foto da Nota Fiscal</label>
+                <div class="control">
+                    <div class="file has-name is-fullwidth is-dark">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="Nota" id="fileInput" accept="*/*" required />
+                            <span class="file-cta">
+                                <span class="file-icon"><i class="fas fa-camera"></i></span>
+                                <span class="file-label">Tirar Foto da Nota</span>
+                            </span>
+                            <span class="file-name" id="fileNameDisplay">Nenhum arquivo capturado</span>
+                        </label>
+                    </div>
+                </div>
+                <div id="preview-container">
+                    <button type="button" class="btn-remove" id="removeBtn">&times;</button>
+                    <img src="" id="image-preview" alt="Preview">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Observações</label>
+                <div class="control">
+                    <textarea class="textarea" name="Obs" placeholder="Anomalias, erros na bomba, etc."></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped pt-4">
+                <div class="control is-expanded">
+                    <button class="button is-pm-send is-fullwidth" type="submit" id="submit-button">
+                        <i class="fas fa-paper-plane mr-2"></i> ENVIAR
+                    </button>
+                </div>
+                <div class="control is-expanded">
+                    <button class="button is-light is-fullwidth" type="button" onclick="resetForm()">
+                        LIMPAR
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
 
     <script>
-      const hoje = new Intl.DateTimeFormat("en-CA", {
-        timeZone: "America/Sao_Paulo",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit"
-      }).format(new Date());
+        const form = document.getElementById("form");
+        const fileInput = document.getElementById("fileInput");
+        const fileNameDisplay = document.getElementById("fileNameDisplay");
+        const previewContainer = document.getElementById("preview-container");
+        const imagePreview = document.getElementById("image-preview");
+        const messageDiv = document.getElementById("message");
+        const overlay = document.getElementById("overlay");
+        const submitBtn = document.getElementById("submit-button");
 
-      document.getElementById("dataAtual").value = hoje; 
-    </script>
+        // Data Atual
+        const hoje = new Intl.DateTimeFormat("en-CA", {
+            timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit"
+        }).format(new Date());
+        document.getElementById("dataAtual").value = hoje;
 
+        function showStatus(text, type) {
+            messageDiv.textContent = text;
+            messageDiv.className = `notification ${type}`;
+            messageDiv.style.display = "block";
+            overlay.style.display = "block";
 
-
-    <!-- VIATURA -->
-    <div class="field">
-      <label class="label">Viatura</label>
-      <div class="control">
-        <div class="select is-fullwidth">
-          <select name="Viatura" required>
-            <option value="">Selecione a Viatura</option>
-
-            <option value="13200">13200</option>
-            <option value="13201">13201</option>
-            <option value="13202">13202</option>
-            <option value="13203">13203</option>
-            <option value="13204">13204</option>
-            <option value="13205">13205</option>
-            <option value="13206">13206</option>
-            <option value="13207">13207</option>
-            <option value="13208">13208</option>
-            <option value="13209">13209</option>
-            <option value="13210">13210</option>
-            <option value="13211">13211</option>
-            <option value="13213">13213</option>
-            <option value="13214">13214</option>
-            <option value="13219">13219</option>
-            <option value="13220">13220</option>
-            <option value="13223">13223</option>
-            <option value="13225">13225</option>
-            <option value="13226">13226</option>
-            <option value="13228">13228</option>
-            <option value="13229">13229</option>
-            <option value="13230">13230</option>
-            <option value="13231">13231</option>
-            <option value="13232">13232</option>
-            <option value="13233">13233</option>
-            <option value="13234">13234</option>
-
-            <option value="13280">13280</option>
-            <option value="13281">13281</option>
-            <option value="outra">Outra, digitar prefixo em observações.</option>
-          </select>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- FOTO -->
-    <div class="field">
-      <label class="label">Foto da Nota Fiscal</label>
-      <div class="control">
-        <div class="file has-name is-fullwidth">
-          <label class="file-label">
-            <input class="file-input" type="file" name="Nota" id="fileInput" accept="*/*" required />
-            <span class="file-cta">
-              <span class="file-icon">
-                <i class="fas fa-upload"></i>
-              </span>
-              <span class="file-label">Selecione a Nota</span>
-            </span>
-            <span class="file-name" id="fileNameDisplay">
-              Nenhuma selecionada
-            </span>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <input type="hidden" name="filename" id="actualFilename" />
-
-    <!-- OBS -->
-    <div class="field">
-      <label class="label">Observações</label>
-      <div class="control">
-        <textarea class="textarea" placeholder="Caso aconteça alguma anomalia relate aqui" name="Obs"></textarea>
-      </div>
-    </div>
-
-    <!-- BOTÕES -->
-    <div class="field is-grouped is-grouped-multiline">
-      <div class="control is-expanded">
-        <button class="button is-primary is-fullwidth" type="submit" id="submit-button">
-          Enviar
-        </button>
-      </div>
-
-      <div class="control is-expanded">
-        <button class="button is-danger is-fullwidth" type="button" onclick="resetForm()">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </form>
-
-  <!-- MENSAGEM -->
-  <div id="message" style="
-      display: none;
-      margin: 20px;
-      padding: 10px;
-      border-radius: 4px;
-      font-weight: bold;
-    "></div>
-
-  <script>
-    const form = document.getElementById("form");
-    const submitButton = document.getElementById("submit-button");
-    const messageDiv = document.getElementById("message");
-    const fileInput = document.getElementById("fileInput");
-    const fileNameDisplay = document.getElementById("fileNameDisplay");
-
-    // Atualiza nome do arquivo exibido
-    fileInput.addEventListener("change", function () {
-      if (this.files && this.files.length > 0) {
-        fileNameDisplay.textContent = this.files[0].name;
-      } else {
-        fileNameDisplay.textContent = "Nenhuma selecionada";
-      }
-    });
-
-    // Função para processar arquivo
-
-
-    async function uploadFile(file, formDataObj) {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        const reader = new FileReader();
-
-        reader.onload = (e) => {
-          img.src = e.target.result;
-        };
-
-        img.onload = () => {
-          const canvas = document.createElement("canvas");
-          const ctx = canvas.getContext("2d");
-
-          // 🔧 CONFIGURAÇÃO PARA BOA NITIDEZ
-          const MAX_WIDTH = 800; // mais definição
-          const QUALITY = 0.9;   // menos compressão
-
-          let width = img.width;
-          let height = img.height;
-
-          if (width > MAX_WIDTH) {
-            height = height * (MAX_WIDTH / width);
-            width = MAX_WIDTH;
-          }
-
-          canvas.width = width;
-          canvas.height = height;
-
-          // Melhora levemente a nitidez
-          ctx.imageSmoothingEnabled = true;
-          ctx.imageSmoothingQuality = "high";
-
-          ctx.drawImage(img, 0, 0, width, height);
-
-          // Nome do arquivo
-          const dataCampo = formDataObj.Data;
-          const agora = new Date();
-          const hora = String(agora.getHours()).padStart(2, "0");
-          const minuto = String(agora.getMinutes()).padStart(2, "0");
-
-          // Verificação da viatura
-          let viatura = formDataObj.Viatura;
-
-          if (viatura === "outra") {
-            viatura = formDataObj.Obs;
-            formDataObj.Viatura = formDataObj.Obs;
-          }
-
-          const novoNome = `${dataCampo}_${hora}-${minuto}_${viatura}.jpg`;
-
-          // 📝 TEXTO DA VIATURA (canto superior direito)
-          const texto = formDataObj.Viatura;
-
-          // Configuração da fonte
-          ctx.font = "bold 28px Arial";
-          ctx.fillStyle = "#FFFFFF";
-          ctx.textBaseline = "top";
-
-          // Medidas do texto
-          const padding = 10;
-          const textWidth = ctx.measureText(texto).width;
-          const textHeight = 40;
-
-          // Posição (canto superior direito)
-          const x = canvas.width - textWidth - padding * 2;
-          const y = padding;
-
-          // Fundo semi-transparente para legibilidade
-          ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-          ctx.fillRect(
-            x - padding,
-            y - padding / 2,
-            textWidth + padding * 2,
-            textHeight
-          );
-
-          // Texto por cima
-          ctx.fillStyle = "#FFFFFF";
-          ctx.fillText(texto, x, y);
-
-
-          const base64 = canvas.toDataURL("image/jpeg", QUALITY);
-
-
-
-          resolve({
-            fileName: novoNome,
-            mimeType: "image/jpeg",
-            data: base64.split(",")[1],
-          });
-        };
-
-        img.onerror = reject;
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-
-    // Evento submit do formulário
-    form.addEventListener("submit", async function (e) {
-      e.preventDefault();
-
-      messageDiv.textContent = "Enviando...";
-      messageDiv.style.display = "block";
-      messageDiv.style.backgroundColor = "beige";
-      messageDiv.style.color = "black";
-      submitButton.disabled = true;
-      submitButton.classList.add("is-loading");
-
-      try {
-        const formData = new FormData(this);
-        const formDataObj = {};
-
-        // Converte FormData para objeto
-        for (let [key, value] of formData.entries()) {
-          formDataObj[key] = value;
+            if (type !== 'is-warning') { // Se não for o de "enviando", some após 3s
+                setTimeout(() => {
+                    messageDiv.style.display = "none";
+                    overlay.style.display = "none";
+                }, 3000);
+            }
         }
 
-        // Lida com arquivo, se houver
-        if (fileInput.files.length > 0) {
-          const fileObj = await uploadFile(fileInput.files[0], formDataObj);
-          formDataObj.fileData = fileObj; // adiciona ao formData
-        }
-
-        // Envio para Google Apps Script
-        const scriptURL =
-          "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
-        
-        const response = await fetch(scriptURL, {
-          redirect: "follow",
-          method: "POST",
-          body: JSON.stringify(formDataObj),
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8",
-          },
+        fileInput.addEventListener("change", function () {
+            if (this.files && this.files[0]) {
+                fileNameDisplay.textContent = this.files[0].name;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.src = e.target.result;
+                    previewContainer.style.display = "block";
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
         });
 
-        const data = await response.json();
-
-        if (data.status === "success") {
-          messageDiv.textContent = "Dados enviados com sucesso!";
-          messageDiv.style.backgroundColor = "#48c78e";
-          messageDiv.style.color = "white";
-          form.reset();
-          fileNameDisplay.textContent = "Nenhuma selecionada";
-        } else {
-          throw new Error("Falha no envio");
+        function resetForm() {
+            form.reset();
+            document.getElementById("dataAtual").value = hoje;
+            previewContainer.style.display = "none";
+            fileNameDisplay.textContent = "Nenhum arquivo capturado";
+            messageDiv.style.display = "none";
+            overlay.style.display = "none";
         }
-      } catch (error) {
-        console.error("Erro:", error);
-        messageDiv.textContent = "Erro: " + error.message;
-        messageDiv.style.backgroundColor = "#f14668";
-        messageDiv.style.color = "white";
-      } finally {
-        submitButton.disabled = false;
-        submitButton.classList.remove("is-loading");
 
-        setTimeout(() => {
-          messageDiv.textContent = "";
-          messageDiv.style.display = "none";
-        }, 6000);
-      }
-    });
+        async function processImage(file, viatura, dataOcorrencia) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                const reader = new FileReader();
+                reader.onload = (e) => img.src = e.target.result;
+                img.onload = () => {
+                    const canvas = document.createElement("canvas");
+                    const ctx = canvas.getContext("2d");
+                    const MAX_WIDTH = 1000;
+                    let width = img.width;
+                    let height = img.height;
 
-    // Botão cancelar
-    const cancelButton = form.querySelector("button.is-danger");
-    cancelButton.addEventListener("click", function () {
-      form.reset();
-      fileNameDisplay.textContent = "Nenhuma selecionada";
-      messageDiv.style.display = "none";
-    });
-  </script>
+                    if (width > MAX_WIDTH) {
+                        height *= (MAX_WIDTH / width);
+                        width = MAX_WIDTH;
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
 
+                    // Gerar Data e Hora para o NOME do arquivo
+                    const agora = new Date();
+                    const horas = String(agora.getHours()).padStart(2, '0');
+                    const minutos = String(agora.getMinutes()).padStart(2, '0');
+
+                    // NOME: 2026-02-02_11-05_VTR-13204.jpg
+                    const customFileName = `${dataOcorrencia}_${horas}-${minutos}_VTR-${viatura}.jpg`;
+
+                    // Marca d'água na imagem
+                    const textoMarca = `VTR: ${viatura} | ${dataOcorrencia} ${horas}:${minutos}`;
+                    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+                    ctx.fillRect(0, height - 40, width, 40);
+                    ctx.font = "bold 20px Arial";
+                    ctx.fillStyle = "white";
+                    ctx.fillText(textoMarca, 20, height - 12);
+
+                    resolve({
+                        fileName: customFileName,
+                        data: canvas.toDataURL("image/jpeg", 0.9).split(",")[1]
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            submitBtn.disabled = true;
+            showStatus("🚀 Enviando dados, aguarde...", "is-warning is-light");
+
+            try {
+                const formData = new FormData(this);
+                const obj = Object.fromEntries(formData.entries());
+
+                if (fileInput.files.length > 0) {
+                    obj.fileData = await processImage(fileInput.files[0], obj.Viatura, obj.Data);
+                }
+
+                const scriptURL = "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
+
+                const response = await fetch(scriptURL, {
+                    method: "POST",
+                    body: JSON.stringify(obj),
+                    headers: { "Content-Type": "text/plain;charset=utf-8" }
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    showStatus("✅ Abastecimento registrado!", "is-success");
+                    setTimeout(resetForm, 1000);
+                } else {
+                    throw new Error();
+                }
+            } catch (error) {
+                showStatus("❌ Erro ao enviar. Verifique a conexão.", "is-danger");
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
 </body>
 
 </html>
