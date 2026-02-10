@@ -148,38 +148,7 @@
                 <div class="control has-icons-left">
                     <div class="select is-fullwidth">
                         <select name="Viatura" id="viaturaSelect" required>
-                            <option value="">Selecione a Viatura</option>
-
-                            <option value="13200">13200</option>
-                            <option value="13201">13201</option>
-                            <option value="13202">13202</option>
-                            <option value="13203">13203</option>
-                            <option value="13204">13204</option>
-                            <option value="13205">13205</option>
-                            <option value="13206">13206</option>
-                            <option value="13207">13207</option>
-                            <option value="13208">13208</option>
-                            <option value="13209">13209</option>
-                            <option value="13210">13210</option>
-                            <option value="13211">13211</option>
-                            <option value="13213">13213</option>
-                            <option value="13214">13214</option>
-                            <option value="13219">13219</option>
-                            <option value="13220">13220</option>
-                            <option value="13223">13223</option>
-                            <option value="13225">13225</option>
-                            <option value="13226">13226</option>
-                            <option value="13228">13228</option>
-                            <option value="13229">13229</option>
-                            <option value="13230">13230</option>
-                            <option value="13231">13231</option>
-                            <option value="13232">13232</option>
-                            <option value="13233">13233</option>
-                            <option value="13234">13234</option>
-                            <option value="13280">13280</option>
-                            <option value="13281">13281</option>
-                            </optgroup>
-                            <option value="outra">Outra (especificar em obs)</option>
+                            <option value="">Carregando viaturas...</option>
                         </select>
                     </div>
                     <span class="icon is-small is-left"><i class="fas fa-hashtag"></i></span>
@@ -209,7 +178,8 @@
             <div class="field">
                 <label class="label">Observações</label>
                 <div class="control">
-                    <textarea class="textarea" name="Obs" placeholder="Anomalias, erros na bomba, etc."></textarea>
+                    <textarea class="textarea" name="Obs" id="Obs"
+                        placeholder="Anomalias, erros na bomba, etc."></textarea>
                 </div>
             </div>
 
@@ -302,11 +272,22 @@
                     ctx.drawImage(img, 0, 0, width, height);
 
                     // Gerar Data e Hora para o NOME do arquivo
+                    // ... dentro do seu evento de submit, onde você captura os dados ...
+
+                    let viatura = document.getElementById("viaturaSelect").value;
+                    const obs = document.getElementById("Obs").value; // Certifique-se que o id do campo de observação é "Obs"
+
+                    // REGRA SOLICITADA: Se for "outra", usa o texto da observação para o nome e marca d'água
+                    if (viatura.toLowerCase() === "outra") {
+                        viatura = obs ? obs : "Outra"; // Usa a Obs, se estiver vazio usa "Outra"
+                    }
+
+                    // Gerar Data e Hora para o NOME do arquivo
                     const agora = new Date();
                     const horas = String(agora.getHours()).padStart(2, '0');
                     const minutos = String(agora.getMinutes()).padStart(2, '0');
 
-                    // NOME: 2026-02-02_11-05_VTR-13204.jpg
+                    // NOME: 2026-02-02_11-05_VTR-VALOR_DA_OBS.jpg
                     const customFileName = `${dataOcorrencia}_${horas}-${minutos}_VTR-${viatura}.jpg`;
 
                     function formatarData(dataISO) {
@@ -380,6 +361,36 @@
                 submitBtn.classList.remove("is-loading");
             }
         });
+
+        // Função para carregar viaturas da planilha
+        // Certifique-se que a scriptURL é a mesma que você usa no POST
+        const scriptURL = "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
+
+        async function carregarViaturas() {
+            const selectVtr = document.getElementById("viaturaSelect");
+            try {
+                const response = await fetch(scriptURL);
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    let options = '<option value="">Selecione a VTR</option>';
+                    result.vtrs.forEach(vtr => {
+                        options += `<option value="${vtr}">${vtr}</option>`;
+                    });
+                    // Adiciona a opção "outra" no final
+                    options += '<option value="outra">Outra (especificar em obs)</option>';
+                    selectVtr.innerHTML = options;
+                }
+            } catch (error) {
+                console.error("Erro:", error);
+                selectVtr.innerHTML = '<option value="">Erro ao carregar</option><option value="outra">Outra (especificar em obs)</option>';
+            }
+        }
+
+        // Executa assim que a página abre
+        window.onload = carregarViaturas;
+
+
     </script>
 </body>
 
