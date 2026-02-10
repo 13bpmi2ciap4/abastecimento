@@ -394,6 +394,16 @@
         window.onload = carregarViaturas;
 
 
+// Função para o botão de fechar/remover a imagem
+const removeBtn = document.getElementById("removeBtn");
+
+removeBtn.addEventListener("click", function () {
+    fileInput.value = ""; // Limpa o arquivo selecionado
+    fileNameDisplay.textContent = "Nenhum arquivo capturado"; // Reseta o texto
+    previewContainer.style.display = "none"; // Esconde o container
+    imagePreview.src = ""; // Limpa a imagem
+});
+
     </script>
 </body>
 
