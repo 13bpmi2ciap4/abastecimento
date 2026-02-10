@@ -69,18 +69,21 @@
             letter-spacing: 0.5px;
         }
 
+/* Preview Centralizado e 50% Menor */
         #preview-container {
             display: none;
-            margin-top: 15px;
+            margin: 15px auto 0 auto; /* Centraliza horizontalmente */
             border: 2px solid #dbdbdb;
             border-radius: 6px;
             padding: 8px;
             background: #fafafa;
             position: relative;
+            max-width: 50%; /* Define o tamanho como metade do formulário */
         }
 
         #image-preview {
             width: 100%;
+            height: auto;
             border-radius: 4px;
             display: block;
         }
