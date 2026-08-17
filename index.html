@@ -5,28 +5,18 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Abastecimentos - 2ª Cia PM</title>
 
     <!-- BULMA -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    >
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 
     <!-- FONT AWESOME -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
     <style>
-
         :root {
             --pm-blue-dark: #002147;
             --pm-blue-light: #003366;
@@ -104,7 +94,7 @@
 
         .tabs-custom a {
             justify-content: center;
-            color: rgba(255,255,255,.75);
+            color: rgba(255, 255, 255, .75);
             border: none !important;
             border-radius: 8px 8px 0 0;
             font-weight: bold;
@@ -115,7 +105,7 @@
 
         .tabs-custom a:hover {
             color: white;
-            background: rgba(255,255,255,.08);
+            background: rgba(255, 255, 255, .08);
         }
 
 
@@ -138,7 +128,7 @@
         .box-custom {
             border-radius: 8px;
             box-shadow:
-                0 4px 15px rgba(0,0,0,.1);
+                0 4px 15px rgba(0, 0, 0, .1);
 
             margin-top: 1.5rem;
             background: #ffffff;
@@ -233,7 +223,7 @@
             max-width: 90%;
             text-align: center;
             box-shadow:
-                0 10px 30px rgba(0,0,0,.2);
+                0 10px 30px rgba(0, 0, 0, .2);
             border-radius: 12px;
             font-weight: bold;
         }
@@ -246,7 +236,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,.4);
+            background: rgba(0, 0, 0, .4);
             z-index: 999;
         }
 
@@ -286,10 +276,7 @@
         .registro {
             display: grid;
             grid-template-columns:
-                130px
-                1fr
-                180px
-                120px;
+                130px 1fr 180px 120px;
 
             gap: 20px;
             align-items: center;
@@ -374,7 +361,7 @@
 
             inset: 0;
 
-            background: rgba(0,0,0,.85);
+            background: rgba(0, 0, 0, .85);
 
             align-items: center;
             justify-content: center;
@@ -397,7 +384,7 @@
             border-radius: 8px;
 
             box-shadow:
-                0 10px 40px rgba(0,0,0,.5);
+                0 10px 40px rgba(0, 0, 0, .5);
         }
 
 
@@ -412,7 +399,7 @@
 
             border-radius: 50%;
 
-            background: rgba(255,255,255,.2);
+            background: rgba(255, 255, 255, .2);
 
             color: white;
 
@@ -435,9 +422,7 @@
 
             .hero-body-custom {
                 padding:
-                    1.5rem
-                    1rem
-                    0 !important;
+                    1.5rem 1rem 0 !important;
             }
 
 
@@ -490,7 +475,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -499,160 +483,296 @@
 <body>
 
 
-<!-- ==================================================
+    <!-- ==================================================
      MENSAGEM
 ================================================== -->
 
-<div id="overlay" class="msg-overlay"></div>
+    <div id="overlay" class="msg-overlay"></div>
 
-<div
-    id="message"
-    class="notification"
-></div>
-
-
-<!-- ==================================================
-     CABEÇALHO + ABAS
-================================================== -->
-
-<section class="hero is-pm">
-
-    <div class="hero-body hero-body-custom">
-
-        <div class="container">
-
-            <h1 class="title has-text-white titulo-principal">
-
-                <i class="fas fa-shield-halved mr-2"></i>
-
-                2ª CIA - Abastecimentos
-
-            </h1>
-
-
-            <div class="tabs tabs-custom">
-
-                <ul>
-
-                    <li
-                        id="tabRegistrar"
-                        class="is-active"
-                    >
-
-                        <a
-                            href="#"
-                            onclick="mostrarAba('registrar', event)"
-                        >
-
-                            <i class="fas fa-gas-pump mr-2"></i>
-
-                            Registrar
-
-                        </a>
-
-                    </li>
-
-
-                    <li id="tabConsultar">
-
-                        <a
-                            href="#"
-                            onclick="mostrarAba('consultar', event)"
-                        >
-
-                            <i class="fas fa-magnifying-glass mr-2"></i>
-
-                            Consultar
-
-                        </a>
-
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ==================================================
-     CONTEÚDO
-================================================== -->
-
-<main class="container conteudo-principal px-4">
+    <div id="message" class="notification"></div>
 
 
     <!-- ==================================================
-         ABA 1 - REGISTRAR
-    ================================================== -->
+     CABEÇALHO + ABAS
+================================================== -->
 
-    <section
-        id="abaRegistrar"
-        class="aba-conteudo ativa"
-    >
+    <section class="hero is-pm">
 
-        <form
-            id="form"
-            class="box box-custom p-5"
-        >
+        <div class="hero-body hero-body-custom">
 
-            <div class="field">
+            <div class="container">
 
-                <label class="label">
+                <h1 class="title has-text-white titulo-principal">
 
-                    <i class="fas fa-calendar-alt mr-1"></i>
+                    <i class="fas fa-shield-halved mr-2"></i>
 
-                    Data da Ocorrência
+                    2ª CIA - Abastecimentos
 
-                </label>
+                </h1>
 
 
-                <div class="control has-icons-left">
+                <div class="tabs tabs-custom">
 
-                    <input
-                        class="input"
-                        type="date"
-                        name="Data"
-                        id="dataAtual"
-                        required
-                    >
+                    <ul>
 
-                    <span class="icon is-small is-left">
+                        <li id="tabRegistrar" class="is-active">
 
-                        <i class="fas fa-calendar"></i>
+                            <a href="#" onclick="mostrarAba('registrar', event)">
 
-                    </span>
+                                <i class="fas fa-gas-pump mr-2"></i>
+
+                                Registrar
+
+                            </a>
+
+                        </li>
+
+
+                        <li id="tabConsultar">
+
+                            <a href="#" onclick="mostrarAba('consultar', event)">
+
+                                <i class="fas fa-magnifying-glass mr-2"></i>
+
+                                Consultar
+
+                            </a>
+
+                        </li>
+
+                    </ul>
 
                 </div>
 
             </div>
 
+        </div>
 
-            <div class="field">
-
-                <label class="label">
-
-                    <i class="fas fa-car-side mr-1"></i>
-
-                    Prefixo da Viatura
-
-                </label>
+    </section>
 
 
-                <div class="control has-icons-left">
+
+    <!-- ==================================================
+     CONTEÚDO
+================================================== -->
+
+    <main class="container conteudo-principal px-4">
+
+
+        <!-- ==================================================
+         ABA 1 - REGISTRAR
+    ================================================== -->
+
+        <section id="abaRegistrar" class="aba-conteudo ativa">
+
+            <form id="form" class="box box-custom p-5">
+
+                <div class="field">
+
+                    <label class="label">
+
+                        <i class="fas fa-calendar-alt mr-1"></i>
+
+                        Data da Ocorrência
+
+                    </label>
+
+
+                    <div class="control has-icons-left">
+
+                        <input class="input" type="date" name="Data" id="dataAtual" required>
+
+                        <span class="icon is-small is-left">
+
+                            <i class="fas fa-calendar"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label class="label">
+
+                        <i class="fas fa-car-side mr-1"></i>
+
+                        Prefixo da Viatura
+
+                    </label>
+
+
+                    <div class="control has-icons-left">
+
+                        <div class="select is-fullwidth">
+
+                            <select name="Viatura" id="viaturaSelect" required>
+
+                                <option value="">
+                                    Carregando viaturas...
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <span class="icon is-small is-left">
+
+                            <i class="fas fa-hashtag"></i>
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label class="label">
+
+                        <i class="fas fa-camera mr-1"></i>
+
+                        Foto da Nota Fiscal
+
+                    </label>
+
+
+                    <div class="control">
+
+                        <div class="file has-name is-fullwidth is-dark">
+
+                            <label class="file-label">
+
+                                <input class="file-input" type="file" name="Nota" id="fileInput" accept="*/*" required>
+
+
+                                <span class="file-cta">
+
+                                    <span class="file-icon">
+
+                                        <i class="fas fa-camera"></i>
+
+                                    </span>
+
+
+                                    <span class="file-label">
+
+                                        Tirar Foto da Nota
+
+                                    </span>
+
+                                </span>
+
+
+                                <span class="file-name" id="fileNameDisplay">
+
+                                    Nenhum arquivo capturado
+
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="preview-container">
+
+                        <button type="button" class="btn-remove" id="removeBtn">
+
+                            &times;
+
+                        </button>
+
+
+                        <img src="" id="image-preview" alt="Preview">
+
+                    </div>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label class="label">
+
+                        <i class="fas fa-comment-alt mr-1"></i>
+
+                        Observações
+
+                    </label>
+
+
+                    <div class="control">
+
+                        <textarea class="textarea" name="Obs" id="Obs"
+                            placeholder="Anomalias, erros na bomba, etc."></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <div class="field is-grouped pt-4">
+
+                    <div class="control is-expanded">
+
+                        <button class="button is-pm-send is-fullwidth" type="submit" id="submit-button">
+
+                            <i class="fas fa-paper-plane mr-2"></i>
+
+                            ENVIAR
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="control is-expanded">
+
+                        <button class="button is-light is-fullwidth" type="button" onclick="resetForm()">
+
+                            LIMPAR
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ==================================================
+         ABA 2 - CONSULTAR
+    ================================================== -->
+
+        <section id="abaConsultar" class="aba-conteudo">
+
+            <div class="box box-custom p-5">
+
+                <h2 class="title is-4">
+
+                    <i class="fas fa-list-check mr-2"></i>
+
+                    Consulta de Abastecimentos
+
+                </h2>
+
+
+                <div class="consulta-campo">
 
                     <div class="select is-fullwidth">
 
-                        <select
-                            name="Viatura"
-                            id="viaturaSelect"
-                            required
-                        >
+                        <select id="viatura">
 
                             <option value="">
                                 Carregando viaturas...
@@ -663,1767 +783,1565 @@
                     </div>
 
 
-                    <span class="icon is-small is-left">
+                    <button class="button is-pm-send" type="button" onclick="consultar()">
 
-                        <i class="fas fa-hashtag"></i>
+                        <i class="fas fa-search mr-2"></i>
 
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label class="label">
-
-                    <i class="fas fa-camera mr-1"></i>
-
-                    Foto da Nota Fiscal
-
-                </label>
-
-
-                <div class="control">
-
-                    <div class="file has-name is-fullwidth is-dark">
-
-                        <label class="file-label">
-
-                            <input
-                                class="file-input"
-                                type="file"
-                                name="Nota"
-                                id="fileInput"
-                                accept="*/*"
-                                required
-                            >
-
-
-                            <span class="file-cta">
-
-                                <span class="file-icon">
-
-                                    <i class="fas fa-camera"></i>
-
-                                </span>
-
-
-                                <span class="file-label">
-
-                                    Tirar Foto da Nota
-
-                                </span>
-
-                            </span>
-
-
-                            <span
-                                class="file-name"
-                                id="fileNameDisplay"
-                            >
-
-                                Nenhum arquivo capturado
-
-                            </span>
-
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div id="preview-container">
-
-                    <button
-                        type="button"
-                        class="btn-remove"
-                        id="removeBtn"
-                    >
-
-                        &times;
-
-                    </button>
-
-
-                    <img
-                        src=""
-                        id="image-preview"
-                        alt="Preview"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label class="label">
-
-                    <i class="fas fa-comment-alt mr-1"></i>
-
-                    Observações
-
-                </label>
-
-
-                <div class="control">
-
-                    <textarea
-                        class="textarea"
-                        name="Obs"
-                        id="Obs"
-                        placeholder="Anomalias, erros na bomba, etc."
-                    ></textarea>
-
-                </div>
-
-            </div>
-
-
-            <div class="field is-grouped pt-4">
-
-                <div class="control is-expanded">
-
-                    <button
-                        class="button is-pm-send is-fullwidth"
-                        type="submit"
-                        id="submit-button"
-                    >
-
-                        <i class="fas fa-paper-plane mr-2"></i>
-
-                        ENVIAR
+                        Pesquisar
 
                     </button>
 
                 </div>
 
 
-                <div class="control is-expanded">
+                <div id="status"></div>
 
-                    <button
-                        class="button is-light is-fullwidth"
-                        type="button"
-                        onclick="resetForm()"
-                    >
 
-                        LIMPAR
-
-                    </button>
-
-                </div>
+                <div id="resultado" class="resultado"></div>
 
             </div>
 
-        </form>
+        </section>
 
-    </section>
+    </main>
 
 
 
     <!-- ==================================================
-         ABA 2 - CONSULTAR
-    ================================================== -->
-
-    <section
-        id="abaConsultar"
-        class="aba-conteudo"
-    >
-
-        <div class="box box-custom p-5">
-
-            <h2 class="title is-4">
-
-                <i class="fas fa-list-check mr-2"></i>
-
-                Consulta de Abastecimentos
-
-            </h2>
-
-
-            <div class="consulta-campo">
-
-                <div class="select is-fullwidth">
-
-                    <select id="viatura">
-
-                        <option value="">
-                            Carregando viaturas...
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <button
-                    class="button is-pm-send"
-                    type="button"
-                    onclick="consultar()"
-                >
-
-                    <i class="fas fa-search mr-2"></i>
-
-                    Pesquisar
-
-                </button>
-
-            </div>
-
-
-            <div id="status"></div>
-
-
-            <div
-                id="resultado"
-                class="resultado"
-            ></div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- ==================================================
      MODAL DA IMAGEM
 ================================================== -->
 
-<div
-    id="modal"
-    class="modal-imagem"
-    onclick="fecharImagem()"
->
+    <div id="modal" class="modal-imagem" onclick="fecharImagem()">
 
 
-    <div
-        class="fechar"
-        onclick="fecharImagem()"
-    >
+        <div class="fechar" onclick="fecharImagem()">
 
-        ×
+            ×
+
+        </div>
+
+
+        <img id="imagemGrande" src="" alt="Imagem" onclick="event.stopPropagation()">
 
     </div>
 
 
-    <img
-        id="imagemGrande"
-        src=""
-        alt="Imagem"
-        onclick="event.stopPropagation()"
-    >
 
-</div>
+    <script>
 
 
+        /* ==================================================
+           CONFIGURAÇÃO
+        ================================================== */
 
-<script>
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
 
 
-/* ==================================================
-   CONFIGURAÇÃO
-================================================== */
+        /* ==================================================
+           ELEMENTOS DO FORMULÁRIO
+        ================================================== */
 
-const API_URL =
-    "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
+        const form =
+            document.getElementById("form");
 
+        const fileInput =
+            document.getElementById("fileInput");
 
-/* ==================================================
-   ELEMENTOS DO FORMULÁRIO
-================================================== */
+        const fileNameDisplay =
+            document.getElementById("fileNameDisplay");
 
-const form =
-    document.getElementById("form");
+        const previewContainer =
+            document.getElementById("preview-container");
 
-const fileInput =
-    document.getElementById("fileInput");
+        const imagePreview =
+            document.getElementById("image-preview");
 
-const fileNameDisplay =
-    document.getElementById("fileNameDisplay");
+        const messageDiv =
+            document.getElementById("message");
 
-const previewContainer =
-    document.getElementById("preview-container");
+        const overlay =
+            document.getElementById("overlay");
 
-const imagePreview =
-    document.getElementById("image-preview");
+        const submitBtn =
+            document.getElementById("submit-button");
 
-const messageDiv =
-    document.getElementById("message");
 
-const overlay =
-    document.getElementById("overlay");
+        /* ==================================================
+           DATA ATUAL
+        ================================================== */
 
-const submitBtn =
-    document.getElementById("submit-button");
-
-
-/* ==================================================
-   DATA ATUAL
-================================================== */
-
-const hoje =
-    new Intl.DateTimeFormat(
-        "en-CA",
-        {
-            timeZone: "America/Sao_Paulo",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit"
-        }
-    ).format(new Date());
-
-
-document.getElementById(
-    "dataAtual"
-).value = hoje;
-
-
-/* ==================================================
-   CONTROLE DAS ABAS
-================================================== */
-
-function mostrarAba(aba, event) {
-
-    if (event) {
-        event.preventDefault();
-    }
-
-
-    const registrar =
-        document.getElementById("abaRegistrar");
-
-    const consultar =
-        document.getElementById("abaConsultar");
-
-
-    const tabRegistrar =
-        document.getElementById("tabRegistrar");
-
-    const tabConsultar =
-        document.getElementById("tabConsultar");
-
-
-    if (aba === "registrar") {
-
-        registrar.classList.add("ativa");
-        consultar.classList.remove("ativa");
-
-        tabRegistrar.classList.add("is-active");
-        tabConsultar.classList.remove("is-active");
-
-    }
-    else {
-
-        registrar.classList.remove("ativa");
-        consultar.classList.add("ativa");
-
-        tabRegistrar.classList.remove("is-active");
-        tabConsultar.classList.add("is-active");
-
-
-        // Carrega as viaturas da consulta
-        carregarViaturasConsulta();
-
-    }
-
-}
-
-
-/* ==================================================
-   MENSAGEM
-================================================== */
-
-function showStatus(text, type) {
-
-    messageDiv.textContent = text;
-
-    messageDiv.className =
-        `notification ${type}`;
-
-    messageDiv.style.display =
-        "block";
-
-    overlay.style.display =
-        "block";
-
-
-    if (
-        type === "is-success" ||
-        type === "is-danger"
-    ) {
-
-        setTimeout(() => {
-
-            messageDiv.style.display =
-                "none";
-
-            overlay.style.display =
-                "none";
-
-        }, 3000);
-
-    }
-
-}
-
-
-/* ==================================================
-   PREVIEW DA FOTO
-================================================== */
-
-fileInput.addEventListener(
-    "change",
-    function() {
-
-        if (
-            this.files &&
-            this.files[0]
-        ) {
-
-            fileNameDisplay.textContent =
-                this.files[0].name;
-
-
-            const reader =
-                new FileReader();
-
-
-            reader.onload =
-                (e) => {
-
-                    imagePreview.src =
-                        e.target.result;
-
-                    previewContainer.style.display =
-                        "block";
-
-                };
-
-
-            reader.readAsDataURL(
-                this.files[0]
-            );
-
-        }
-
-    }
-);
-
-
-/* ==================================================
-   BOTÃO REMOVER FOTO
-================================================== */
-
-document
-    .getElementById("removeBtn")
-    .addEventListener(
-        "click",
-        function() {
-
-            fileInput.value = "";
-
-            imagePreview.src = "";
-
-            previewContainer.style.display =
-                "none";
-
-            fileNameDisplay.textContent =
-                "Nenhum arquivo capturado";
-
-        }
-    );
-
-
-/* ==================================================
-   RESET FORM
-================================================== */
-
-function resetForm() {
-
-    form.reset();
-
-
-    document.getElementById(
-        "dataAtual"
-    ).value = hoje;
-
-
-    previewContainer.style.display =
-        "none";
-
-
-    imagePreview.src =
-        "";
-
-
-    fileNameDisplay.textContent =
-        "Nenhum arquivo capturado";
-
-
-    messageDiv.style.display =
-        "none";
-
-
-    overlay.style.display =
-        "none";
-
-}
-
-
-/* ==================================================
-   PROCESSAMENTO DA IMAGEM
-================================================== */
-
-async function processImage(
-    file,
-    viatura,
-    dataOcorrencia
-) {
-
-    return new Promise((resolve, reject) => {
-
-        const img =
-            new Image();
-
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            (e) => {
-
-                img.src =
-                    e.target.result;
-
-            };
-
-
-        img.onerror =
-            () => {
-
-                reject(
-                    new Error(
-                        "Não foi possível processar a imagem."
-                    )
-                );
-
-            };
-
-
-        img.onload =
-            () => {
-
-                const canvas =
-                    document.createElement(
-                        "canvas"
-                    );
-
-
-                const ctx =
-                    canvas.getContext(
-                        "2d"
-                    );
-
-
-                const MAX_WIDTH =
-                    1000;
-
-
-                let width =
-                    img.width;
-
-                let height =
-                    img.height;
-
-
-                if (
-                    width > MAX_WIDTH
-                ) {
-
-                    height *=
-                        MAX_WIDTH / width;
-
-                    width =
-                        MAX_WIDTH;
-
+        const hoje =
+            new Intl.DateTimeFormat(
+                "en-CA",
+                {
+                    timeZone: "America/Sao_Paulo",
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit"
                 }
+            ).format(new Date());
 
 
-                canvas.width =
-                    width;
+        document.getElementById(
+            "dataAtual"
+        ).value = hoje;
 
-                canvas.height =
-                    height;
 
+        /* ==================================================
+           CONTROLE DAS ABAS
+        ================================================== */
 
-                ctx.drawImage(
-                    img,
-                    0,
-                    0,
-                    width,
-                    height
-                );
+        function mostrarAba(aba, event) {
 
-
-                /* ==========================================
-                   VIATURA
-                ========================================== */
-
-                let vtr =
-                    document
-                        .getElementById(
-                            "viaturaSelect"
-                        )
-                        .value;
-
-
-                const obs =
-                    document
-                        .getElementById(
-                            "Obs"
-                        )
-                        .value;
-
-
-                if (
-                    vtr.toLowerCase() ===
-                    "outra"
-                ) {
-
-                    vtr =
-                        obs
-                            ? obs
-                            : "Outra";
-
-                }
-
-
-                /* ==========================================
-                   HORA
-                ========================================== */
-
-                const agora =
-                    new Date();
-
-
-                const horas =
-                    String(
-                        agora.getHours()
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-
-
-                const minutos =
-                    String(
-                        agora.getMinutes()
-                    ).padStart(
-                        2,
-                        "0"
-                    );
-
-
-                /* ==========================================
-                   NOME DO ARQUIVO
-                ========================================== */
-
-                const customFileName =
-                    `${dataOcorrencia}_${horas}-${minutos}_VTR-${vtr}.jpg`;
-
-
-                /* ==========================================
-                   DATA FORMATADA
-                ========================================== */
-
-                function formatarData(
-                    dataISO
-                ) {
-
-                    const [
-                        ano,
-                        mes,
-                        dia
-                    ] =
-                        dataISO.split("-");
-
-
-                    return `${dia}-${mes}-${ano}`;
-
-                }
-
-
-                /* ==========================================
-                   MARCA D'ÁGUA
-                ========================================== */
-
-                const textoMarca =
-                    `VTR: ${vtr} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
-
-
-                ctx.fillStyle =
-                    "rgba(0, 0, 0, 0.6)";
-
-
-                ctx.fillRect(
-                    0,
-                    height - 40,
-                    width,
-                    40
-                );
-
-
-                ctx.font =
-                    "bold 20px Arial";
-
-
-                ctx.fillStyle =
-                    "white";
-
-
-                ctx.fillText(
-                    textoMarca,
-                    20,
-                    height - 12
-                );
-
-
-                /* ==========================================
-                   RETORNA
-                ========================================== */
-
-                resolve({
-
-                    fileName:
-                        customFileName,
-
-                    data:
-                        canvas
-                            .toDataURL(
-                                "image/jpeg",
-                                0.85
-                            )
-                            .split(",")[1]
-
-                });
-
-            };
-
-
-        reader.readAsDataURL(
-            file
-        );
-
-    });
-
-}
-
-
-/* ==================================================
-   ENVIO DO FORMULÁRIO
-================================================== */
-
-form.addEventListener(
-    "submit",
-    async function(e) {
-
-        e.preventDefault();
-
-
-        submitBtn.disabled =
-            true;
-
-
-        submitBtn.classList.add(
-            "is-loading"
-        );
-
-
-        showStatus(
-            "🚀 Enviando dados para o sistema... Aguarde.",
-            "is-warning is-light"
-        );
-
-
-        try {
-
-            const formData =
-                new FormData(this);
-
-
-            const obj =
-                Object.fromEntries(
-                    formData.entries()
-                );
-
-
-            if (
-                fileInput.files.length > 0
-            ) {
-
-                obj.fileData =
-                    await processImage(
-                        fileInput.files[0],
-                        obj.Viatura,
-                        obj.Data
-                    );
-
+            if (event) {
+                event.preventDefault();
             }
 
 
-            const response =
-                await fetch(
-                    API_URL,
-                    {
-                        method: "POST",
+            const registrar =
+                document.getElementById("abaRegistrar");
 
-                        body:
-                            JSON.stringify(obj),
-
-                        headers: {
-                            "Content-Type":
-                                "text/plain;charset=utf-8"
-                        }
-                    }
-                );
+            const consultar =
+                document.getElementById("abaConsultar");
 
 
-            const result =
-                await response.json();
+            const tabRegistrar =
+                document.getElementById("tabRegistrar");
+
+            const tabConsultar =
+                document.getElementById("tabConsultar");
 
 
-            if (
-                result.status ===
-                "success"
-            ) {
+            if (aba === "registrar") {
 
-                showStatus(
-                    "✅ Abastecimento registrado com sucesso!",
-                    "is-success"
-                );
+                registrar.classList.add("ativa");
+                consultar.classList.remove("ativa");
 
-
-                setTimeout(
-                    () => {
-
-                        resetForm();
-
-                    },
-                    2500
-                );
+                tabRegistrar.classList.add("is-active");
+                tabConsultar.classList.remove("is-active");
 
             }
             else {
 
-                throw new Error(
-                    "Erro no servidor"
-                );
+                registrar.classList.remove("ativa");
+                consultar.classList.add("ativa");
+
+                tabRegistrar.classList.remove("is-active");
+                tabConsultar.classList.add("is-active");
+
+
+                // Carrega as viaturas da consulta
+                // Reutiliza as viaturas já carregadas
+                carregarViaturas();
+
 
             }
 
         }
-        catch(error) {
-
-            console.error(error);
 
 
-            showStatus(
-                "❌ Erro ao enviar. Tente novamente ou verifique a conexão.",
-                "is-danger"
-            );
+        /* ==================================================
+           MENSAGEM
+        ================================================== */
+
+        function showStatus(text, type) {
+
+            messageDiv.textContent = text;
+
+            messageDiv.className =
+                `notification ${type}`;
+
+            messageDiv.style.display =
+                "block";
+
+            overlay.style.display =
+                "block";
+
+
+            if (
+                type === "is-success" ||
+                type === "is-danger"
+            ) {
+
+                setTimeout(() => {
+
+                    messageDiv.style.display =
+                        "none";
+
+                    overlay.style.display =
+                        "none";
+
+                }, 3000);
+
+            }
 
         }
-        finally {
-
-            submitBtn.disabled =
-                false;
 
 
-            submitBtn.classList.remove(
-                "is-loading"
-            );
+        /* ==================================================
+           PREVIEW DA FOTO
+        ================================================== */
 
-        }
+        fileInput.addEventListener(
+            "change",
+            function () {
 
-    }
-);
+                if (
+                    this.files &&
+                    this.files[0]
+                ) {
+
+                    fileNameDisplay.textContent =
+                        this.files[0].name;
 
 
-/* ==================================================
-   CARREGA VIATURAS DO FORMULÁRIO
-================================================== */
+                    const reader =
+                        new FileReader();
 
-async function carregarViaturasFormulario() {
 
-    const selectVtr =
-        document.getElementById(
-            "viaturaSelect"
+                    reader.onload =
+                        (e) => {
+
+                            imagePreview.src =
+                                e.target.result;
+
+                            previewContainer.style.display =
+                                "block";
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        this.files[0]
+                    );
+
+                }
+
+            }
         );
 
 
-    try {
+        /* ==================================================
+           BOTÃO REMOVER FOTO
+        ================================================== */
 
-        const response =
-            await fetch(
-                API_URL
-            );
+        document
+            .getElementById("removeBtn")
+            .addEventListener(
+                "click",
+                function () {
 
+                    fileInput.value = "";
 
-        const result =
-            await response.json();
+                    imagePreview.src = "";
 
+                    previewContainer.style.display =
+                        "none";
 
-        if (
-            result.status ===
-            "success"
-        ) {
-
-            let options =
-                '<option value="">Selecione a VTR</option>';
-
-
-            result.vtrs.forEach(
-                vtr => {
-
-                    options +=
-                        `<option value="${escaparHTML(vtr)}">${escaparHTML(vtr)}</option>`;
+                    fileNameDisplay.textContent =
+                        "Nenhum arquivo capturado";
 
                 }
             );
 
 
-            options +=
-                '<option value="outra">Outra (especificar em obs)</option>';
+        /* ==================================================
+           RESET FORM
+        ================================================== */
+
+        function resetForm() {
+
+            form.reset();
 
 
-            selectVtr.innerHTML =
-                options;
-
-        }
-
-    }
-    catch(error) {
-
-        console.error(
-            "Erro:",
-            error
-        );
+            document.getElementById(
+                "dataAtual"
+            ).value = hoje;
 
 
-        selectVtr.innerHTML =
-            '<option value="">Erro ao carregar</option>' +
-            '<option value="outra">Outra (especificar em obs)</option>';
-
-    }
-
-}
+            previewContainer.style.display =
+                "none";
 
 
-/* ==================================================
-   JSONP
-================================================== */
-
-function jsonp(url) {
-
-    return new Promise(
-        (resolve, reject) => {
-
-            const callbackName =
-                "jsonp_" +
-                Date.now() +
-                "_" +
-                Math.floor(
-                    Math.random() * 10000
-                );
+            imagePreview.src =
+                "";
 
 
-            const script =
-                document.createElement(
-                    "script"
-                );
+            fileNameDisplay.textContent =
+                "Nenhum arquivo capturado";
 
 
-            const timeout =
-                setTimeout(
-                    () => {
-
-                        delete window[
-                            callbackName
-                        ];
-
-                        script.remove();
+            messageDiv.style.display =
+                "none";
 
 
-                        reject(
-                            new Error(
-                                "Tempo limite excedido"
-                            )
-                        );
-
-                    },
-                    15000
-                );
-
-
-            window[
-                callbackName
-            ] =
-                function(data) {
-
-                    clearTimeout(
-                        timeout
-                    );
-
-
-                    delete window[
-                        callbackName
-                    ];
-
-
-                    script.remove();
-
-
-                    resolve(data);
-
-                };
-
-
-            script.onerror =
-                function() {
-
-                    clearTimeout(
-                        timeout
-                    );
-
-
-                    delete window[
-                        callbackName
-                    ];
-
-
-                    script.remove();
-
-
-                    reject(
-                        new Error(
-                            "Erro ao acessar o servidor"
-                        )
-                    );
-
-                };
-
-
-            script.src =
-                url +
-                (
-                    url.includes("?")
-                        ? "&"
-                        : "?"
-                ) +
-                "callback=" +
-                encodeURIComponent(
-                    callbackName
-                );
-
-
-            document.body.appendChild(
-                script
-            );
+            overlay.style.display =
+                "none";
 
         }
-    );
-
-}
 
 
-/* ==================================================
-   CONVERTE LINK DO GOOGLE DRIVE
-   PARA THUMBNAIL
-================================================== */
+        /* ==================================================
+           PROCESSAMENTO DA IMAGEM
+        ================================================== */
 
-function converterLinkDrive(
-    url,
-    tamanho = "w2000"
-) {
-
-    if (!url) {
-        return "";
-    }
-
-
-    url =
-        String(url).trim();
-
-
-    let id =
-        null;
-
-
-    /* ------------------------------------------
-       /file/d/ID/view
-    ------------------------------------------ */
-
-    let match =
-        url.match(
-            /drive\.google\.com\/file\/d\/([^\/?]+)/
-        );
-
-
-    if (match) {
-
-        id =
-            match[1];
-
-    }
-
-
-    /* ------------------------------------------
-       ?id=ID
-    ------------------------------------------ */
-
-    if (!id) {
-
-        match =
-            url.match(
-                /[?&]id=([^&]+)/
-            );
-
-
-        if (match) {
-
-            id =
-                match[1];
-
-        }
-
-    }
-
-
-    /* ------------------------------------------
-       Gera thumbnail
-    ------------------------------------------ */
-
-    if (id) {
-
-        return (
-            "https://drive.google.com/thumbnail?id=" +
-            encodeURIComponent(id) +
-            "&sz=" +
-            tamanho
-        );
-
-    }
-
-
-    /* ------------------------------------------
-       Se não for Drive,
-       mantém URL original
-    ------------------------------------------ */
-
-    return url;
-
-}
-
-
-/* ==================================================
-   CARREGA VIATURAS DA CONSULTA
-================================================== */
-
-let consultaViaturasCarregadas =
-    false;
-
-
-async function carregarViaturasConsulta() {
-
-    const select =
-        document.getElementById(
-            "viatura"
-        );
-
-
-    if (
-        consultaViaturasCarregadas
-    ) {
-
-        return;
-
-    }
-
-
-    try {
-
-        const resposta =
-            await jsonp(
-                API_URL +
-                "?action=vtr"
-            );
-
-
-        if (
-            resposta.status !==
-            "success"
+        async function processImage(
+            file,
+            viatura,
+            dataOcorrencia
         ) {
 
-            throw new Error(
-                resposta.message ||
-                "Erro ao carregar viaturas"
-            );
-
-        }
-
-
-        select.innerHTML =
-            '<option value="">Selecione a viatura...</option>';
-
-
-        resposta.vtrs.forEach(
-            vtr => {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-
-                option.value =
-                    vtr;
-
-
-                option.textContent =
-                    vtr;
-
-
-                select.appendChild(
-                    option
-                );
-
-            }
-        );
-
-
-        consultaViaturasCarregadas =
-            true;
-
-
-        document.getElementById(
-            "status"
-        ).textContent =
-            resposta.vtrs.length +
-            " viaturas disponíveis.";
-
-    }
-    catch(erro) {
-
-        console.error(
-            erro
-        );
-
-
-        select.innerHTML =
-            '<option value="">Erro ao carregar</option>';
-
-
-        document.getElementById(
-            "status"
-        ).textContent =
-            "Erro: " +
-            erro.message;
-
-    }
-
-}
-
-
-/* ==================================================
-   CONSULTA ABASTECIMENTOS
-================================================== */
-
-async function consultar() {
-
-    const viatura =
-        document
-            .getElementById(
-                "viatura"
-            )
-            .value
-            .trim();
-
-
-    const resultado =
-        document.getElementById(
-            "resultado"
-        );
-
-
-    const status =
-        document.getElementById(
-            "status"
-        );
-
-
-    if (!viatura) {
-
-        resultado.innerHTML =
-            "";
-
-
-        status.textContent =
-            "Selecione uma viatura.";
-
-
-        return;
-
-    }
-
-
-    resultado.innerHTML =
-        '<div class="nenhum">' +
-        '<i class="fas fa-spinner fa-spin mr-2"></i>' +
-        'Consultando...' +
-        '</div>';
-
-
-    status.textContent =
-        "Buscando os últimos registros...";
-
-
-    try {
-
-        const url =
-            API_URL +
-            "?action=abastecimentos" +
-            "&viatura=" +
-            encodeURIComponent(
-                viatura
-            );
-
-
-        const resposta =
-            await jsonp(
-                url
-            );
-
-
-        if (
-            resposta.status !==
-            "success"
-        ) {
-
-            throw new Error(
-                resposta.message ||
-                "Erro na consulta"
-            );
-
-        }
-
-
-        mostrarResultados(
-            resposta.registros
-        );
-
-
-        status.textContent =
-            resposta.registros.length +
-            " registro(s) encontrado(s).";
-
-    }
-    catch(erro) {
-
-        console.error(
-            erro
-        );
-
-
-        resultado.innerHTML =
-            '<div class="nenhum">' +
-            '<i class="fas fa-triangle-exclamation mr-2"></i>' +
-            'Erro ao realizar consulta.' +
-            '</div>';
-
-
-        status.textContent =
-            erro.message;
-
-    }
-
-}
-
-
-/* ==================================================
-   MOSTRA RESULTADOS
-================================================== */
-
-function mostrarResultados(
-    registros
-) {
-
-    const container =
-        document.getElementById(
-            "resultado"
-        );
-
-
-    if (
-        !registros ||
-        registros.length === 0
-    ) {
-
-        container.innerHTML =
-            '<div class="nenhum">' +
-            '<i class="fas fa-inbox mr-2"></i>' +
-            'Nenhum abastecimento encontrado para esta viatura.' +
-            '</div>';
-
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        "";
-
-
-    registros.forEach(
-        registro => {
-
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "registro";
-
-
-            /* ==========================================
-               VIATURA
-            ========================================== */
-
-            const viatura =
-                document.createElement(
-                    "div"
-                );
-
-
-            viatura.innerHTML =
-                '<span class="label">Viatura</span>' +
-                '<span class="valor">' +
-                escaparHTML(
-                    registro.viatura
-                ) +
-                '</span>';
-
-
-            /* ==========================================
-               OBS
-            ========================================== */
-
-            const obs =
-                document.createElement(
-                    "div"
-                );
-
-
-            obs.innerHTML =
-                '<span class="label">Observação</span>' +
-                '<span class="valor">' +
-                (
-                    registro.obs
-                        ? escaparHTML(
-                            registro.obs
-                        )
-                        : "—"
-                ) +
-                '</span>';
-
-
-            /* ==========================================
-               DATA
-            ========================================== */
-
-            const timestamp =
-                document.createElement(
-                    "div"
-                );
-
-
-            timestamp.innerHTML =
-                '<span class="label">Data / Hora</span>' +
-                '<span class="valor data">' +
-                escaparHTML(
-                    registro.timestamp
-                ) +
-                '</span>';
-
-
-            /* ==========================================
-               IMAGEM
-            ========================================== */
-
-            const arquivo =
-                document.createElement(
-                    "div"
-                );
-
-
-            arquivo.innerHTML =
-                '<span class="label">Imagem</span>';
-
-
-            if (
-                registro.fileLink
-            ) {
+            return new Promise((resolve, reject) => {
 
                 const img =
-                    document.createElement(
-                        "img"
-                    );
+                    new Image();
+
+                const reader =
+                    new FileReader();
 
 
-                img.className =
-                    "thumb";
+                reader.onload =
+                    (e) => {
 
-
-                const imagemUrl =
-                    converterLinkDrive(
-                        registro.fileLink,
-                        "w1000"
-                    );
-
-
-                img.src =
-                    imagemUrl;
-
-
-                img.alt =
-                    "Imagem do abastecimento";
-
-
-                img.loading =
-                    "lazy";
-
-
-                img.onclick =
-                    function() {
-
-                        abrirImagem(
-                            registro.fileLink
-                        );
+                        img.src =
+                            e.target.result;
 
                     };
 
 
                 img.onerror =
-                    function() {
+                    () => {
 
-                        img.style.display =
-                            "none";
-
-
-                        const erro =
-                            document.createElement(
-                                "div"
-                            );
-
-
-                        erro.className =
-                            "sem-imagem";
-
-
-                        erro.innerHTML =
-                            '<i class="fas fa-image-slash mr-1"></i>' +
-                            'Imagem indisponível';
-
-
-                        arquivo.appendChild(
-                            erro
+                        reject(
+                            new Error(
+                                "Não foi possível processar a imagem."
+                            )
                         );
 
                     };
 
 
-                arquivo.appendChild(
-                    img
+                img.onload =
+                    () => {
+
+                        const canvas =
+                            document.createElement(
+                                "canvas"
+                            );
+
+
+                        const ctx =
+                            canvas.getContext(
+                                "2d"
+                            );
+
+
+                        const MAX_WIDTH =
+                            1000;
+
+
+                        let width =
+                            img.width;
+
+                        let height =
+                            img.height;
+
+
+                        if (
+                            width > MAX_WIDTH
+                        ) {
+
+                            height *=
+                                MAX_WIDTH / width;
+
+                            width =
+                                MAX_WIDTH;
+
+                        }
+
+
+                        canvas.width =
+                            width;
+
+                        canvas.height =
+                            height;
+
+
+                        ctx.drawImage(
+                            img,
+                            0,
+                            0,
+                            width,
+                            height
+                        );
+
+
+                        /* ==========================================
+                           VIATURA
+                        ========================================== */
+
+                        let vtr =
+                            document
+                                .getElementById(
+                                    "viaturaSelect"
+                                )
+                                .value;
+
+
+                        const obs =
+                            document
+                                .getElementById(
+                                    "Obs"
+                                )
+                                .value;
+
+
+                        if (
+                            vtr.toLowerCase() ===
+                            "outra"
+                        ) {
+
+                            vtr =
+                                obs
+                                    ? obs
+                                    : "Outra";
+
+                        }
+
+
+                        /* ==========================================
+                           HORA
+                        ========================================== */
+
+                        const agora =
+                            new Date();
+
+
+                        const horas =
+                            String(
+                                agora.getHours()
+                            ).padStart(
+                                2,
+                                "0"
+                            );
+
+
+                        const minutos =
+                            String(
+                                agora.getMinutes()
+                            ).padStart(
+                                2,
+                                "0"
+                            );
+
+
+                        /* ==========================================
+                           NOME DO ARQUIVO
+                        ========================================== */
+
+                        const customFileName =
+                            `${dataOcorrencia}_${horas}-${minutos}_VTR-${vtr}.jpg`;
+
+
+                        /* ==========================================
+                           DATA FORMATADA
+                        ========================================== */
+
+                        function formatarData(
+                            dataISO
+                        ) {
+
+                            const [
+                                ano,
+                                mes,
+                                dia
+                            ] =
+                                dataISO.split("-");
+
+
+                            return `${dia}-${mes}-${ano}`;
+
+                        }
+
+
+                        /* ==========================================
+                           MARCA D'ÁGUA
+                        ========================================== */
+
+                        const textoMarca =
+                            `VTR: ${vtr} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
+
+
+                        ctx.fillStyle =
+                            "rgba(0, 0, 0, 0.6)";
+
+
+                        ctx.fillRect(
+                            0,
+                            height - 40,
+                            width,
+                            40
+                        );
+
+
+                        ctx.font =
+                            "bold 20px Arial";
+
+
+                        ctx.fillStyle =
+                            "white";
+
+
+                        ctx.fillText(
+                            textoMarca,
+                            20,
+                            height - 12
+                        );
+
+
+                        /* ==========================================
+                           RETORNA
+                        ========================================== */
+
+                        resolve({
+
+                            fileName:
+                                customFileName,
+
+                            data:
+                                canvas
+                                    .toDataURL(
+                                        "image/jpeg",
+                                        0.85
+                                    )
+                                    .split(",")[1]
+
+                        });
+
+                    };
+
+
+                reader.readAsDataURL(
+                    file
+                );
+
+            });
+
+        }
+
+
+        /* ==================================================
+           ENVIO DO FORMULÁRIO
+        ================================================== */
+
+        form.addEventListener(
+            "submit",
+            async function (e) {
+
+                e.preventDefault();
+
+
+                submitBtn.disabled =
+                    true;
+
+
+                submitBtn.classList.add(
+                    "is-loading"
+                );
+
+
+                showStatus(
+                    "🚀 Enviando dados para o sistema... Aguarde.",
+                    "is-warning is-light"
+                );
+
+
+                try {
+
+                    const formData =
+                        new FormData(this);
+
+
+                    const obj =
+                        Object.fromEntries(
+                            formData.entries()
+                        );
+
+
+                    if (
+                        fileInput.files.length > 0
+                    ) {
+
+                        obj.fileData =
+                            await processImage(
+                                fileInput.files[0],
+                                obj.Viatura,
+                                obj.Data
+                            );
+
+                    }
+
+
+                    const response =
+                        await fetch(
+                            API_URL,
+                            {
+                                method: "POST",
+
+                                body:
+                                    JSON.stringify(obj),
+
+                                headers: {
+                                    "Content-Type":
+                                        "text/plain;charset=utf-8"
+                                }
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (
+                        result.status ===
+                        "success"
+                    ) {
+
+                        showStatus(
+                            "✅ Abastecimento registrado com sucesso!",
+                            "is-success"
+                        );
+
+
+                        setTimeout(
+                            () => {
+
+                                resetForm();
+
+                            },
+                            2500
+                        );
+
+                    }
+                    else {
+
+                        throw new Error(
+                            "Erro no servidor"
+                        );
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(error);
+
+
+                    showStatus(
+                        "❌ Erro ao enviar. Tente novamente ou verifique a conexão.",
+                        "is-danger"
+                    );
+
+                }
+                finally {
+
+                    submitBtn.disabled =
+                        false;
+
+
+                    submitBtn.classList.remove(
+                        "is-loading"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ==================================================
+           CARREGA VIATURAS DO FORMULÁRIO
+        ================================================== */
+
+
+        /* ==================================================
+           JSONP
+        ================================================== */
+
+        function jsonp(url) {
+
+            return new Promise(
+                (resolve, reject) => {
+
+                    const callbackName =
+                        "jsonp_" +
+                        Date.now() +
+                        "_" +
+                        Math.floor(
+                            Math.random() * 10000
+                        );
+
+
+                    const script =
+                        document.createElement(
+                            "script"
+                        );
+
+
+                    const timeout =
+                        setTimeout(
+                            () => {
+
+                                delete window[
+                                    callbackName
+                                ];
+
+                                script.remove();
+
+
+                                reject(
+                                    new Error(
+                                        "Tempo limite excedido"
+                                    )
+                                );
+
+                            },
+                            15000
+                        );
+
+
+                    window[
+                        callbackName
+                    ] =
+                        function (data) {
+
+                            clearTimeout(
+                                timeout
+                            );
+
+
+                            delete window[
+                                callbackName
+                            ];
+
+
+                            script.remove();
+
+
+                            resolve(data);
+
+                        };
+
+
+                    script.onerror =
+                        function () {
+
+                            clearTimeout(
+                                timeout
+                            );
+
+
+                            delete window[
+                                callbackName
+                            ];
+
+
+                            script.remove();
+
+
+                            reject(
+                                new Error(
+                                    "Erro ao acessar o servidor"
+                                )
+                            );
+
+                        };
+
+
+                    script.src =
+                        url +
+                        (
+                            url.includes("?")
+                                ? "&"
+                                : "?"
+                        ) +
+                        "callback=" +
+                        encodeURIComponent(
+                            callbackName
+                        );
+
+
+                    document.body.appendChild(
+                        script
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ==================================================
+           CONVERTE LINK DO GOOGLE DRIVE
+           PARA THUMBNAIL
+        ================================================== */
+
+        function converterLinkDrive(
+            url,
+            tamanho = "w2000"
+        ) {
+
+            if (!url) {
+                return "";
+            }
+
+
+            url =
+                String(url).trim();
+
+
+            let id =
+                null;
+
+
+            /* ------------------------------------------
+               /file/d/ID/view
+            ------------------------------------------ */
+
+            let match =
+                url.match(
+                    /drive\.google\.com\/file\/d\/([^\/?]+)/
+                );
+
+
+            if (match) {
+
+                id =
+                    match[1];
+
+            }
+
+
+            /* ------------------------------------------
+               ?id=ID
+            ------------------------------------------ */
+
+            if (!id) {
+
+                match =
+                    url.match(
+                        /[?&]id=([^&]+)/
+                    );
+
+
+                if (match) {
+
+                    id =
+                        match[1];
+
+                }
+
+            }
+
+
+            /* ------------------------------------------
+               Gera thumbnail
+            ------------------------------------------ */
+
+            if (id) {
+
+                return (
+                    "https://drive.google.com/thumbnail?id=" +
+                    encodeURIComponent(id) +
+                    "&sz=" +
+                    tamanho
                 );
 
             }
-            else {
 
-                arquivo.innerHTML +=
-                    '<div class="sem-imagem">' +
-                    '<i class="fas fa-image mr-1"></i>' +
-                    'Sem imagem' +
-                    '</div>';
+
+            /* ------------------------------------------
+               Se não for Drive,
+               mantém URL original
+            ------------------------------------------ */
+
+            return url;
+
+        }
+
+
+        /* ==================================================
+           CARREGA VIATURAS DA CONSULTA
+        ================================================== */
+
+        let consultaViaturasCarregadas =
+            false;
+
+        /* ==================================================
+           CARREGA VIATURAS - UMA ÚNICA SOLICITAÇÃO
+        ================================================== */
+
+        let viaturasCarregadas = null;
+        let carregandoViaturas = null;
+
+
+        async function carregarViaturas() {
+
+            // Se já carregou anteriormente, reutiliza os dados
+            if (viaturasCarregadas) {
+                preencherViaturas(viaturasCarregadas);
+                return viaturasCarregadas;
+            }
+
+
+            // Se já existe uma solicitação em andamento,
+            // aguarda a mesma em vez de fazer outra
+            if (carregandoViaturas) {
+                return carregandoViaturas;
+            }
+
+
+            carregandoViaturas = jsonp(
+                API_URL + "?action=vtr"
+            )
+                .then(resposta => {
+
+                    if (resposta.status !== "success") {
+                        throw new Error(
+                            resposta.message ||
+                            "Erro ao carregar viaturas"
+                        );
+                    }
+
+
+                    viaturasCarregadas =
+                        resposta.vtrs || [];
+
+
+                    preencherViaturas(
+                        viaturasCarregadas
+                    );
+
+
+                    return viaturasCarregadas;
+
+                })
+                .catch(erro => {
+
+                    console.error(
+                        "Erro ao carregar viaturas:",
+                        erro
+                    );
+
+
+                    document.getElementById(
+                        "viaturaSelect"
+                    ).innerHTML =
+                        '<option value="">Erro ao carregar</option>' +
+                        '<option value="outra">Outra (especificar em obs)</option>';
+
+
+                    document.getElementById(
+                        "viatura"
+                    ).innerHTML =
+                        '<option value="">Erro ao carregar</option>';
+
+
+                    throw erro;
+
+                });
+
+
+            return carregandoViaturas;
+
+        }
+
+
+        /* ==================================================
+           PREENCHE OS DOIS SELECTS COM A MESMA LISTA
+        ================================================== */
+
+        function preencherViaturas(
+            vtrs
+        ) {
+
+            const selectFormulario =
+                document.getElementById(
+                    "viaturaSelect"
+                );
+
+
+            const selectConsulta =
+                document.getElementById(
+                    "viatura"
+                );
+
+
+            /* ------------------------------------------
+               FORMULÁRIO
+            ------------------------------------------ */
+
+            selectFormulario.innerHTML =
+                '<option value="">Selecione a VTR</option>';
+
+
+            vtrs.forEach(
+                vtr => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        vtr;
+
+
+                    option.textContent =
+                        vtr;
+
+
+                    selectFormulario.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            selectFormulario.innerHTML +=
+                '<option value="outra">Outra (especificar em obs)</option>';
+
+
+            /* ------------------------------------------
+               CONSULTA
+            ------------------------------------------ */
+
+            selectConsulta.innerHTML =
+                '<option value="">Selecione a viatura...</option>';
+
+
+            vtrs.forEach(
+                vtr => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        vtr;
+
+
+                    option.textContent =
+                        vtr;
+
+
+                    selectConsulta.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+            document.getElementById(
+                "status"
+            ).textContent =
+                vtrs.length +
+                " viaturas disponíveis.";
+
+        }
+
+
+        /* ==================================================
+           CONSULTA ABASTECIMENTOS
+        ================================================== */
+
+        async function consultar() {
+
+            const viatura =
+                document
+                    .getElementById(
+                        "viatura"
+                    )
+                    .value
+                    .trim();
+
+
+            const resultado =
+                document.getElementById(
+                    "resultado"
+                );
+
+
+            const status =
+                document.getElementById(
+                    "status"
+                );
+
+
+            if (!viatura) {
+
+                resultado.innerHTML =
+                    "";
+
+
+                status.textContent =
+                    "Selecione uma viatura.";
+
+
+                return;
 
             }
 
 
-            div.appendChild(
-                viatura
-            );
+            resultado.innerHTML =
+                '<div class="nenhum">' +
+                '<i class="fas fa-spinner fa-spin mr-2"></i>' +
+                'Consultando...' +
+                '</div>';
 
 
-            div.appendChild(
-                obs
-            );
+            status.textContent =
+                "Buscando os últimos registros...";
 
 
-            div.appendChild(
-                timestamp
-            );
+            try {
+
+                const url =
+                    API_URL +
+                    "?action=abastecimentos" +
+                    "&viatura=" +
+                    encodeURIComponent(
+                        viatura
+                    );
 
 
-            div.appendChild(
-                arquivo
-            );
+                const resposta =
+                    await jsonp(
+                        url
+                    );
 
 
-            container.appendChild(
-                div
-            );
+                if (
+                    resposta.status !==
+                    "success"
+                ) {
+
+                    throw new Error(
+                        resposta.message ||
+                        "Erro na consulta"
+                    );
+
+                }
+
+
+                mostrarResultados(
+                    resposta.registros
+                );
+
+
+                status.textContent =
+                    resposta.registros.length +
+                    " registro(s) encontrado(s).";
+
+            }
+            catch (erro) {
+
+                console.error(
+                    erro
+                );
+
+
+                resultado.innerHTML =
+                    '<div class="nenhum">' +
+                    '<i class="fas fa-triangle-exclamation mr-2"></i>' +
+                    'Erro ao realizar consulta.' +
+                    '</div>';
+
+
+                status.textContent =
+                    erro.message;
+
+            }
 
         }
-    );
-
-}
 
 
-/* ==================================================
-   ABRE IMAGEM
-================================================== */
+        /* ==================================================
+           MOSTRA RESULTADOS
+        ================================================== */
 
-function abrirImagem(
-    url
-) {
-
-    const imagemUrl =
-        converterLinkDrive(
-            url,
-            "w2000"
-        );
-
-
-    const imagemGrande =
-        document.getElementById(
-            "imagemGrande"
-        );
-
-
-    imagemGrande.src =
-        imagemUrl;
-
-
-    document
-        .getElementById(
-            "modal"
-        )
-        .classList.add(
-            "aberto"
-        );
-
-}
-
-
-/* ==================================================
-   FECHA IMAGEM
-================================================== */
-
-function fecharImagem() {
-
-    document
-        .getElementById(
-            "modal"
-        )
-        .classList.remove(
-            "aberto"
-        );
-
-
-    document
-        .getElementById(
-            "imagemGrande"
-        )
-        .src =
-            "";
-
-}
-
-
-/* ==================================================
-   ESC FECHA MODAL
-================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key ===
-            "Escape"
+        function mostrarResultados(
+            registros
         ) {
 
-            fecharImagem();
+            const container =
+                document.getElementById(
+                    "resultado"
+                );
+
+
+            if (
+                !registros ||
+                registros.length === 0
+            ) {
+
+                container.innerHTML =
+                    '<div class="nenhum">' +
+                    '<i class="fas fa-inbox mr-2"></i>' +
+                    'Nenhum abastecimento encontrado para esta viatura.' +
+                    '</div>';
+
+
+                return;
+
+            }
+
+
+            container.innerHTML =
+                "";
+
+
+            registros.forEach(
+                registro => {
+
+                    const div =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    div.className =
+                        "registro";
+
+
+                    /* ==========================================
+                       VIATURA
+                    ========================================== */
+
+                    const viatura =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    viatura.innerHTML =
+                        '<span class="label">Viatura</span>' +
+                        '<span class="valor">' +
+                        escaparHTML(
+                            registro.viatura
+                        ) +
+                        '</span>';
+
+
+                    /* ==========================================
+                       OBS
+                    ========================================== */
+
+                    const obs =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    obs.innerHTML =
+                        '<span class="label">Observação</span>' +
+                        '<span class="valor">' +
+                        (
+                            registro.obs
+                                ? escaparHTML(
+                                    registro.obs
+                                )
+                                : "—"
+                        ) +
+                        '</span>';
+
+
+                    /* ==========================================
+                       DATA
+                    ========================================== */
+
+                    const timestamp =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    timestamp.innerHTML =
+                        '<span class="label">Data / Hora</span>' +
+                        '<span class="valor data">' +
+                        escaparHTML(
+                            registro.timestamp
+                        ) +
+                        '</span>';
+
+
+                    /* ==========================================
+                       IMAGEM
+                    ========================================== */
+
+                    const arquivo =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    arquivo.innerHTML =
+                        '<span class="label">Imagem</span>';
+
+
+                    if (
+                        registro.fileLink
+                    ) {
+
+                        const img =
+                            document.createElement(
+                                "img"
+                            );
+
+
+                        img.className =
+                            "thumb";
+
+
+                        const imagemUrl =
+                            converterLinkDrive(
+                                registro.fileLink,
+                                "w1000"
+                            );
+
+
+                        img.src =
+                            imagemUrl;
+
+
+                        img.alt =
+                            "Imagem do abastecimento";
+
+
+                        img.loading =
+                            "lazy";
+
+
+                        img.onclick =
+                            function () {
+
+                                abrirImagem(
+                                    registro.fileLink
+                                );
+
+                            };
+
+
+                        img.onerror =
+                            function () {
+
+                                img.style.display =
+                                    "none";
+
+
+                                const erro =
+                                    document.createElement(
+                                        "div"
+                                    );
+
+
+                                erro.className =
+                                    "sem-imagem";
+
+
+                                erro.innerHTML =
+                                    '<i class="fas fa-image-slash mr-1"></i>' +
+                                    'Imagem indisponível';
+
+
+                                arquivo.appendChild(
+                                    erro
+                                );
+
+                            };
+
+
+                        arquivo.appendChild(
+                            img
+                        );
+
+                    }
+                    else {
+
+                        arquivo.innerHTML +=
+                            '<div class="sem-imagem">' +
+                            '<i class="fas fa-image mr-1"></i>' +
+                            'Sem imagem' +
+                            '</div>';
+
+                    }
+
+
+                    div.appendChild(
+                        viatura
+                    );
+
+
+                    div.appendChild(
+                        obs
+                    );
+
+
+                    div.appendChild(
+                        timestamp
+                    );
+
+
+                    div.appendChild(
+                        arquivo
+                    );
+
+
+                    container.appendChild(
+                        div
+                    );
+
+                }
+            );
 
         }
 
-    }
-);
+
+        /* ==================================================
+           ABRE IMAGEM
+        ================================================== */
+
+        function abrirImagem(
+            url
+        ) {
+
+            const imagemUrl =
+                converterLinkDrive(
+                    url,
+                    "w2000"
+                );
 
 
-/* ==================================================
-   SEGURANÇA BÁSICA
-================================================== */
+            const imagemGrande =
+                document.getElementById(
+                    "imagemGrande"
+                );
 
-function escaparHTML(
-    valor
-) {
 
-    return String(
-        valor || ""
-    )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
+            imagemGrande.src =
+                imagemUrl;
+
+
+            document
+                .getElementById(
+                    "modal"
+                )
+                .classList.add(
+                    "aberto"
+                );
+
+        }
+
+
+        /* ==================================================
+           FECHA IMAGEM
+        ================================================== */
+
+        function fecharImagem() {
+
+            document
+                .getElementById(
+                    "modal"
+                )
+                .classList.remove(
+                    "aberto"
+                );
+
+
+            document
+                .getElementById(
+                    "imagemGrande"
+                )
+                .src =
+                "";
+
+        }
+
+
+        /* ==================================================
+           ESC FECHA MODAL
+        ================================================== */
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "Escape"
+                ) {
+
+                    fecharImagem();
+
+                }
+
+            }
         );
 
-}
+
+        /* ==================================================
+           SEGURANÇA BÁSICA
+        ================================================== */
+
+        function escaparHTML(
+            valor
+        ) {
+
+            return String(
+                valor || ""
+            )
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+
+        }
 
 
-/* ==================================================
-   INICIALIZAÇÃO
-================================================== */
+        /* ==================================================
+           INICIALIZAÇÃO
+        ================================================== */
 
-// Carrega imediatamente as viaturas
-// do formulário de registro.
+        // Carrega imediatamente as viaturas
+        // do formulário de registro.
 
-carregarViaturasFormulario();
+        carregarViaturas();
 
 
-</script>
+    </script>
 
 </body>
 
