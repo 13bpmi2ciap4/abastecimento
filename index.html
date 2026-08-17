@@ -2,91 +2,205 @@
 <html lang="pt-BR">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
     <title>Abastecimentos - 2ª Cia PM</title>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- BULMA -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    >
+
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
 
     <style>
+
         :root {
             --pm-blue-dark: #002147;
             --pm-blue-light: #003366;
             --pm-gray: #333333;
             --bg-body: #f5f7fa;
+            --pm-gold: #ccaa00;
         }
 
-        body {
-            background-color: var(--bg-body);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        * {
+            box-sizing: border-box;
         }
+
+
+        body {
+            margin: 0;
+            background-color: var(--bg-body);
+            color: #1e293b;
+            font-family: 'Segoe UI',
+                Tahoma,
+                Geneva,
+                Verdana,
+                sans-serif;
+        }
+
+
+        /* ==================================================
+           CABEÇALHO
+        ================================================== */
 
         .hero.is-pm {
             background-color: var(--pm-blue-dark);
             color: white;
-            border-bottom: 4px solid #ccaa00;
+            border-bottom: 4px solid var(--pm-gold);
         }
+
+
+        .hero-body-custom {
+            padding: 1.5rem 1rem 0 !important;
+        }
+
+
+        .titulo-principal {
+            margin-bottom: 1.5rem !important;
+            text-align: center;
+        }
+
+
+        /* ==================================================
+           ABAS
+        ================================================== */
+
+        .tabs-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+
+        .tabs-custom {
+            margin-bottom: 0 !important;
+        }
+
+
+        .tabs-custom ul {
+            border-bottom: none;
+            display: flex;
+            width: 100%;
+        }
+
+
+        .tabs-custom li {
+            flex: 1;
+        }
+
+
+        .tabs-custom a {
+            justify-content: center;
+            color: rgba(255,255,255,.75);
+            border: none !important;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            padding: 14px 10px;
+            transition: .2s;
+        }
+
+
+        .tabs-custom a:hover {
+            color: white;
+            background: rgba(255,255,255,.08);
+        }
+
+
+        .tabs-custom li.is-active a {
+            color: var(--pm-blue-dark);
+            background: white;
+        }
+
+
+        /* ==================================================
+           CONTAINER
+        ================================================== */
+
+        .conteudo-principal {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
 
         .box-custom {
             border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-top: -1.5rem;
+            box-shadow:
+                0 4px 15px rgba(0,0,0,.1);
+
+            margin-top: 1.5rem;
             background: #ffffff;
         }
 
-        /* Estilo da Mensagem Flutuante Centralizada */
-        #message {
+
+        .aba-conteudo {
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            min-width: 300px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-radius: 12px;
-            font-weight: bold;
         }
 
-        /* Overlay para escurecer o fundo quando a mensagem aparece (opcional) */
-        .msg-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            z-index: 999;
+
+        .aba-conteudo.ativa {
+            display: block;
         }
+
+
+        /* ==================================================
+           FORMULÁRIO
+        ================================================== */
 
         .label {
             color: var(--pm-gray);
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
+            font-size: .85rem;
+            letter-spacing: .5px;
         }
 
-/* Preview Centralizado e 50% Menor */
+
+        .button.is-pm-send {
+            background-color: var(--pm-blue-dark);
+            color: white;
+            font-weight: bold;
+        }
+
+
+        .button.is-pm-send:hover {
+            background-color: var(--pm-blue-light);
+            color: white;
+        }
+
+
+        /* ==================================================
+           PREVIEW
+        ================================================== */
+
         #preview-container {
             display: none;
-            margin: 15px auto 0 auto; /* Centraliza horizontalmente */
+            margin-top: 15px;
             border: 2px solid #dbdbdb;
             border-radius: 6px;
             padding: 8px;
             background: #fafafa;
             position: relative;
-            max-width: 50%; /* Define o tamanho como metade do formulário */
         }
+
 
         #image-preview {
             width: 100%;
-            height: auto;
             border-radius: 4px;
             display: block;
         }
+
 
         .btn-remove {
             position: absolute;
@@ -100,311 +214,2217 @@
             height: 28px;
             cursor: pointer;
             font-weight: bold;
+            z-index: 5;
         }
 
-        .button.is-pm-send {
-            background-color: var(--pm-blue-dark);
-            color: white;
+
+        /* ==================================================
+           MENSAGEM
+        ================================================== */
+
+        #message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            min-width: 300px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow:
+                0 10px 30px rgba(0,0,0,.2);
+            border-radius: 12px;
             font-weight: bold;
         }
 
+
+        .msg-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.4);
+            z-index: 999;
+        }
+
+
+        /* ==================================================
+           CONSULTA
+        ================================================== */
+
+        .consulta-campo {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+
+        .consulta-campo .select {
+            flex: 1;
+        }
+
+
+        .consulta-campo select {
+            width: 100%;
+        }
+
+
+        #status {
+            margin-top: 15px;
+            color: #64748b;
+        }
+
+
+        .resultado {
+            margin-top: 25px;
+        }
+
+
+        .registro {
+            display: grid;
+            grid-template-columns:
+                130px
+                1fr
+                180px
+                120px;
+
+            gap: 20px;
+            align-items: center;
+
+            padding: 15px;
+            margin-bottom: 10px;
+
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+
+
+        .registro .label {
+            display: block;
+            color: #64748b;
+            font-size: 12px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+
+        .valor {
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+
+        .data {
+            font-weight: bold;
+        }
+
+
+        /* ==================================================
+           MINIATURA
+        ================================================== */
+
+        .thumb {
+            width: 100px;
+            height: 75px;
+
+            object-fit: cover;
+
+            border-radius: 7px;
+            border: 1px solid #cbd5e1;
+
+            cursor: pointer;
+
+            transition: .2s;
+
+            background: #e2e8f0;
+        }
+
+
+        .thumb:hover {
+            transform: scale(1.05);
+        }
+
+
+        .sem-imagem {
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+
+        .nenhum {
+            text-align: center;
+            padding: 40px 10px;
+            color: #64748b;
+        }
+
+
+        /* ==================================================
+           MODAL DA IMAGEM
+        ================================================== */
+
+        .modal-imagem {
+            display: none;
+
+            position: fixed;
+            z-index: 9999;
+
+            inset: 0;
+
+            background: rgba(0,0,0,.85);
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+
+        .modal-imagem.aberto {
+            display: flex;
+        }
+
+
+        .modal-imagem img {
+            max-width: 95vw;
+            max-height: 90vh;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 10px 40px rgba(0,0,0,.5);
+        }
+
+
+        .fechar {
+            position: fixed;
+
+            top: 15px;
+            right: 25px;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,.2);
+
+            color: white;
+
+            font-size: 30px;
+            line-height: 45px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            z-index: 10000;
+        }
+
+
+        /* ==================================================
+           RESPONSIVO
+        ================================================== */
+
         @media (max-width: 768px) {
-            .hero-body {
-                padding: 1.5rem 1rem 3rem !important;
+
+            .hero-body-custom {
+                padding:
+                    1.5rem
+                    1rem
+                    0 !important;
             }
 
-            .title {
+
+            .titulo-principal {
                 font-size: 1.5rem !important;
-                text-align: center;
             }
+
+
+            .tabs-custom a {
+                font-size: .85rem;
+                padding: 12px 5px;
+            }
+
+
+            .consulta-campo {
+                flex-direction: column;
+            }
+
+
+            .consulta-campo .select,
+            .consulta-campo button {
+                width: 100%;
+            }
+
+
+            .registro {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+
+            .thumb {
+                width: 140px;
+                height: 100px;
+            }
+
         }
+
+
+        @media (max-width: 450px) {
+
+            .tabs-custom a {
+                font-size: .75rem;
+            }
+
+            .tabs-custom a i {
+                display: block;
+                margin-right: 0 !important;
+                margin-bottom: 4px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <div id="overlay" class="msg-overlay"></div>
-    <div id="message" class="notification"></div>
 
-    <section class="hero is-pm">
-        <div class="hero-body py-5">
-            <div class="container">
-                <h1 class="title has-text-white">
-                    <i class="fas fa-shield-halved mr-2"></i> 2ª CIA - Abastecimentos
-                </h1>
+<!-- ==================================================
+     MENSAGEM
+================================================== -->
+
+<div id="overlay" class="msg-overlay"></div>
+
+<div
+    id="message"
+    class="notification"
+></div>
+
+
+<!-- ==================================================
+     CABEÇALHO + ABAS
+================================================== -->
+
+<section class="hero is-pm">
+
+    <div class="hero-body hero-body-custom">
+
+        <div class="container">
+
+            <h1 class="title has-text-white titulo-principal">
+
+                <i class="fas fa-shield-halved mr-2"></i>
+
+                2ª CIA - Abastecimentos
+
+            </h1>
+
+
+            <div class="tabs tabs-custom">
+
+                <ul>
+
+                    <li
+                        id="tabRegistrar"
+                        class="is-active"
+                    >
+
+                        <a
+                            href="#"
+                            onclick="mostrarAba('registrar', event)"
+                        >
+
+                            <i class="fas fa-gas-pump mr-2"></i>
+
+                            Registrar Abastecimento
+
+                        </a>
+
+                    </li>
+
+
+                    <li id="tabConsultar">
+
+                        <a
+                            href="#"
+                            onclick="mostrarAba('consultar', event)"
+                        >
+
+                            <i class="fas fa-magnifying-glass mr-2"></i>
+
+                            Consultar Abastecimentos
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
             </div>
+
         </div>
-    </section>
 
-    <main class="container is-max-desktop px-4">
-        <form id="form" class="box box-custom p-5">
+    </div>
+
+</section>
+
+
+
+<!-- ==================================================
+     CONTEÚDO
+================================================== -->
+
+<main class="container conteudo-principal px-4">
+
+
+    <!-- ==================================================
+         ABA 1 - REGISTRAR
+    ================================================== -->
+
+    <section
+        id="abaRegistrar"
+        class="aba-conteudo ativa"
+    >
+
+        <form
+            id="form"
+            class="box box-custom p-5"
+        >
+
             <div class="field">
-                <label class="label"><i class="fas fa-calendar-alt mr-1"></i> Data da Ocorrência</label>
+
+                <label class="label">
+
+                    <i class="fas fa-calendar-alt mr-1"></i>
+
+                    Data da Ocorrência
+
+                </label>
+
+
                 <div class="control has-icons-left">
-                    <input class="input" type="date" name="Data" id="dataAtual" required />
-                    <span class="icon is-small is-left"><i class="fas fa-calendar"></i></span>
+
+                    <input
+                        class="input"
+                        type="date"
+                        name="Data"
+                        id="dataAtual"
+                        required
+                    >
+
+                    <span class="icon is-small is-left">
+
+                        <i class="fas fa-calendar"></i>
+
+                    </span>
+
                 </div>
+
             </div>
 
+
             <div class="field">
-                <label class="label"><i class="fas fa-car-side mr-1"></i> Prefixo da Viatura</label>
+
+                <label class="label">
+
+                    <i class="fas fa-car-side mr-1"></i>
+
+                    Prefixo da Viatura
+
+                </label>
+
+
                 <div class="control has-icons-left">
+
                     <div class="select is-fullwidth">
-                        <select name="Viatura" id="viaturaSelect" required>
-                            <option value="">Carregando viaturas...</option>
+
+                        <select
+                            name="Viatura"
+                            id="viaturaSelect"
+                            required
+                        >
+
+                            <option value="">
+                                Carregando viaturas...
+                            </option>
+
                         </select>
+
                     </div>
-                    <span class="icon is-small is-left"><i class="fas fa-hashtag"></i></span>
+
+
+                    <span class="icon is-small is-left">
+
+                        <i class="fas fa-hashtag"></i>
+
+                    </span>
+
                 </div>
+
             </div>
 
+
             <div class="field">
-                <label class="label"><i class="fas fa-camera mr-1"></i> Foto da Nota Fiscal</label>
+
+                <label class="label">
+
+                    <i class="fas fa-camera mr-1"></i>
+
+                    Foto da Nota Fiscal
+
+                </label>
+
+
                 <div class="control">
+
                     <div class="file has-name is-fullwidth is-dark">
+
                         <label class="file-label">
-                            <input class="file-input" type="file" name="Nota" id="fileInput" accept="*/*" required />
+
+                            <input
+                                class="file-input"
+                                type="file"
+                                name="Nota"
+                                id="fileInput"
+                                accept="*/*"
+                                required
+                            >
+
+
                             <span class="file-cta">
-                                <span class="file-icon"><i class="fas fa-camera"></i></span>
-                                <span class="file-label">Tirar Foto da Nota</span>
+
+                                <span class="file-icon">
+
+                                    <i class="fas fa-camera"></i>
+
+                                </span>
+
+
+                                <span class="file-label">
+
+                                    Tirar Foto da Nota
+
+                                </span>
+
                             </span>
-                            <span class="file-name" id="fileNameDisplay">Nenhum arquivo capturado</span>
+
+
+                            <span
+                                class="file-name"
+                                id="fileNameDisplay"
+                            >
+
+                                Nenhum arquivo capturado
+
+                            </span>
+
                         </label>
+
                     </div>
+
                 </div>
+
+
                 <div id="preview-container">
-                    <button type="button" class="btn-remove" id="removeBtn">&times;</button>
-                    <img src="" id="image-preview" alt="Preview">
+
+                    <button
+                        type="button"
+                        class="btn-remove"
+                        id="removeBtn"
+                    >
+
+                        &times;
+
+                    </button>
+
+
+                    <img
+                        src=""
+                        id="image-preview"
+                        alt="Preview"
+                    >
+
                 </div>
+
             </div>
 
+
             <div class="field">
-                <label class="label">Observações</label>
+
+                <label class="label">
+
+                    <i class="fas fa-comment-alt mr-1"></i>
+
+                    Observações
+
+                </label>
+
+
                 <div class="control">
-                    <textarea class="textarea" name="Obs" id="Obs"
-                        placeholder="Anomalias, erros na bomba, etc."></textarea>
+
+                    <textarea
+                        class="textarea"
+                        name="Obs"
+                        id="Obs"
+                        placeholder="Anomalias, erros na bomba, etc."
+                    ></textarea>
+
                 </div>
+
             </div>
+
 
             <div class="field is-grouped pt-4">
+
                 <div class="control is-expanded">
-                    <button class="button is-pm-send is-fullwidth" type="submit" id="submit-button">
-                        <i class="fas fa-paper-plane mr-2"></i> ENVIAR
+
+                    <button
+                        class="button is-pm-send is-fullwidth"
+                        type="submit"
+                        id="submit-button"
+                    >
+
+                        <i class="fas fa-paper-plane mr-2"></i>
+
+                        ENVIAR
+
                     </button>
+
                 </div>
+
+
                 <div class="control is-expanded">
-                    <button class="button is-light is-fullwidth" type="button" onclick="resetForm()">
+
+                    <button
+                        class="button is-light is-fullwidth"
+                        type="button"
+                        onclick="resetForm()"
+                    >
+
                         LIMPAR
+
                     </button>
+
                 </div>
+
             </div>
+
         </form>
-    </main>
 
-    <script>
-        const form = document.getElementById("form");
-        const fileInput = document.getElementById("fileInput");
-        const fileNameDisplay = document.getElementById("fileNameDisplay");
-        const previewContainer = document.getElementById("preview-container");
-        const imagePreview = document.getElementById("image-preview");
-        const messageDiv = document.getElementById("message");
-        const overlay = document.getElementById("overlay");
-        const submitBtn = document.getElementById("submit-button");
+    </section>
 
-        // Data Atual
-        const hoje = new Intl.DateTimeFormat("en-CA", {
-            timeZone: "America/Sao_Paulo", year: "numeric", month: "2-digit", day: "2-digit"
-        }).format(new Date());
-        document.getElementById("dataAtual").value = hoje;
 
-        function showStatus(text, type) {
-            messageDiv.textContent = text;
-            messageDiv.className = `notification ${type}`;
-            messageDiv.style.display = "block";
-            overlay.style.display = "block";
 
-            // Se for sucesso ou erro, agende para sumir. 
-            // Se for 'is-warning' (enviando), não coloca timeout, deixa ela lá até o próximo showStatus.
-            if (type === 'is-success' || type === 'is-danger') {
-                setTimeout(() => {
-                    messageDiv.style.display = "none";
-                    overlay.style.display = "none";
-                }, 3000); // 3 segundos é um tempo bom para leitura
-            }
+    <!-- ==================================================
+         ABA 2 - CONSULTAR
+    ================================================== -->
+
+    <section
+        id="abaConsultar"
+        class="aba-conteudo"
+    >
+
+        <div class="box box-custom p-5">
+
+            <h2 class="title is-4">
+
+                <i class="fas fa-list-check mr-2"></i>
+
+                Consulta de Abastecimentos
+
+            </h2>
+
+
+            <div class="consulta-campo">
+
+                <div class="select is-fullwidth">
+
+                    <select id="viatura">
+
+                        <option value="">
+                            Carregando viaturas...
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="button is-pm-send"
+                    type="button"
+                    onclick="consultar()"
+                >
+
+                    <i class="fas fa-search mr-2"></i>
+
+                    Pesquisar
+
+                </button>
+
+            </div>
+
+
+            <div id="status"></div>
+
+
+            <div
+                id="resultado"
+                class="resultado"
+            ></div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================================
+     MODAL DA IMAGEM
+================================================== -->
+
+<div
+    id="modal"
+    class="modal-imagem"
+    onclick="fecharImagem()"
+>
+
+
+    <div
+        class="fechar"
+        onclick="fecharImagem()"
+    >
+
+        ×
+
+    </div>
+
+
+    <img
+        id="imagemGrande"
+        src=""
+        alt="Imagem"
+        onclick="event.stopPropagation()"
+    >
+
+</div>
+
+
+
+<script>
+
+
+/* ==================================================
+   CONFIGURAÇÃO
+================================================== */
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
+
+
+/* ==================================================
+   ELEMENTOS DO FORMULÁRIO
+================================================== */
+
+const form =
+    document.getElementById("form");
+
+const fileInput =
+    document.getElementById("fileInput");
+
+const fileNameDisplay =
+    document.getElementById("fileNameDisplay");
+
+const previewContainer =
+    document.getElementById("preview-container");
+
+const imagePreview =
+    document.getElementById("image-preview");
+
+const messageDiv =
+    document.getElementById("message");
+
+const overlay =
+    document.getElementById("overlay");
+
+const submitBtn =
+    document.getElementById("submit-button");
+
+
+/* ==================================================
+   DATA ATUAL
+================================================== */
+
+const hoje =
+    new Intl.DateTimeFormat(
+        "en-CA",
+        {
+            timeZone: "America/Sao_Paulo",
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit"
         }
+    ).format(new Date());
 
-        fileInput.addEventListener("change", function () {
-            if (this.files && this.files[0]) {
-                fileNameDisplay.textContent = this.files[0].name;
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    imagePreview.src = e.target.result;
-                    previewContainer.style.display = "block";
-                }
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
 
-        function resetForm() {
-            form.reset();
-            document.getElementById("dataAtual").value = hoje;
-            previewContainer.style.display = "none";
-            fileNameDisplay.textContent = "Nenhum arquivo capturado";
-            messageDiv.style.display = "none";
-            overlay.style.display = "none";
-        }
+document.getElementById(
+    "dataAtual"
+).value = hoje;
 
-        async function processImage(file, viatura, dataOcorrencia) {
-            return new Promise((resolve) => {
-                const img = new Image();
-                const reader = new FileReader();
-                reader.onload = (e) => img.src = e.target.result;
-                img.onload = () => {
-                    const canvas = document.createElement("canvas");
-                    const ctx = canvas.getContext("2d");
-                    const MAX_WIDTH = 1000;
-                    let width = img.width;
-                    let height = img.height;
 
-                    if (width > MAX_WIDTH) {
-                        height *= (MAX_WIDTH / width);
-                        width = MAX_WIDTH;
-                    }
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
+/* ==================================================
+   CONTROLE DAS ABAS
+================================================== */
 
-                    // Gerar Data e Hora para o NOME do arquivo
-                    // ... dentro do seu evento de submit, onde você captura os dados ...
+function mostrarAba(aba, event) {
 
-                    let viatura = document.getElementById("viaturaSelect").value;
-                    const obs = document.getElementById("Obs").value; // Certifique-se que o id do campo de observação é "Obs"
+    if (event) {
+        event.preventDefault();
+    }
 
-                    // REGRA SOLICITADA: Se for "outra", usa o texto da observação para o nome e marca d'água
-                    if (viatura.toLowerCase() === "outra") {
-                        viatura = obs ? obs : "Outra"; // Usa a Obs, se estiver vazio usa "Outra"
-                    }
 
-                    // Gerar Data e Hora para o NOME do arquivo
-                    const agora = new Date();
-                    const horas = String(agora.getHours()).padStart(2, '0');
-                    const minutos = String(agora.getMinutes()).padStart(2, '0');
+    const registrar =
+        document.getElementById("abaRegistrar");
 
-                    // NOME: 2026-02-02_11-05_VTR-VALOR_DA_OBS.jpg
-                    const customFileName = `${dataOcorrencia}_${horas}-${minutos}_VTR-${viatura}.jpg`;
+    const consultar =
+        document.getElementById("abaConsultar");
 
-                    function formatarData(dataISO) {
-                        const [ano, mes, dia] = dataISO.split("-");
-                        return `${dia}-${mes}-${ano}`;
-                    }
 
-                    // Marca d'água na imagem
-                    const textoMarca = `VTR: ${viatura} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
-                    ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
-                    ctx.fillRect(0, height - 40, width, 40);
-                    ctx.font = "bold 20px Arial";
-                    ctx.fillStyle = "white";
-                    ctx.fillText(textoMarca, 20, height - 12);
+    const tabRegistrar =
+        document.getElementById("tabRegistrar");
 
-                    resolve({
-                        fileName: customFileName,
-                        data: canvas.toDataURL("image/jpeg", 0.85).split(",")[1]
-                    });
+    const tabConsultar =
+        document.getElementById("tabConsultar");
+
+
+    if (aba === "registrar") {
+
+        registrar.classList.add("ativa");
+        consultar.classList.remove("ativa");
+
+        tabRegistrar.classList.add("is-active");
+        tabConsultar.classList.remove("is-active");
+
+    }
+    else {
+
+        registrar.classList.remove("ativa");
+        consultar.classList.add("ativa");
+
+        tabRegistrar.classList.remove("is-active");
+        tabConsultar.classList.add("is-active");
+
+
+        // Carrega as viaturas da consulta
+        carregarViaturasConsulta();
+
+    }
+
+}
+
+
+/* ==================================================
+   MENSAGEM
+================================================== */
+
+function showStatus(text, type) {
+
+    messageDiv.textContent = text;
+
+    messageDiv.className =
+        `notification ${type}`;
+
+    messageDiv.style.display =
+        "block";
+
+    overlay.style.display =
+        "block";
+
+
+    if (
+        type === "is-success" ||
+        type === "is-danger"
+    ) {
+
+        setTimeout(() => {
+
+            messageDiv.style.display =
+                "none";
+
+            overlay.style.display =
+                "none";
+
+        }, 3000);
+
+    }
+
+}
+
+
+/* ==================================================
+   PREVIEW DA FOTO
+================================================== */
+
+fileInput.addEventListener(
+    "change",
+    function() {
+
+        if (
+            this.files &&
+            this.files[0]
+        ) {
+
+            fileNameDisplay.textContent =
+                this.files[0].name;
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                (e) => {
+
+                    imagePreview.src =
+                        e.target.result;
+
+                    previewContainer.style.display =
+                        "block";
+
                 };
-                reader.readAsDataURL(file);
-            });
+
+
+            reader.readAsDataURL(
+                this.files[0]
+            );
+
         }
 
-        form.addEventListener("submit", async function (e) {
-            e.preventDefault();
+    }
+);
 
-            // 1. Bloqueia o botão e mostra o status de carregamento
-            submitBtn.disabled = true;
-            submitBtn.classList.add("is-loading"); // Se estiver usando Bulma
-            showStatus("🚀 Enviando dados para o sistema... Aguarde.", "is-warning is-light");
 
-            try {
-                const formData = new FormData(this);
-                const obj = Object.fromEntries(formData.entries());
+/* ==================================================
+   BOTÃO REMOVER FOTO
+================================================== */
 
-                if (fileInput.files.length > 0) {
-                    // Aguarda o processamento da imagem (redimensionamento + marca d'água)
-                    obj.fileData = await processImage(fileInput.files[0], obj.Viatura, obj.Data);
+document
+    .getElementById("removeBtn")
+    .addEventListener(
+        "click",
+        function() {
+
+            fileInput.value = "";
+
+            imagePreview.src = "";
+
+            previewContainer.style.display =
+                "none";
+
+            fileNameDisplay.textContent =
+                "Nenhum arquivo capturado";
+
+        }
+    );
+
+
+/* ==================================================
+   RESET FORM
+================================================== */
+
+function resetForm() {
+
+    form.reset();
+
+
+    document.getElementById(
+        "dataAtual"
+    ).value = hoje;
+
+
+    previewContainer.style.display =
+        "none";
+
+
+    imagePreview.src =
+        "";
+
+
+    fileNameDisplay.textContent =
+        "Nenhum arquivo capturado";
+
+
+    messageDiv.style.display =
+        "none";
+
+
+    overlay.style.display =
+        "none";
+
+}
+
+
+/* ==================================================
+   PROCESSAMENTO DA IMAGEM
+================================================== */
+
+async function processImage(
+    file,
+    viatura,
+    dataOcorrencia
+) {
+
+    return new Promise((resolve, reject) => {
+
+        const img =
+            new Image();
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            (e) => {
+
+                img.src =
+                    e.target.result;
+
+            };
+
+
+        img.onerror =
+            () => {
+
+                reject(
+                    new Error(
+                        "Não foi possível processar a imagem."
+                    )
+                );
+
+            };
+
+
+        img.onload =
+            () => {
+
+                const canvas =
+                    document.createElement(
+                        "canvas"
+                    );
+
+
+                const ctx =
+                    canvas.getContext(
+                        "2d"
+                    );
+
+
+                const MAX_WIDTH =
+                    1000;
+
+
+                let width =
+                    img.width;
+
+                let height =
+                    img.height;
+
+
+                if (
+                    width > MAX_WIDTH
+                ) {
+
+                    height *=
+                        MAX_WIDTH / width;
+
+                    width =
+                        MAX_WIDTH;
+
                 }
 
-                const scriptURL = "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
 
-                // 2. Faz o envio e ESPERA (await) a resposta real do Google
-                const response = await fetch(scriptURL, {
-                    method: "POST",
-                    body: JSON.stringify(obj),
-                    headers: { "Content-Type": "text/plain;charset=utf-8" }
+                canvas.width =
+                    width;
+
+                canvas.height =
+                    height;
+
+
+                ctx.drawImage(
+                    img,
+                    0,
+                    0,
+                    width,
+                    height
+                );
+
+
+                /* ==========================================
+                   VIATURA
+                ========================================== */
+
+                let vtr =
+                    document
+                        .getElementById(
+                            "viaturaSelect"
+                        )
+                        .value;
+
+
+                const obs =
+                    document
+                        .getElementById(
+                            "Obs"
+                        )
+                        .value;
+
+
+                if (
+                    vtr.toLowerCase() ===
+                    "outra"
+                ) {
+
+                    vtr =
+                        obs
+                            ? obs
+                            : "Outra";
+
+                }
+
+
+                /* ==========================================
+                   HORA
+                ========================================== */
+
+                const agora =
+                    new Date();
+
+
+                const horas =
+                    String(
+                        agora.getHours()
+                    ).padStart(
+                        2,
+                        "0"
+                    );
+
+
+                const minutos =
+                    String(
+                        agora.getMinutes()
+                    ).padStart(
+                        2,
+                        "0"
+                    );
+
+
+                /* ==========================================
+                   NOME DO ARQUIVO
+                ========================================== */
+
+                const customFileName =
+                    `${dataOcorrencia}_${horas}-${minutos}_VTR-${vtr}.jpg`;
+
+
+                /* ==========================================
+                   DATA FORMATADA
+                ========================================== */
+
+                function formatarData(
+                    dataISO
+                ) {
+
+                    const [
+                        ano,
+                        mes,
+                        dia
+                    ] =
+                        dataISO.split("-");
+
+
+                    return `${dia}-${mes}-${ano}`;
+
+                }
+
+
+                /* ==========================================
+                   MARCA D'ÁGUA
+                ========================================== */
+
+                const textoMarca =
+                    `VTR: ${vtr} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
+
+
+                ctx.fillStyle =
+                    "rgba(0, 0, 0, 0.6)";
+
+
+                ctx.fillRect(
+                    0,
+                    height - 40,
+                    width,
+                    40
+                );
+
+
+                ctx.font =
+                    "bold 20px Arial";
+
+
+                ctx.fillStyle =
+                    "white";
+
+
+                ctx.fillText(
+                    textoMarca,
+                    20,
+                    height - 12
+                );
+
+
+                /* ==========================================
+                   RETORNA
+                ========================================== */
+
+                resolve({
+
+                    fileName:
+                        customFileName,
+
+                    data:
+                        canvas
+                            .toDataURL(
+                                "image/jpeg",
+                                0.85
+                            )
+                            .split(",")[1]
+
                 });
 
-                const result = await response.json();
+            };
 
-                // 3. Só entra aqui DEPOIS que o Google respondeu
-                if (result.status === "success") {
-                    showStatus("✅ Abastecimento registrado com sucesso!", "is-success");
 
-                    // Limpa o formulário apenas após o sucesso
-                    setTimeout(() => {
+        reader.readAsDataURL(
+            file
+        );
+
+    });
+
+}
+
+
+/* ==================================================
+   ENVIO DO FORMULÁRIO
+================================================== */
+
+form.addEventListener(
+    "submit",
+    async function(e) {
+
+        e.preventDefault();
+
+
+        submitBtn.disabled =
+            true;
+
+
+        submitBtn.classList.add(
+            "is-loading"
+        );
+
+
+        showStatus(
+            "🚀 Enviando dados para o sistema... Aguarde.",
+            "is-warning is-light"
+        );
+
+
+        try {
+
+            const formData =
+                new FormData(this);
+
+
+            const obj =
+                Object.fromEntries(
+                    formData.entries()
+                );
+
+
+            if (
+                fileInput.files.length > 0
+            ) {
+
+                obj.fileData =
+                    await processImage(
+                        fileInput.files[0],
+                        obj.Viatura,
+                        obj.Data
+                    );
+
+            }
+
+
+            const response =
+                await fetch(
+                    API_URL,
+                    {
+                        method: "POST",
+
+                        body:
+                            JSON.stringify(obj),
+
+                        headers: {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        }
+                    }
+                );
+
+
+            const result =
+                await response.json();
+
+
+            if (
+                result.status ===
+                "success"
+            ) {
+
+                showStatus(
+                    "✅ Abastecimento registrado com sucesso!",
+                    "is-success"
+                );
+
+
+                setTimeout(
+                    () => {
+
                         resetForm();
-                    }, 2500);
-                } else {
-                    throw new Error("Erro no servidor");
-                }
 
-            } catch (error) {
-                console.error(error);
-                showStatus("❌ Erro ao enviar. Tente novamente ou verifique a conexão.", "is-danger");
-            } finally {
-                // 4. Libera o botão independente de ter dado erro ou sucesso
-                submitBtn.disabled = false;
-                submitBtn.classList.remove("is-loading");
+                    },
+                    2500
+                );
+
             }
-        });
+            else {
 
-        // Função para carregar viaturas da planilha
-        // Certifique-se que a scriptURL é a mesma que você usa no POST
-        const scriptURL = "https://script.google.com/macros/s/AKfycbyCQ9crWywcceQU6tz2kkL-hG2bltZvoR6BZWc08rLpc7E4tDR5ubdGhbUWGXwUkaqK/exec";
+                throw new Error(
+                    "Erro no servidor"
+                );
 
-        async function carregarViaturas() {
-            const selectVtr = document.getElementById("viaturaSelect");
-            try {
-                const response = await fetch(scriptURL);
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    let options = '<option value="">Selecione a VTR</option>';
-                    result.vtrs.forEach(vtr => {
-                        options += `<option value="${vtr}">${vtr}</option>`;
-                    });
-                    // Adiciona a opção "outra" no final
-                    options += '<option value="outra">Outra (especificar em obs)</option>';
-                    selectVtr.innerHTML = options;
-                }
-            } catch (error) {
-                console.error("Erro:", error);
-                selectVtr.innerHTML = '<option value="">Erro ao carregar</option><option value="outra">Outra (especificar em obs)</option>';
             }
+
+        }
+        catch(error) {
+
+            console.error(error);
+
+
+            showStatus(
+                "❌ Erro ao enviar. Tente novamente ou verifique a conexão.",
+                "is-danger"
+            );
+
+        }
+        finally {
+
+            submitBtn.disabled =
+                false;
+
+
+            submitBtn.classList.remove(
+                "is-loading"
+            );
+
         }
 
-        // Executa assim que a página abre
-        window.onload = carregarViaturas;
+    }
+);
 
 
-// Função para o botão de fechar/remover a imagem
-const removeBtn = document.getElementById("removeBtn");
+/* ==================================================
+   CARREGA VIATURAS DO FORMULÁRIO
+================================================== */
 
-removeBtn.addEventListener("click", function () {
-    fileInput.value = ""; // Limpa o arquivo selecionado
-    fileNameDisplay.textContent = "Nenhum arquivo capturado"; // Reseta o texto
-    previewContainer.style.display = "none"; // Esconde o container
-    imagePreview.src = ""; // Limpa a imagem
-});
+async function carregarViaturasFormulario() {
 
-    </script>
+    const selectVtr =
+        document.getElementById(
+            "viaturaSelect"
+        );
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            result.status ===
+            "success"
+        ) {
+
+            let options =
+                '<option value="">Selecione a VTR</option>';
+
+
+            result.vtrs.forEach(
+                vtr => {
+
+                    options +=
+                        `<option value="${escaparHTML(vtr)}">${escaparHTML(vtr)}</option>`;
+
+                }
+            );
+
+
+            options +=
+                '<option value="outra">Outra (especificar em obs)</option>';
+
+
+            selectVtr.innerHTML =
+                options;
+
+        }
+
+    }
+    catch(error) {
+
+        console.error(
+            "Erro:",
+            error
+        );
+
+
+        selectVtr.innerHTML =
+            '<option value="">Erro ao carregar</option>' +
+            '<option value="outra">Outra (especificar em obs)</option>';
+
+    }
+
+}
+
+
+/* ==================================================
+   JSONP
+================================================== */
+
+function jsonp(url) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const callbackName =
+                "jsonp_" +
+                Date.now() +
+                "_" +
+                Math.floor(
+                    Math.random() * 10000
+                );
+
+
+            const script =
+                document.createElement(
+                    "script"
+                );
+
+
+            const timeout =
+                setTimeout(
+                    () => {
+
+                        delete window[
+                            callbackName
+                        ];
+
+                        script.remove();
+
+
+                        reject(
+                            new Error(
+                                "Tempo limite excedido"
+                            )
+                        );
+
+                    },
+                    15000
+                );
+
+
+            window[
+                callbackName
+            ] =
+                function(data) {
+
+                    clearTimeout(
+                        timeout
+                    );
+
+
+                    delete window[
+                        callbackName
+                    ];
+
+
+                    script.remove();
+
+
+                    resolve(data);
+
+                };
+
+
+            script.onerror =
+                function() {
+
+                    clearTimeout(
+                        timeout
+                    );
+
+
+                    delete window[
+                        callbackName
+                    ];
+
+
+                    script.remove();
+
+
+                    reject(
+                        new Error(
+                            "Erro ao acessar o servidor"
+                        )
+                    );
+
+                };
+
+
+            script.src =
+                url +
+                (
+                    url.includes("?")
+                        ? "&"
+                        : "?"
+                ) +
+                "callback=" +
+                encodeURIComponent(
+                    callbackName
+                );
+
+
+            document.body.appendChild(
+                script
+            );
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   CONVERTE LINK DO GOOGLE DRIVE
+   PARA THUMBNAIL
+================================================== */
+
+function converterLinkDrive(
+    url,
+    tamanho = "w2000"
+) {
+
+    if (!url) {
+        return "";
+    }
+
+
+    url =
+        String(url).trim();
+
+
+    let id =
+        null;
+
+
+    /* ------------------------------------------
+       /file/d/ID/view
+    ------------------------------------------ */
+
+    let match =
+        url.match(
+            /drive\.google\.com\/file\/d\/([^\/?]+)/
+        );
+
+
+    if (match) {
+
+        id =
+            match[1];
+
+    }
+
+
+    /* ------------------------------------------
+       ?id=ID
+    ------------------------------------------ */
+
+    if (!id) {
+
+        match =
+            url.match(
+                /[?&]id=([^&]+)/
+            );
+
+
+        if (match) {
+
+            id =
+                match[1];
+
+        }
+
+    }
+
+
+    /* ------------------------------------------
+       Gera thumbnail
+    ------------------------------------------ */
+
+    if (id) {
+
+        return (
+            "https://drive.google.com/thumbnail?id=" +
+            encodeURIComponent(id) +
+            "&sz=" +
+            tamanho
+        );
+
+    }
+
+
+    /* ------------------------------------------
+       Se não for Drive,
+       mantém URL original
+    ------------------------------------------ */
+
+    return url;
+
+}
+
+
+/* ==================================================
+   CARREGA VIATURAS DA CONSULTA
+================================================== */
+
+let consultaViaturasCarregadas =
+    false;
+
+
+async function carregarViaturasConsulta() {
+
+    const select =
+        document.getElementById(
+            "viatura"
+        );
+
+
+    if (
+        consultaViaturasCarregadas
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const resposta =
+            await jsonp(
+                API_URL +
+                "?action=vtr"
+            );
+
+
+        if (
+            resposta.status !==
+            "success"
+        ) {
+
+            throw new Error(
+                resposta.message ||
+                "Erro ao carregar viaturas"
+            );
+
+        }
+
+
+        select.innerHTML =
+            '<option value="">Selecione a viatura...</option>';
+
+
+        resposta.vtrs.forEach(
+            vtr => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    vtr;
+
+
+                option.textContent =
+                    vtr;
+
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        consultaViaturasCarregadas =
+            true;
+
+
+        document.getElementById(
+            "status"
+        ).textContent =
+            resposta.vtrs.length +
+            " viaturas disponíveis.";
+
+    }
+    catch(erro) {
+
+        console.error(
+            erro
+        );
+
+
+        select.innerHTML =
+            '<option value="">Erro ao carregar</option>';
+
+
+        document.getElementById(
+            "status"
+        ).textContent =
+            "Erro: " +
+            erro.message;
+
+    }
+
+}
+
+
+/* ==================================================
+   CONSULTA ABASTECIMENTOS
+================================================== */
+
+async function consultar() {
+
+    const viatura =
+        document
+            .getElementById(
+                "viatura"
+            )
+            .value
+            .trim();
+
+
+    const resultado =
+        document.getElementById(
+            "resultado"
+        );
+
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+
+    if (!viatura) {
+
+        resultado.innerHTML =
+            "";
+
+
+        status.textContent =
+            "Selecione uma viatura.";
+
+
+        return;
+
+    }
+
+
+    resultado.innerHTML =
+        '<div class="nenhum">' +
+        '<i class="fas fa-spinner fa-spin mr-2"></i>' +
+        'Consultando...' +
+        '</div>';
+
+
+    status.textContent =
+        "Buscando os últimos registros...";
+
+
+    try {
+
+        const url =
+            API_URL +
+            "?action=abastecimentos" +
+            "&viatura=" +
+            encodeURIComponent(
+                viatura
+            );
+
+
+        const resposta =
+            await jsonp(
+                url
+            );
+
+
+        if (
+            resposta.status !==
+            "success"
+        ) {
+
+            throw new Error(
+                resposta.message ||
+                "Erro na consulta"
+            );
+
+        }
+
+
+        mostrarResultados(
+            resposta.registros
+        );
+
+
+        status.textContent =
+            resposta.registros.length +
+            " registro(s) encontrado(s).";
+
+    }
+    catch(erro) {
+
+        console.error(
+            erro
+        );
+
+
+        resultado.innerHTML =
+            '<div class="nenhum">' +
+            '<i class="fas fa-triangle-exclamation mr-2"></i>' +
+            'Erro ao realizar consulta.' +
+            '</div>';
+
+
+        status.textContent =
+            erro.message;
+
+    }
+
+}
+
+
+/* ==================================================
+   MOSTRA RESULTADOS
+================================================== */
+
+function mostrarResultados(
+    registros
+) {
+
+    const container =
+        document.getElementById(
+            "resultado"
+        );
+
+
+    if (
+        !registros ||
+        registros.length === 0
+    ) {
+
+        container.innerHTML =
+            '<div class="nenhum">' +
+            '<i class="fas fa-inbox mr-2"></i>' +
+            'Nenhum abastecimento encontrado para esta viatura.' +
+            '</div>';
+
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        "";
+
+
+    registros.forEach(
+        registro => {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "registro";
+
+
+            /* ==========================================
+               VIATURA
+            ========================================== */
+
+            const viatura =
+                document.createElement(
+                    "div"
+                );
+
+
+            viatura.innerHTML =
+                '<span class="label">Viatura</span>' +
+                '<span class="valor">' +
+                escaparHTML(
+                    registro.viatura
+                ) +
+                '</span>';
+
+
+            /* ==========================================
+               OBS
+            ========================================== */
+
+            const obs =
+                document.createElement(
+                    "div"
+                );
+
+
+            obs.innerHTML =
+                '<span class="label">Observação</span>' +
+                '<span class="valor">' +
+                (
+                    registro.obs
+                        ? escaparHTML(
+                            registro.obs
+                        )
+                        : "—"
+                ) +
+                '</span>';
+
+
+            /* ==========================================
+               DATA
+            ========================================== */
+
+            const timestamp =
+                document.createElement(
+                    "div"
+                );
+
+
+            timestamp.innerHTML =
+                '<span class="label">Data / Hora</span>' +
+                '<span class="valor data">' +
+                escaparHTML(
+                    registro.timestamp
+                ) +
+                '</span>';
+
+
+            /* ==========================================
+               IMAGEM
+            ========================================== */
+
+            const arquivo =
+                document.createElement(
+                    "div"
+                );
+
+
+            arquivo.innerHTML =
+                '<span class="label">Imagem</span>';
+
+
+            if (
+                registro.fileLink
+            ) {
+
+                const img =
+                    document.createElement(
+                        "img"
+                    );
+
+
+                img.className =
+                    "thumb";
+
+
+                const imagemUrl =
+                    converterLinkDrive(
+                        registro.fileLink,
+                        "w1000"
+                    );
+
+
+                img.src =
+                    imagemUrl;
+
+
+                img.alt =
+                    "Imagem do abastecimento";
+
+
+                img.loading =
+                    "lazy";
+
+
+                img.onclick =
+                    function() {
+
+                        abrirImagem(
+                            registro.fileLink
+                        );
+
+                    };
+
+
+                img.onerror =
+                    function() {
+
+                        img.style.display =
+                            "none";
+
+
+                        const erro =
+                            document.createElement(
+                                "div"
+                            );
+
+
+                        erro.className =
+                            "sem-imagem";
+
+
+                        erro.innerHTML =
+                            '<i class="fas fa-image-slash mr-1"></i>' +
+                            'Imagem indisponível';
+
+
+                        arquivo.appendChild(
+                            erro
+                        );
+
+                    };
+
+
+                arquivo.appendChild(
+                    img
+                );
+
+            }
+            else {
+
+                arquivo.innerHTML +=
+                    '<div class="sem-imagem">' +
+                    '<i class="fas fa-image mr-1"></i>' +
+                    'Sem imagem' +
+                    '</div>';
+
+            }
+
+
+            div.appendChild(
+                viatura
+            );
+
+
+            div.appendChild(
+                obs
+            );
+
+
+            div.appendChild(
+                timestamp
+            );
+
+
+            div.appendChild(
+                arquivo
+            );
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+/* ==================================================
+   ABRE IMAGEM
+================================================== */
+
+function abrirImagem(
+    url
+) {
+
+    const imagemUrl =
+        converterLinkDrive(
+            url,
+            "w2000"
+        );
+
+
+    const imagemGrande =
+        document.getElementById(
+            "imagemGrande"
+        );
+
+
+    imagemGrande.src =
+        imagemUrl;
+
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList.add(
+            "aberto"
+        );
+
+}
+
+
+/* ==================================================
+   FECHA IMAGEM
+================================================== */
+
+function fecharImagem() {
+
+    document
+        .getElementById(
+            "modal"
+        )
+        .classList.remove(
+            "aberto"
+        );
+
+
+    document
+        .getElementById(
+            "imagemGrande"
+        )
+        .src =
+            "";
+
+}
+
+
+/* ==================================================
+   ESC FECHA MODAL
+================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key ===
+            "Escape"
+        ) {
+
+            fecharImagem();
+
+        }
+
+    }
+);
+
+
+/* ==================================================
+   SEGURANÇA BÁSICA
+================================================== */
+
+function escaparHTML(
+    valor
+) {
+
+    return String(
+        valor || ""
+    )
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ==================================================
+   INICIALIZAÇÃO
+================================================== */
+
+// Carrega imediatamente as viaturas
+// do formulário de registro.
+
+carregarViaturasFormulario();
+
+
+</script>
+
 </body>
 
 </html>
