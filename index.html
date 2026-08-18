@@ -18,11 +18,13 @@
 
     <style>
         :root {
+
             --pm-blue-dark: #002147;
             --pm-blue-light: #003366;
             --pm-gray: #333333;
             --bg-body: #f5f7fa;
             --pm-gold: #ccaa00;
+
         }
 
 
@@ -32,14 +34,21 @@
 
 
         body {
+
             margin: 0;
-            background-color: var(--bg-body);
+
+            background-color:
+                var(--bg-body);
+
             color: #1e293b;
-            font-family: 'Segoe UI',
+
+            font-family:
+                'Segoe UI',
                 Tahoma,
                 Geneva,
                 Verdana,
                 sans-serif;
+
         }
 
 
@@ -48,20 +57,33 @@
         ================================================== */
 
         .hero.is-pm {
-            background-color: var(--pm-blue-dark);
+
+            background-color:
+                var(--pm-blue-dark);
+
             color: white;
-            border-bottom: 4px solid var(--pm-gold);
+
+            border-bottom:
+                4px solid var(--pm-gold);
+
         }
 
 
         .hero-body-custom {
-            padding: 1.5rem 1rem 0 !important;
+
+            padding:
+                1.5rem 1rem 0 !important;
+
         }
 
 
         .titulo-principal {
-            margin-bottom: 1.5rem !important;
+
+            margin-bottom:
+                1.5rem !important;
+
             text-align: center;
+
         }
 
 
@@ -70,48 +92,79 @@
         ================================================== */
 
         .tabs-container {
+
             max-width: 900px;
+
             margin: 0 auto;
+
         }
 
 
         .tabs-custom {
-            margin-bottom: 0 !important;
+
+            margin-bottom:
+                0 !important;
+
         }
 
 
         .tabs-custom ul {
+
             border-bottom: none;
+
             display: flex;
+
             width: 100%;
+
         }
 
 
         .tabs-custom li {
+
             flex: 1;
+
         }
 
 
         .tabs-custom a {
+
             justify-content: center;
-            color: rgba(255, 255, 255, .75);
+
+            color:
+                rgba(255, 255, 255, .75);
+
             border: none !important;
-            border-radius: 8px 8px 0 0;
+
+            border-radius:
+                8px 8px 0 0;
+
             font-weight: bold;
-            padding: 14px 10px;
+
+            padding:
+                14px 10px;
+
             transition: .2s;
+
         }
 
 
         .tabs-custom a:hover {
+
             color: white;
-            background: rgba(255, 255, 255, .08);
+
+            background:
+                rgba(255, 255, 255, .08);
+
         }
 
 
         .tabs-custom li.is-active a {
-            color: var(--pm-blue-dark);
+
+            color:
+                var(--pm-blue-dark);
+
             background: white;
+
         }
 
 
@@ -120,28 +173,39 @@
         ================================================== */
 
         .conteudo-principal {
+
             max-width: 900px;
+
             margin: 0 auto;
+
         }
 
 
         .box-custom {
+
             border-radius: 8px;
+
             box-shadow:
                 0 4px 15px rgba(0, 0, 0, .1);
 
             margin-top: 1.5rem;
+
             background: #ffffff;
+
         }
 
 
         .aba-conteudo {
+
             display: none;
+
         }
 
 
         .aba-conteudo.ativa {
+
             display: block;
+
         }
 
 
@@ -150,23 +214,39 @@
         ================================================== */
 
         .label {
-            color: var(--pm-gray);
-            text-transform: uppercase;
+
+            color:
+                var(--pm-gray);
+
+            text-transform:
+                uppercase;
+
             font-size: .85rem;
+
             letter-spacing: .5px;
+
         }
 
 
         .button.is-pm-send {
-            background-color: var(--pm-blue-dark);
+
+            background-color:
+                var(--pm-blue-dark);
+
             color: white;
+
             font-weight: bold;
+
         }
 
 
         .button.is-pm-send:hover {
-            background-color: var(--pm-blue-light);
+
+            background-color:
+                var(--pm-blue-light);
+
             color: white;
+
         }
 
 
@@ -175,36 +255,62 @@
         ================================================== */
 
         #preview-container {
+
             display: none;
+
             margin-top: 15px;
-            border: 2px solid #dbdbdb;
+
+            border:
+                2px solid #dbdbdb;
+
             border-radius: 6px;
+
             padding: 8px;
+
             background: #fafafa;
+
             position: relative;
+
         }
 
 
         #image-preview {
+
             width: 100%;
+
             border-radius: 4px;
+
             display: block;
+
         }
 
 
         .btn-remove {
+
             position: absolute;
+
             top: -10px;
+
             right: -10px;
+
             background: #d32f2f;
+
             color: white;
+
             border: none;
+
             border-radius: 50%;
+
             width: 28px;
+
             height: 28px;
+
             cursor: pointer;
+
             font-weight: bold;
+
             z-index: 5;
+
         }
 
 
@@ -213,31 +319,55 @@
         ================================================== */
 
         #message {
+
             display: none;
+
             position: fixed;
+
             top: 50%;
+
             left: 50%;
-            transform: translate(-50%, -50%);
+
+            transform:
+                translate(-50%, -50%);
+
             z-index: 1000;
+
             min-width: 300px;
+
             max-width: 90%;
+
             text-align: center;
+
             box-shadow:
                 0 10px 30px rgba(0, 0, 0, .2);
+
             border-radius: 12px;
+
             font-weight: bold;
+
         }
 
 
         .msg-overlay {
+
             display: none;
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
-            background: rgba(0, 0, 0, .4);
+
+            background:
+                rgba(0, 0, 0, .4);
+
             z-index: 999;
+
         }
 
 
@@ -246,67 +376,188 @@
         ================================================== */
 
         .consulta-campo {
+
             display: flex;
+
             gap: 10px;
+
             align-items: center;
+
         }
 
 
         .consulta-campo .select {
+
             flex: 1;
+
         }
 
 
         .consulta-campo select {
+
             width: 100%;
+
         }
 
 
         #status {
+
             margin-top: 15px;
+
             color: #64748b;
+
         }
 
 
         .resultado {
+
             margin-top: 25px;
+
         }
 
+
+        /* ==================================================
+           CARDS DOS RESULTADOS
+        ================================================== */
 
         .registro {
-            display: grid;
-            grid-template-columns:
-                130px 1fr 180px 120px;
 
-            gap: 20px;
+            display: grid;
+
+            grid-template-columns:
+                130px minmax(200px, 1fr) 190px 130px;
+
+            grid-template-areas:
+                "viatura obs data imagem";
+
+            gap: 18px;
+
             align-items: center;
 
-            padding: 15px;
-            margin-bottom: 10px;
+            padding: 16px 18px;
 
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
+            margin-bottom: 12px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e2e8f0;
+
+            border-left:
+                4px solid var(--pm-blue-dark);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, .05);
+
+            transition:
+                transform .2s,
+                box-shadow .2s;
+
         }
 
+
+        .registro:hover {
+
+            transform:
+                translateY(-1px);
+
+            box-shadow:
+                0 5px 15px rgba(0, 0, 0, .08);
+
+        }
+
+
+        /* ==================================================
+           ÁREAS DO CARD
+        ================================================== */
+
+        .registro .campo-viatura {
+
+            grid-area: viatura;
+
+        }
+
+
+        .registro .campo-obs {
+
+            grid-area: obs;
+
+            min-width: 0;
+
+        }
+
+
+        .registro .campo-data {
+
+            grid-area: data;
+
+        }
+
+
+        .registro .campo-imagem {
+
+            grid-area: imagem;
+
+            display: flex;
+
+            justify-content: flex-end;
+
+            align-items: center;
+
+        }
+
+
+        /* ==================================================
+           LABELS DO CARD
+        ================================================== */
 
         .registro .label {
+
             display: block;
+
             color: #64748b;
-            font-size: 12px;
-            margin-bottom: 4px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+
             text-transform: uppercase;
+
+            letter-spacing: .5px;
+
         }
 
 
-        .valor {
+        /* ==================================================
+           VALORES DO CARD
+        ================================================== */
+
+        .registro .valor {
+
+            color: #1e293b;
+
             font-size: 14px;
+
+            line-height: 1.4;
+
             word-break: break-word;
+
         }
 
 
-        .data {
-            font-weight: bold;
+        .registro .valor.data {
+
+            font-weight: 700;
+
+            color:
+                var(--pm-blue-dark);
+
+            white-space: nowrap;
+
         }
 
 
@@ -314,38 +565,62 @@
            MINIATURA
         ================================================== */
 
-        .thumb {
-            width: 100px;
-            height: 75px;
+        .registro .thumb {
+
+            width: 110px;
+
+            height: 82px;
 
             object-fit: cover;
 
-            border-radius: 7px;
-            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+
+            border:
+                1px solid #cbd5e1;
 
             cursor: pointer;
 
-            transition: .2s;
+            transition:
+                transform .2s,
+                box-shadow .2s;
 
             background: #e2e8f0;
+
         }
 
 
-        .thumb:hover {
-            transform: scale(1.05);
+        .registro .thumb:hover {
+
+            transform:
+                scale(1.05);
+
+            box-shadow:
+                0 4px 12px rgba(0, 0, 0, .18);
+
         }
 
 
-        .sem-imagem {
+        .registro .sem-imagem {
+
             color: #94a3b8;
-            font-size: 13px;
+
+            font-size: 12px;
+
         }
 
+
+        /* ==================================================
+           NENHUM RESULTADO
+        ================================================== */
 
         .nenhum {
+
             text-align: center;
+
             padding: 40px 10px;
+
             color: #64748b;
+
         }
 
 
@@ -354,29 +629,38 @@
         ================================================== */
 
         .modal-imagem {
+
             display: none;
 
             position: fixed;
+
             z-index: 9999;
 
             inset: 0;
 
-            background: rgba(0, 0, 0, .85);
+            background:
+                rgba(0, 0, 0, .85);
 
             align-items: center;
+
             justify-content: center;
 
             padding: 20px;
+
         }
 
 
         .modal-imagem.aberto {
+
             display: flex;
+
         }
 
 
         .modal-imagem img {
+
             max-width: 95vw;
+
             max-height: 90vh;
 
             object-fit: contain;
@@ -385,25 +669,31 @@
 
             box-shadow:
                 0 10px 40px rgba(0, 0, 0, .5);
+
         }
 
 
         .fechar {
+
             position: fixed;
 
             top: 15px;
+
             right: 25px;
 
             width: 45px;
+
             height: 45px;
 
             border-radius: 50%;
 
-            background: rgba(255, 255, 255, .2);
+            background:
+                rgba(255, 255, 255, .2);
 
             color: white;
 
             font-size: 30px;
+
             line-height: 45px;
 
             text-align: center;
@@ -411,67 +701,209 @@
             cursor: pointer;
 
             z-index: 10000;
+
         }
 
 
         /* ==================================================
-           RESPONSIVO
+           RESPONSIVO - TABLET / CELULAR
         ================================================== */
 
         @media (max-width: 768px) {
 
             .hero-body-custom {
+
                 padding:
                     1.5rem 1rem 0 !important;
+
             }
 
 
             .titulo-principal {
-                font-size: 1.5rem !important;
+
+                font-size:
+                    1.5rem !important;
+
             }
 
 
             .tabs-custom a {
+
                 font-size: .85rem;
-                padding: 12px 5px;
+
+                padding:
+                    12px 5px;
+
             }
 
 
             .consulta-campo {
+
                 flex-direction: column;
+
             }
 
 
             .consulta-campo .select,
             .consulta-campo button {
+
                 width: 100%;
+
             }
 
+
+            /* ==========================================
+               CARD
+            ========================================== */
 
             .registro {
-                grid-template-columns: 1fr;
-                gap: 12px;
+
+                grid-template-columns:
+                    1fr 1fr;
+
+                grid-template-areas:
+
+                    "viatura data"
+
+                    "obs obs"
+
+                    "imagem imagem";
+
+                gap: 14px;
+
+                padding: 16px;
+
+                border-left:
+                    4px solid var(--pm-blue-dark);
+
             }
 
 
-            .thumb {
-                width: 140px;
-                height: 100px;
+            .registro .campo-data {
+
+                text-align: right;
+
+            }
+
+
+            .registro .valor.data {
+
+                white-space: normal;
+
+                font-size: 13px;
+
+            }
+
+
+            .registro .campo-obs {
+
+                padding-top: 10px;
+
+                border-top:
+                    1px solid #e2e8f0;
+
+            }
+
+
+            .registro .campo-imagem {
+
+                justify-content:
+                    flex-start;
+
+                padding-top: 10px;
+
+                border-top:
+                    1px solid #e2e8f0;
+
+            }
+
+
+            .registro .thumb {
+
+                width: 150px;
+
+                height: 110px;
+
             }
 
         }
 
 
+        /* ==================================================
+           CELULAR PEQUENO
+        ================================================== */
+
         @media (max-width: 450px) {
 
             .tabs-custom a {
+
                 font-size: .75rem;
+
             }
 
+
             .tabs-custom a i {
+
                 display: block;
+
                 margin-right: 0 !important;
+
                 margin-bottom: 4px;
+
+            }
+
+
+            .registro {
+
+                grid-template-columns: 1fr;
+
+                grid-template-areas:
+
+                    "viatura"
+
+                    "data"
+
+                    "obs"
+
+                    "imagem";
+
+                gap: 10px;
+
+            }
+
+
+            .registro .campo-data {
+
+                text-align: left;
+
+            }
+
+
+            .registro .campo-obs {
+
+                padding-top: 10px;
+
+            }
+
+
+            .registro .campo-imagem {
+
+                justify-content:
+                    flex-start;
+
+                padding-top: 10px;
+
+            }
+
+
+            .registro .thumb {
+
+                width: 100%;
+
+                max-width: 240px;
+
+                height: 160px;
+
             }
 
         }
@@ -484,8 +916,8 @@
 
 
     <!-- ==================================================
-     MENSAGEM
-================================================== -->
+         MENSAGEM
+    ================================================== -->
 
     <div id="overlay" class="msg-overlay"></div>
 
@@ -493,8 +925,8 @@
 
 
     <!-- ==================================================
-     CABEÇALHO + ABAS
-================================================== -->
+         CABEÇALHO + ABAS
+    ================================================== -->
 
     <section class="hero is-pm">
 
@@ -551,21 +983,23 @@
     </section>
 
 
-
     <!-- ==================================================
-     CONTEÚDO
-================================================== -->
+         CONTEÚDO
+    ================================================== -->
 
     <main class="container conteudo-principal px-4">
 
 
         <!-- ==================================================
-         ABA 1 - REGISTRAR
-    ================================================== -->
+             ABA REGISTRAR
+        ================================================== -->
 
         <section id="abaRegistrar" class="aba-conteudo ativa">
 
             <form id="form" class="box box-custom p-5">
+
+
+                <!-- DATA -->
 
                 <div class="field">
 
@@ -582,6 +1016,7 @@
 
                         <input class="input" type="date" name="Data" id="dataAtual" required>
 
+
                         <span class="icon is-small is-left">
 
                             <i class="fas fa-calendar"></i>
@@ -592,6 +1027,8 @@
 
                 </div>
 
+
+                <!-- VIATURA -->
 
                 <div class="field">
 
@@ -629,6 +1066,8 @@
 
                 </div>
 
+
+                <!-- FOTO -->
 
                 <div class="field">
 
@@ -697,6 +1136,8 @@
                 </div>
 
 
+                <!-- OBSERVAÇÃO -->
+
                 <div class="field">
 
                     <label class="label">
@@ -717,6 +1158,8 @@
 
                 </div>
 
+
+                <!-- BOTÕES -->
 
                 <div class="field is-grouped pt-4">
 
@@ -750,10 +1193,9 @@
         </section>
 
 
-
         <!-- ==================================================
-         ABA 2 - CONSULTAR
-    ================================================== -->
+             ABA CONSULTAR
+        ================================================== -->
 
         <section id="abaConsultar" class="aba-conteudo">
 
@@ -806,13 +1248,11 @@
     </main>
 
 
-
     <!-- ==================================================
-     MODAL DA IMAGEM
-================================================== -->
+         MODAL DA IMAGEM
+    ================================================== -->
 
     <div id="modal" class="modal-imagem" onclick="fecharImagem()">
-
 
         <div class="fechar" onclick="fecharImagem()">
 
@@ -824,7 +1264,6 @@
         <img id="imagemGrande" src="" alt="Imagem" onclick="event.stopPropagation()">
 
     </div>
-
 
 
     <script>
@@ -845,40 +1284,66 @@
         const form =
             document.getElementById("form");
 
+
         const fileInput =
             document.getElementById("fileInput");
 
+
         const fileNameDisplay =
-            document.getElementById("fileNameDisplay");
+            document.getElementById(
+                "fileNameDisplay"
+            );
+
 
         const previewContainer =
-            document.getElementById("preview-container");
+            document.getElementById(
+                "preview-container"
+            );
+
 
         const imagePreview =
-            document.getElementById("image-preview");
+            document.getElementById(
+                "image-preview"
+            );
+
 
         const messageDiv =
-            document.getElementById("message");
+            document.getElementById(
+                "message"
+            );
+
 
         const overlay =
-            document.getElementById("overlay");
+            document.getElementById(
+                "overlay"
+            );
+
 
         const submitBtn =
-            document.getElementById("submit-button");
+            document.getElementById(
+                "submit-button"
+            );
 
 
         /* ==================================================
-           DATA ATUAL
+           DATA ATUAL - SÃO PAULO
         ================================================== */
 
         const hoje =
             new Intl.DateTimeFormat(
                 "en-CA",
                 {
-                    timeZone: "America/Sao_Paulo",
-                    year: "numeric",
-                    month: "2-digit",
-                    day: "2-digit"
+                    timeZone:
+                        "America/Sao_Paulo",
+
+                    year:
+                        "numeric",
+
+                    month:
+                        "2-digit",
+
+                    day:
+                        "2-digit"
                 }
             ).format(new Date());
 
@@ -892,49 +1357,87 @@
            CONTROLE DAS ABAS
         ================================================== */
 
-        function mostrarAba(aba, event) {
+        function mostrarAba(
+            aba,
+            event
+        ) {
 
             if (event) {
+
                 event.preventDefault();
+
             }
 
 
             const registrar =
-                document.getElementById("abaRegistrar");
+                document.getElementById(
+                    "abaRegistrar"
+                );
+
 
             const consultar =
-                document.getElementById("abaConsultar");
+                document.getElementById(
+                    "abaConsultar"
+                );
 
 
             const tabRegistrar =
-                document.getElementById("tabRegistrar");
+                document.getElementById(
+                    "tabRegistrar"
+                );
+
 
             const tabConsultar =
-                document.getElementById("tabConsultar");
+                document.getElementById(
+                    "tabConsultar"
+                );
 
 
             if (aba === "registrar") {
 
-                registrar.classList.add("ativa");
-                consultar.classList.remove("ativa");
+                registrar.classList.add(
+                    "ativa"
+                );
 
-                tabRegistrar.classList.add("is-active");
-                tabConsultar.classList.remove("is-active");
+
+                consultar.classList.remove(
+                    "ativa"
+                );
+
+
+                tabRegistrar.classList.add(
+                    "is-active"
+                );
+
+
+                tabConsultar.classList.remove(
+                    "is-active"
+                );
 
             }
             else {
 
-                registrar.classList.remove("ativa");
-                consultar.classList.add("ativa");
-
-                tabRegistrar.classList.remove("is-active");
-                tabConsultar.classList.add("is-active");
+                registrar.classList.remove(
+                    "ativa"
+                );
 
 
-                // Carrega as viaturas da consulta
-                // Reutiliza as viaturas já carregadas
+                consultar.classList.add(
+                    "ativa"
+                );
+
+
+                tabRegistrar.classList.remove(
+                    "is-active"
+                );
+
+
+                tabConsultar.classList.add(
+                    "is-active"
+                );
+
+
                 carregarViaturas();
-
 
             }
 
@@ -945,15 +1448,22 @@
            MENSAGEM
         ================================================== */
 
-        function showStatus(text, type) {
+        function showStatus(
+            text,
+            type
+        ) {
 
-            messageDiv.textContent = text;
+            messageDiv.textContent =
+                text;
+
 
             messageDiv.className =
                 `notification ${type}`;
 
+
             messageDiv.style.display =
                 "block";
+
 
             overlay.style.display =
                 "block";
@@ -964,15 +1474,19 @@
                 type === "is-danger"
             ) {
 
-                setTimeout(() => {
+                setTimeout(
+                    () => {
 
-                    messageDiv.style.display =
-                        "none";
+                        messageDiv.style.display =
+                            "none";
 
-                    overlay.style.display =
-                        "none";
 
-                }, 3000);
+                        overlay.style.display =
+                            "none";
+
+                    },
+                    3000
+                );
 
             }
 
@@ -1005,6 +1519,7 @@
 
                             imagePreview.src =
                                 e.target.result;
+
 
                             previewContainer.style.display =
                                 "block";
@@ -1092,241 +1607,248 @@
             dataOcorrencia
         ) {
 
-            return new Promise((resolve, reject) => {
+            return new Promise(
+                (resolve, reject) => {
 
-                const img =
-                    new Image();
-
-                const reader =
-                    new FileReader();
+                    const img =
+                        new Image();
 
 
-                reader.onload =
-                    (e) => {
-
-                        img.src =
-                            e.target.result;
-
-                    };
+                    const reader =
+                        new FileReader();
 
 
-                img.onerror =
-                    () => {
+                    reader.onload =
+                        (e) => {
 
-                        reject(
-                            new Error(
-                                "Não foi possível processar a imagem."
-                            )
-                        );
+                            img.src =
+                                e.target.result;
 
-                    };
+                        };
 
 
-                img.onload =
-                    () => {
+                    img.onerror =
+                        () => {
 
-                        const canvas =
-                            document.createElement(
-                                "canvas"
-                            );
-
-
-                        const ctx =
-                            canvas.getContext(
-                                "2d"
-                            );
-
-
-                        const MAX_WIDTH =
-                            1000;
-
-
-                        let width =
-                            img.width;
-
-                        let height =
-                            img.height;
-
-
-                        if (
-                            width > MAX_WIDTH
-                        ) {
-
-                            height *=
-                                MAX_WIDTH / width;
-
-                            width =
-                                MAX_WIDTH;
-
-                        }
-
-
-                        canvas.width =
-                            width;
-
-                        canvas.height =
-                            height;
-
-
-                        ctx.drawImage(
-                            img,
-                            0,
-                            0,
-                            width,
-                            height
-                        );
-
-
-                        /* ==========================================
-                           VIATURA
-                        ========================================== */
-
-                        let vtr =
-                            document
-                                .getElementById(
-                                    "viaturaSelect"
+                            reject(
+                                new Error(
+                                    "Não foi possível processar a imagem."
                                 )
-                                .value;
+                            );
+
+                        };
 
 
-                        const obs =
-                            document
-                                .getElementById(
-                                    "Obs"
-                                )
-                                .value;
+                    img.onload =
+                        () => {
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
 
 
-                        if (
-                            vtr.toLowerCase() ===
-                            "outra"
-                        ) {
-
-                            vtr =
-                                obs
-                                    ? obs
-                                    : "Outra";
-
-                        }
+                            const ctx =
+                                canvas.getContext(
+                                    "2d"
+                                );
 
 
-                        /* ==========================================
-                           HORA
-                        ========================================== */
-
-                        const agora =
-                            new Date();
+                            const MAX_WIDTH =
+                                1000;
 
 
-                        const horas =
-                            String(
-                                agora.getHours()
-                            ).padStart(
-                                2,
-                                "0"
+                            let width =
+                                img.width;
+
+
+                            let height =
+                                img.height;
+
+
+                            if (
+                                width >
+                                MAX_WIDTH
+                            ) {
+
+                                height *=
+                                    MAX_WIDTH /
+                                    width;
+
+                                width =
+                                    MAX_WIDTH;
+
+                            }
+
+
+                            canvas.width =
+                                width;
+
+
+                            canvas.height =
+                                height;
+
+
+                            ctx.drawImage(
+                                img,
+                                0,
+                                0,
+                                width,
+                                height
                             );
 
 
-                        const minutos =
-                            String(
-                                agora.getMinutes()
-                            ).padStart(
-                                2,
-                                "0"
-                            );
+                            /* ==========================================
+                               VIATURA
+                            ========================================== */
 
-
-                        /* ==========================================
-                           NOME DO ARQUIVO
-                        ========================================== */
-
-                        const customFileName =
-                            `${dataOcorrencia}_${horas}-${minutos}_VTR-${vtr}.jpg`;
-
-
-                        /* ==========================================
-                           DATA FORMATADA
-                        ========================================== */
-
-                        function formatarData(
-                            dataISO
-                        ) {
-
-                            const [
-                                ano,
-                                mes,
-                                dia
-                            ] =
-                                dataISO.split("-");
-
-
-                            return `${dia}-${mes}-${ano}`;
-
-                        }
-
-
-                        /* ==========================================
-                           MARCA D'ÁGUA
-                        ========================================== */
-
-                        const textoMarca =
-                            `VTR: ${vtr} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
-
-
-                        ctx.fillStyle =
-                            "rgba(0, 0, 0, 0.6)";
-
-
-                        ctx.fillRect(
-                            0,
-                            height - 40,
-                            width,
-                            40
-                        );
-
-
-                        ctx.font =
-                            "bold 20px Arial";
-
-
-                        ctx.fillStyle =
-                            "white";
-
-
-                        ctx.fillText(
-                            textoMarca,
-                            20,
-                            height - 12
-                        );
-
-
-                        /* ==========================================
-                           RETORNA
-                        ========================================== */
-
-                        resolve({
-
-                            fileName:
-                                customFileName,
-
-                            data:
-                                canvas
-                                    .toDataURL(
-                                        "image/jpeg",
-                                        0.85
+                            let vtr =
+                                document
+                                    .getElementById(
+                                        "viaturaSelect"
                                     )
-                                    .split(",")[1]
-
-                        });
-
-                    };
+                                    .value;
 
 
-                reader.readAsDataURL(
-                    file
-                );
+                            const obs =
+                                document
+                                    .getElementById(
+                                        "Obs"
+                                    )
+                                    .value;
 
-            });
+
+                            if (
+                                vtr.toLowerCase() ===
+                                "outra"
+                            ) {
+
+                                vtr =
+                                    obs
+                                        ? obs
+                                        : "Outra";
+
+                            }
+
+
+                            /* ==========================================
+                               HORA
+                            ========================================== */
+
+                            const agora =
+                                new Date();
+
+
+                            const horas =
+                                String(
+                                    agora.getHours()
+                                ).padStart(
+                                    2,
+                                    "0"
+                                );
+
+
+                            const minutos =
+                                String(
+                                    agora.getMinutes()
+                                ).padStart(
+                                    2,
+                                    "0"
+                                );
+
+
+                            /* ==========================================
+                               NOME DO ARQUIVO
+                            ========================================== */
+
+                            const customFileName =
+                                `${dataOcorrencia}_${horas}-${minutos}_VTR-${vtr}.jpg`;
+
+
+                            /* ==========================================
+                               DATA FORMATADA
+                            ========================================== */
+
+                            function formatarData(
+                                dataISO
+                            ) {
+
+                                const [
+                                    ano,
+                                    mes,
+                                    dia
+                                ] =
+                                    dataISO.split("-");
+
+
+                                return `${dia}-${mes}-${ano}`;
+
+                            }
+
+
+                            /* ==========================================
+                               MARCA D'ÁGUA
+                            ========================================== */
+
+                            const textoMarca =
+                                `VTR: ${vtr} | ${formatarData(dataOcorrencia)} ${horas}:${minutos}`;
+
+
+                            ctx.fillStyle =
+                                "rgba(0, 0, 0, 0.6)";
+
+
+                            ctx.fillRect(
+                                0,
+                                height - 40,
+                                width,
+                                40
+                            );
+
+
+                            ctx.font =
+                                "bold 20px Arial";
+
+
+                            ctx.fillStyle =
+                                "white";
+
+
+                            ctx.fillText(
+                                textoMarca,
+                                20,
+                                height - 12
+                            );
+
+
+                            /* ==========================================
+                               RETORNA
+                            ========================================== */
+
+                            resolve({
+
+                                fileName:
+                                    customFileName,
+
+                                data:
+                                    canvas
+                                        .toDataURL(
+                                            "image/jpeg",
+                                            0.85
+                                        )
+                                        .split(",")[1]
+
+                            });
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
 
         }
 
@@ -1370,7 +1892,8 @@
 
 
                     if (
-                        fileInput.files.length > 0
+                        fileInput.files.length >
+                        0
                     ) {
 
                         obj.fileData =
@@ -1387,10 +1910,13 @@
                         await fetch(
                             API_URL,
                             {
-                                method: "POST",
+                                method:
+                                    "POST",
 
                                 body:
-                                    JSON.stringify(obj),
+                                    JSON.stringify(
+                                        obj
+                                    ),
 
                                 headers: {
                                     "Content-Type":
@@ -1436,7 +1962,9 @@
                 }
                 catch (error) {
 
-                    console.error(error);
+                    console.error(
+                        error
+                    );
 
 
                     showStatus(
@@ -1462,25 +1990,26 @@
 
 
         /* ==================================================
-           CARREGA VIATURAS DO FORMULÁRIO
-        ================================================== */
-
-
-        /* ==================================================
            JSONP
         ================================================== */
 
-        function jsonp(url) {
+        function jsonp(
+            url
+        ) {
 
             return new Promise(
-                (resolve, reject) => {
+                (
+                    resolve,
+                    reject
+                ) => {
 
                     const callbackName =
                         "jsonp_" +
                         Date.now() +
                         "_" +
                         Math.floor(
-                            Math.random() * 10000
+                            Math.random() *
+                            10000
                         );
 
 
@@ -1497,6 +2026,7 @@
                                 delete window[
                                     callbackName
                                 ];
+
 
                                 script.remove();
 
@@ -1515,7 +2045,9 @@
                     window[
                         callbackName
                     ] =
-                        function (data) {
+                        function (
+                            data
+                        ) {
 
                             clearTimeout(
                                 timeout
@@ -1530,7 +2062,9 @@
                             script.remove();
 
 
-                            resolve(data);
+                            resolve(
+                                data
+                            );
 
                         };
 
@@ -1594,7 +2128,9 @@
         ) {
 
             if (!url) {
+
                 return "";
+
             }
 
 
@@ -1647,7 +2183,7 @@
 
 
             /* ------------------------------------------
-               Gera thumbnail
+               GERA THUMBNAIL
             ------------------------------------------ */
 
             if (id) {
@@ -1663,8 +2199,7 @@
 
 
             /* ------------------------------------------
-               Se não for Drive,
-               mantém URL original
+               SE NÃO FOR DRIVE
             ------------------------------------------ */
 
             return url;
@@ -1673,85 +2208,119 @@
 
 
         /* ==================================================
-           CARREGA VIATURAS DA CONSULTA
+           CARREGA VIATURAS
         ================================================== */
 
         let consultaViaturasCarregadas =
             false;
 
-        /* ==================================================
-           CARREGA VIATURAS - UMA ÚNICA SOLICITAÇÃO
-        ================================================== */
 
-        let viaturasCarregadas = null;
-        let carregandoViaturas = null;
+        let viaturasCarregadas =
+            null;
+
+
+        let carregandoViaturas =
+            null;
 
 
         async function carregarViaturas() {
 
-            // Se já carregou anteriormente, reutiliza os dados
-            if (viaturasCarregadas) {
-                preencherViaturas(viaturasCarregadas);
+            /* ------------------------------------------
+               JÁ CARREGOU
+            ------------------------------------------ */
+
+            if (
+                viaturasCarregadas
+            ) {
+
+                preencherViaturas(
+                    viaturasCarregadas
+                );
+
+
                 return viaturasCarregadas;
+
             }
 
 
-            // Se já existe uma solicitação em andamento,
-            // aguarda a mesma em vez de fazer outra
-            if (carregandoViaturas) {
+            /* ------------------------------------------
+               SOLICITAÇÃO EM ANDAMENTO
+            ------------------------------------------ */
+
+            if (
+                carregandoViaturas
+            ) {
+
                 return carregandoViaturas;
+
             }
 
 
-            carregandoViaturas = jsonp(
-                API_URL + "?action=vtr"
-            )
-                .then(resposta => {
+            /* ------------------------------------------
+               BUSCA
+            ------------------------------------------ */
 
-                    if (resposta.status !== "success") {
-                        throw new Error(
-                            resposta.message ||
-                            "Erro ao carregar viaturas"
-                        );
-                    }
+            carregandoViaturas =
+                jsonp(
+                    API_URL +
+                    "?action=vtr"
+                )
+                    .then(
+                        resposta => {
+
+                            if (
+                                resposta.status !==
+                                "success"
+                            ) {
+
+                                throw new Error(
+                                    resposta.message ||
+                                    "Erro ao carregar viaturas"
+                                );
+
+                            }
 
 
-                    viaturasCarregadas =
-                        resposta.vtrs || [];
+                            viaturasCarregadas =
+                                resposta.vtrs ||
+                                [];
 
 
-                    preencherViaturas(
-                        viaturasCarregadas
+                            preencherViaturas(
+                                viaturasCarregadas
+                            );
+
+
+                            return viaturasCarregadas;
+
+                        }
+                    )
+                    .catch(
+                        erro => {
+
+                            console.error(
+                                "Erro ao carregar viaturas:",
+                                erro
+                            );
+
+
+                            document.getElementById(
+                                "viaturaSelect"
+                            ).innerHTML =
+                                '<option value="">Erro ao carregar</option>' +
+                                '<option value="outra">Outra (especificar em obs)</option>';
+
+
+                            document.getElementById(
+                                "viatura"
+                            ).innerHTML =
+                                '<option value="">Erro ao carregar</option>';
+
+
+                            throw erro;
+
+                        }
                     );
-
-
-                    return viaturasCarregadas;
-
-                })
-                .catch(erro => {
-
-                    console.error(
-                        "Erro ao carregar viaturas:",
-                        erro
-                    );
-
-
-                    document.getElementById(
-                        "viaturaSelect"
-                    ).innerHTML =
-                        '<option value="">Erro ao carregar</option>' +
-                        '<option value="outra">Outra (especificar em obs)</option>';
-
-
-                    document.getElementById(
-                        "viatura"
-                    ).innerHTML =
-                        '<option value="">Erro ao carregar</option>';
-
-
-                    throw erro;
-
-                });
 
 
             return carregandoViaturas;
@@ -1760,7 +2329,7 @@
 
 
         /* ==================================================
-           PREENCHE OS DOIS SELECTS COM A MESMA LISTA
+           PREENCHE OS DOIS SELECTS
         ================================================== */
 
         function preencherViaturas(
@@ -2031,8 +2600,16 @@
                         );
 
 
+                    viatura.className =
+                        "campo-viatura";
+
+
                     viatura.innerHTML =
-                        '<span class="label">Viatura</span>' +
+                        '<span class="label">' +
+                        '<i class="fas fa-car-side mr-1"></i>' +
+                        'Viatura' +
+                        '</span>' +
+
                         '<span class="valor">' +
                         escaparHTML(
                             registro.viatura
@@ -2041,7 +2618,7 @@
 
 
                     /* ==========================================
-                       OBS
+                       OBSERVAÇÃO
                     ========================================== */
 
                     const obs =
@@ -2050,9 +2627,18 @@
                         );
 
 
+                    obs.className =
+                        "campo-obs";
+
+
                     obs.innerHTML =
-                        '<span class="label">Observação</span>' +
+                        '<span class="label">' +
+                        '<i class="fas fa-comment-alt mr-1"></i>' +
+                        'Observação' +
+                        '</span>' +
+
                         '<span class="valor">' +
+
                         (
                             registro.obs
                                 ? escaparHTML(
@@ -2060,11 +2646,12 @@
                                 )
                                 : "—"
                         ) +
+
                         '</span>';
 
 
                     /* ==========================================
-                       DATA
+                       DATA / HORA
                     ========================================== */
 
                     const timestamp =
@@ -2073,8 +2660,24 @@
                         );
 
 
+                    timestamp.className =
+                        "campo-data";
+
+
+                    /*
+                     * O Apps Script já entrega o timestamp
+                     * formatado no fuso de São Paulo.
+                     *
+                     * Não usamos new Date() aqui,
+                     * evitando uma nova conversão de fuso.
+                     */
+
                     timestamp.innerHTML =
-                        '<span class="label">Data / Hora</span>' +
+                        '<span class="label">' +
+                        '<i class="fas fa-clock mr-1"></i>' +
+                        'Data / Hora' +
+                        '</span>' +
+
                         '<span class="valor data">' +
                         escaparHTML(
                             registro.timestamp
@@ -2092,8 +2695,8 @@
                         );
 
 
-                    arquivo.innerHTML =
-                        '<span class="label">Imagem</span>';
+                    arquivo.className =
+                        "campo-imagem";
 
 
                     if (
@@ -2175,14 +2778,21 @@
                     }
                     else {
 
-                        arquivo.innerHTML +=
+                        arquivo.innerHTML =
                             '<div class="sem-imagem">' +
+
                             '<i class="fas fa-image mr-1"></i>' +
+
                             'Sem imagem' +
+
                             '</div>';
 
                     }
 
+
+                    /* ==========================================
+                       MONTA O CARD
+                    ========================================== */
 
                     div.appendChild(
                         viatura
@@ -2307,22 +2917,27 @@
             return String(
                 valor || ""
             )
+
                 .replace(
                     /&/g,
                     "&amp;"
                 )
+
                 .replace(
                     /</g,
                     "&lt;"
                 )
+
                 .replace(
                     />/g,
                     "&gt;"
                 )
+
                 .replace(
                     /"/g,
                     "&quot;"
                 )
+
                 .replace(
                     /'/g,
                     "&#039;"
@@ -2334,9 +2949,6 @@
         /* ==================================================
            INICIALIZAÇÃO
         ================================================== */
-
-        // Carrega imediatamente as viaturas
-        // do formulário de registro.
 
         carregarViaturas();
 
