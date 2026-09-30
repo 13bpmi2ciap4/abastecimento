@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
+<title>Abastecimento</title>
+<style>
+/* ==================== estilo.css (inline) ==================== */
+:root {
+  --bg:#f4f6fa; --card:#fff; --fg:#0f172a; --muted:#64748b; --border:#e2e8f0;
+  --accent:#0f766e; --accent-fg:#fff; --accent-soft:#ccfbf1;
+  --danger:#dc2626; --danger-soft:#fee2e2; --ok:#16a34a; --ok-soft:#dcfce7; --warn:#d97706; --warn-soft:#fef3c7;
+  --sombra:0 1px 3px rgba(15,23,42,.08), 0 8px 24px rgba(15,23,42,.06); --raio:16px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:#0b1220; --card:#131c2e; --fg:#e5e7eb; --muted:#94a3b8; --border:#24314a;
+    --accent:#2dd4bf; --accent-fg:#042f2e; --accent-soft:#134e4a;
+    --danger:#f87171; --danger-soft:#450a0a; --ok:#4ade80; --ok-soft:#052e16; --warn:#fbbf24; --warn-soft:#451a03;
+    --sombra:0 1px 3px rgba(0,0,0,.4);
+  }
+}
+* { box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+[hidden] { display:none !important; }
+body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+
+/* Estrutura */
+.topo { position:sticky; top:0; z-index:5; background:var(--card); border-bottom:1px solid var(--border); padding-top:env(safe-area-inset-top); }
+.topo-in { max-width:1000px; margin:0 auto; padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.topo h1 { font-size:1.15rem; margin:0; }
+.app { max-width:520px; margin:0 auto; padding:16px 16px 120px; display:grid; gap:14px; }
+.app.largo { max-width:1000px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:var(--raio); padding:16px; box-shadow:var(--sombra); }
+
+/* Botões */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:48px; padding:0 18px; border-radius:12px;
+  border:1.5px solid var(--accent); background:transparent; color:var(--accent); font:600 1rem inherit; cursor:pointer; text-decoration:none; }
+.btn:active { transform:scale(.98); }
+.btn-primario { background:var(--accent); color:var(--accent-fg); }
+.btn-perigo { border-color:var(--danger); color:var(--danger); }
+.btn-grande { width:100%; min-height:56px; font-size:1.1rem; }
+.btn-peq { min-height:38px; padding:0 14px; font-size:.9rem; }
+.btn:disabled { opacity:.45; cursor:not-allowed; }
+.btn-icone { display:inline-flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px; background:var(--accent-soft); text-decoration:none; font-size:1.3rem; }
+
+/* Formulários */
+label.campo { display:block; font-size:.8rem; font-weight:600; color:var(--muted); margin-bottom:4px; }
+input, select { width:100%; min-height:46px; padding:0 12px; border:1.5px solid var(--border); border-radius:10px; background:var(--bg); color:var(--fg); font:inherit; font-size:16px; }
+input:focus, select:focus { outline:none; border-color:var(--accent); }
+.grade { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; }
+.grade-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+details > summary { cursor:pointer; font-weight:600; list-style:none; }
+details > summary::-webkit-details-marker { display:none; }
+details > summary::after { content:"▾"; float:right; color:var(--muted); }
+details[open] > summary::after { content:"▴"; }
+.dica { font-size:.8rem; color:var(--muted); margin:6px 0 0; }
+
+/* Foto */
+.vazio { text-align:center; display:grid; gap:12px; padding:8px 0; }
+.vazio-ic { font-size:3.2rem; }
+.vazio p { margin:0; color:var(--muted); }
+.previa img { width:100%; max-height:52vh; object-fit:contain; border-radius:12px; background:#000; }
+.previa .info { font-size:.8rem; color:var(--muted); margin:8px 0 12px; text-align:center; }
+.barra { position:fixed; left:0; right:0; bottom:0; z-index:5; padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top, var(--bg) 70%, transparent); }
+.barra > * { max-width:488px; margin:0 auto; display:flex; }
+
+/* Lista de dados */
+.dados { list-style:none; padding:0; margin:12px 0 0; text-align:left; }
+.dados li { display:flex; justify-content:space-between; gap:12px; padding:8px 0; border-bottom:1px solid var(--border); font-size:.95rem; }
+.dados li:last-child { border:0; }
+.dados li span:first-child { color:var(--muted); }
+.dados li span:last-child { font-weight:600; text-align:right; word-break:break-word; }
+
+/* Modal */
+dialog.modal { border:0; border-radius:22px; padding:24px 20px calc(20px + env(safe-area-inset-bottom)); width:min(92vw,440px); max-height:90vh; overflow:auto;
+  background:var(--card); color:var(--fg); box-shadow:0 20px 60px rgba(0,0,0,.35); text-align:center; animation:sobe .2s ease-out; }
+dialog.modal::backdrop { background:rgba(2,6,23,.6); backdrop-filter:blur(2px); }
+.modal-icone { width:64px; height:64px; border-radius:50%; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; font-size:2rem; background:var(--accent-soft); }
+.modal.sucesso .modal-icone { background:var(--ok-soft); }
+.modal.erro .modal-icone { background:var(--danger-soft); }
+.modal.aviso .modal-icone { background:var(--warn-soft); }
+.modal h2 { margin:0 0 6px; font-size:1.2rem; }
+.modal p { margin:0; color:var(--muted); white-space:pre-line; }
+.modal-acoes { display:grid; gap:10px; margin-top:20px; }
+.modal-acoes.lado { grid-template-columns:1fr 1fr; }
+.modal form { text-align:left; display:grid; gap:12px; margin-top:16px; }
+.spinner { width:44px; height:44px; margin:0 auto 12px; border-radius:50%; border:4px solid var(--border); border-top-color:var(--accent); animation:gira 1s linear infinite; }
+@media (max-width:600px) {
+  dialog.modal { margin:auto auto 0; width:100%; border-radius:22px 22px 0 0; }
+  dialog.modal.centro { margin:auto; width:min(92vw,440px); border-radius:22px; }
+}
+@keyframes gira { to { transform:rotate(360deg); } }
+@keyframes sobe { from { opacity:0; transform:translateY(16px); } }
+
+/* Toast */
+.toast { position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom)); transform:translateX(-50%); z-index:100;
+  background:var(--fg); color:var(--bg); padding:12px 20px; border-radius:999px; font-weight:600; box-shadow:var(--sombra); animation:sobe .2s ease-out; }
+
+/* ==================== consulta.html (inline) ==================== */
+.abas { display:grid; grid-template-columns:1fr 1fr; gap:6px; background:var(--card); border:1px solid var(--border); border-radius:14px; padding:5px; }
+.abas button { min-height:42px; border:0; border-radius:10px; background:transparent; color:var(--muted); font:600 .95rem inherit; cursor:pointer; }
+.abas button.ativa { background:var(--accent); color:var(--accent-fg); }
+.resumo { font-size:.9rem; color:var(--muted); padding:0 4px; }
+.lista { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:12px; }
+.item { display:grid; gap:8px; }
+.item-topo { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+.badge { display:inline-block; padding:2px 10px; border-radius:999px; background:var(--accent-soft); color:var(--accent); font-weight:700; font-size:.85rem; }
+.badge.outra { background:var(--warn-soft); color:var(--warn); }
+.placa { font-weight:700; font-size:1.1rem; margin-left:6px; }
+.total { font-weight:800; font-size:1.15rem; white-space:nowrap; }
+.meta { font-size:.85rem; color:var(--muted); display:flex; flex-wrap:wrap; gap:4px 14px; }
+.acoes { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
+.vazio-msg { text-align:center; color:var(--muted); padding:32px 0; }
+.filtros-acoes { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px; }
+.filtros-acoes .btn:first-child { grid-column:1 / -1; }
+.tabela-wrap { display:none; }
+.tabela-wrap table { width:100%; border-collapse:collapse; font-size:.92rem; }
+.tabela-wrap th { background:var(--card); text-align:left; font-size:.75rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); padding:12px 10px; border-bottom:2px solid var(--border); white-space:nowrap; }
+.tabela-wrap td { padding:10px; border-bottom:1px solid var(--border); white-space:nowrap; }
+.tabela-wrap tbody tr:hover { background:var(--accent-soft); }
+.tabela-wrap .num { text-align:right; font-variant-numeric:tabular-nums; }
+.tabela-wrap td.total { font-weight:800; }
+.tabela-wrap .cel-acoes { display:flex; gap:6px; justify-content:flex-end; }
+.tabela-wrap .btn-peq { min-height:34px; padding:0 10px; }
+@media (min-width:900px) {
+  .app.largo { max-width:1400px; padding-left:24px; padding-right:24px; }
+  .topo-in { max-width:1400px; padding-left:24px; padding-right:24px; }
+  #painelReg .lista { display:none; }
+  #painelReg .tabela-wrap { display:block; padding:0; overflow-x:auto; }
+  #painelReg .grade { grid-template-columns:repeat(6,1fr); }
+  .filtros-acoes { display:flex; }
+  .filtros-acoes .btn { min-width:150px; }
+  #mais { justify-self:center; min-width:240px; }
+}
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-in">
+    <h1 id="tituloTopo">⛽ Abastecimento</h1>
+  </div>
+</header>
+
+<main class="app largo" style="padding-bottom:40px">
+
+  <div class="abas" id="abasTopo">
+    <button id="tabAbast" class="ativa">⛽ Abastecimento</button>
+    <button id="tabCons">📋 Registros</button>
+  </div>
+
+  <!-- ==================== Painel: Abastecimento ==================== -->
+  <div id="painelAbast" style="display:grid;gap:14px">
+    <section class="card">
+      <div id="vazio" class="vazio">
+        <div class="vazio-ic">🧾</div>
+        <p>Fotografe o cupom do abastecimento</p>
+        <label class="btn btn-primario btn-grande" for="camera">📷 Tirar foto</label>
+        <label class="btn" for="galeria">🖼️ Escolher da galeria</label>
+      </div>
+      <div id="previa" class="previa" hidden>
+        <img id="imagem" alt="Foto do cupom">
+        <div class="info" id="tamanho"></div>
+        <div class="grade-2">
+          <label class="btn btn-peq" for="camera">📷 Nova foto</label>
+          <label class="btn btn-peq" for="galeria">🖼️ Galeria</label>
+        </div>
+      </div>
+      <input type="file" id="camera" accept="image/*" capture="environment" hidden>
+      <input type="file" id="galeria" accept="image/*" hidden>
+    </section>
+
+    <details class="card" id="cfg">
+      <summary>⚙️ Configurações</summary>
+      <div style="display:grid;gap:12px;margin-top:14px">
+        <div>
+          <label class="campo" for="apiKey">Chave da API do Gemini</label>
+          <input type="password" id="apiKey" placeholder="AIza..." autocomplete="off">
+          <p class="dica">Fica guardada apenas neste aparelho.</p>
+        </div>
+        <div>
+          <label class="campo" for="modelo">Modelo</label>
+          <input type="text" id="modelo" value="gemini-3.5-flash-lite">
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <!-- ==================== Painel: Registros (consulta) ==================== -->
+  <div id="painelCons" hidden>
+
+    <!-- Tela de senha -->
+    <div id="telaSenha" class="card" style="text-align:center;max-width:420px;margin:20px auto">
+      <div class="vazio-ic">🔒</div>
+      <h2 style="margin:0 0 8px;font-size:1.15rem">Acesso restrito</h2>
+      <p style="margin:0 0 16px;color:var(--muted);font-size:.95rem">Informe a senha para ver os registros.</p>
+      <form id="formSenha" style="display:grid;gap:12px">
+        <input type="password" id="senhaInput" placeholder="Senha" autocomplete="off" autofocus>
+        <button type="submit" class="btn btn-primario">Entrar</button>
+      </form>
+      <p id="senhaErro" style="color:var(--danger);font-size:.88rem;margin:10px 0 0" hidden>Senha incorreta.</p>
+    </div>
+
+    <!-- Conteúdo da consulta -->
+    <div id="conteudoCons" style="display:grid;gap:14px" hidden>
+
+      <div id="painelReg" style="display:grid;gap:14px">
+        <details class="card">
+          <summary>🔍 Filtros</summary>
+          <form id="filtros" style="margin-top:14px">
+            <div class="grade">
+              <div><label class="campo">Cupom de</label><input type="date" name="de"></div>
+              <div><label class="campo">Cupom até</label><input type="date" name="ate"></div>
+              <div><label class="campo">Viatura</label><input type="text" name="viatura" placeholder="ex.: 13281"></div>
+              <div><label class="campo">Placa</label><input type="text" name="placa" placeholder="ex.: TKS9C36"></div>
+              <div><label class="campo">Produto</label><select name="produto"><option value="">Todos</option></select></div>
+              <div><label class="campo">MAT</label><input type="text" name="mat"></div>
+              <div><label class="campo">Nº do cupom</label><input type="text" name="numero_cupom"></div>
+              <div><label class="campo">Valor total mín.</label><input type="number" step="0.01" name="vmin" inputmode="decimal"></div>
+              <div><label class="campo">Valor total máx.</label><input type="number" step="0.01" name="vmax" inputmode="decimal"></div>
+              <div><label class="campo">Km mín.</label><input type="number" name="kmin" inputmode="numeric"></div>
+              <div><label class="campo">Km máx.</label><input type="number" name="kmax" inputmode="numeric"></div>
+              <div><label class="campo">Ordenar por</label>
+                <select name="ordem">
+                  <option value="created_at.desc,id.desc">Envio: mais recente</option>
+                  <option value="created_at.asc,id.asc">Envio: mais antigo</option>
+                  <option value="data_cupom.desc,id.desc">Data do cupom: recente</option>
+                  <option value="valor_total.desc">Maior valor</option>
+                  <option value="quilometragem.desc">Maior km</option>
+                </select></div>
+            </div>
+            <div class="filtros-acoes">
+              <button type="submit" class="btn btn-primario">Pesquisar</button>
+              <button type="button" id="limpar" class="btn">Limpar</button>
+              <button type="button" id="csv" class="btn">Exportar CSV</button>
+            </div>
+          </form>
+        </details>
+
+        <div class="resumo" id="resumo"></div>
+        <div class="vazio-msg" id="semDados" hidden>Nenhum lançamento encontrado.</div>
+        <div class="lista" id="lista"></div>
+        <div class="card tabela-wrap">
+          <table>
+            <thead><tr>
+              <th>Enviado em</th><th>Viatura</th><th>Placa</th><th>Data cupom</th><th class="num">Km</th>
+              <th>Produto</th><th class="num">Unitário</th><th class="num">Total</th><th>MAT</th><th>Nº cupom</th><th></th>
+            </tr></thead>
+            <tbody id="corpo"></tbody>
+          </table>
+        </div>
+        <button id="mais" class="btn" hidden>Carregar mais 25</button>
+      </div>
+
+      <!-- Abas internas: Abastecimentos / Viaturas -->
+      <div class="abas" id="abasReg">
+        <button id="tabReg" class="ativa">Abastecimentos</button>
+        <button id="tabVtr">Viaturas</button>
+      </div>
+
+      <div id="painelVtr" style="display:grid;gap:14px" hidden>
+        <section class="card">
+          <h2 style="margin:0 0 12px;font-size:1.05rem" id="tituloVtr">Cadastrar viatura</h2>
+          <form id="formVtr" class="grade-2">
+            <div><label class="campo">Prefixo</label><input type="text" name="prefixo" required></div>
+            <div><label class="campo">Placa</label><input type="text" name="placa" required maxlength="8" style="text-transform:uppercase"></div>
+            <button type="submit" class="btn btn-primario" style="grid-column:1 / -1">Salvar</button>
+          </form>
+        </section>
+        <div class="lista" id="listaVtr"></div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<div class="barra" id="barraEnviar">
+  <button id="enviar" class="btn btn-primario btn-grande" disabled>Enviar abastecimento</button>
+</div>
+
+<!-- Modal de edição (consulta) -->
+<dialog class="modal" id="dlgEditar">
+  <div class="modal-icone">✏️</div>
+  <h2>Editar lançamento</h2>
+  <p id="editarInfo"></p>
+  <form id="formEditar">
+    <div class="grade-2">
+      <div><label class="campo">Placa</label><input type="text" name="placa" required maxlength="8" style="text-transform:uppercase"></div>
+      <div><label class="campo">Data do cupom</label><input type="date" name="data_cupom" required></div>
+      <div><label class="campo">Quilometragem</label><input type="number" name="quilometragem" required min="0" inputmode="numeric"></div>
+      <div><label class="campo">Produto</label><input type="text" name="produto" required></div>
+      <div><label class="campo">Valor unitário</label><input type="number" name="valor_unitario" required step="0.001" min="0.001" inputmode="decimal"></div>
+      <div><label class="campo">Valor total</label><input type="number" name="valor_total" required step="0.01" min="0.01" inputmode="decimal"></div>
+      <div><label class="campo">MAT</label><input type="text" name="mat" required></div>
+      <div><label class="campo">Nº do cupom</label><input type="text" name="numero_cupom" required></div>
+    </div>
+    <div class="modal-acoes lado">
+      <button type="button" class="btn" id="cancelarEdicao">Cancelar</button>
+      <button type="submit" class="btn btn-primario">Salvar</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+/* ==================== config.js (inline) ==================== */
+const SUPABASE_URL = 'https://gfxgynhwaxshkqgrcjgv.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_0Xfp9RS-ei0hcJ67QIM0lA_hnn5_rIV';
+
+async function sb(caminho, { method = 'GET', body, prefer } = {}) {
+  const headers = { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` };
+  if (body !== undefined) headers['Content-Type'] = 'application/json';
+  if (prefer) headers.Prefer = prefer;
+  const url = caminho.startsWith('__fn__')
+    ? `${SUPABASE_URL}/functions/v1/${caminho.slice(6)}`
+    : `${SUPABASE_URL}/rest/v1/${caminho}`;
+  const resp = await fetch(url, {
+    method, headers, body: body !== undefined ? JSON.stringify(body) : undefined,
+  });
+  const texto = await resp.text();
+  const dados = texto ? JSON.parse(texto) : null;
+  if (!resp.ok) {
+    const e = new Error(dados?.message || dados?.erro || `HTTP ${resp.status}`);
+    e.code = dados?.code;
+    throw e;
+  }
+  return dados;
+}
+
+const normalizarPlaca = p => String(p ?? '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+/* ==================== ui.js (inline) ==================== */
+const $ = id => document.getElementById(id);
+
+function el(tag, classe, texto) {
+  const e = document.createElement(tag);
+  if (classe) e.className = classe;
+  if (texto != null) e.textContent = texto;
+  return e;
+}
+
+const ICONES = { sucesso: '✅', erro: '❌', aviso: '⚠️', info: 'ℹ️', pergunta: '❓' };
+
+function abrirModal({ tipo = 'info', titulo, mensagem, conteudo, botoes = [{ texto: 'OK', valor: true, estilo: 'primario' }] }) {
+  return new Promise(resolve => {
+    const d = el('dialog', 'modal ' + tipo);
+    d.appendChild(el('div', 'modal-icone', ICONES[tipo]));
+    d.appendChild(el('h2', '', titulo));
+    if (mensagem) d.appendChild(el('p', '', mensagem));
+    if (conteudo) d.appendChild(conteudo);
+    const acoes = el('div', 'modal-acoes' + (botoes.length === 2 ? ' lado' : ''));
+    for (const b of botoes) {
+      const btn = el('button', 'btn' + (b.estilo ? ' btn-' + b.estilo : ''), b.texto);
+      btn.type = 'button';
+      btn.onclick = () => { resolve(b.valor); d.close(); };
+      acoes.appendChild(btn);
+    }
+    d.appendChild(acoes);
+    d.addEventListener('close', () => { resolve(false); d.remove(); });
+    d.addEventListener('click', e => { if (e.target === d) d.close(); });
+    document.body.appendChild(d);
+    d.showModal();
+  });
+}
+
+const sucesso = (titulo, opts = {}) => abrirModal({ tipo: 'sucesso', titulo, ...opts });
+const erro = (titulo, mensagem, opts = {}) => abrirModal({ tipo: 'erro', titulo, mensagem, ...opts });
+const aviso = (titulo, mensagem, opts = {}) => abrirModal({ tipo: 'aviso', titulo, mensagem, ...opts });
+
+function confirmar(titulo, mensagem, textoOk = 'Confirmar', perigo = false) {
+  return abrirModal({
+    tipo: 'pergunta', titulo, mensagem,
+    botoes: [
+      { texto: 'Cancelar', valor: false },
+      { texto: textoOk, valor: true, estilo: perigo ? 'perigo' : 'primario' },
+    ],
+  });
+}
+
+function carregando(texto) {
+  const d = el('dialog', 'modal centro');
+  d.appendChild(el('div', 'spinner'));
+  const t = el('h2', '', texto);
+  d.appendChild(t);
+  d.addEventListener('cancel', e => e.preventDefault());
+  document.body.appendChild(d);
+  d.showModal();
+  return { atualizar: x => { t.textContent = x; }, fechar: () => { d.close(); d.remove(); } };
+}
+
+function toast(texto) {
+  const t = el('div', 'toast', texto);
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+function listaDados(pares) {
+  const ul = el('ul', 'dados');
+  for (const [k, v] of pares) {
+    const li = el('li');
+    li.append(el('span', '', k), el('span', '', v ?? '—'));
+    ul.appendChild(li);
+  }
+  return ul;
+}
+
+const brl = (v, casas = 2) => v == null ? '—' : 'R$ ' + Number(v).toLocaleString('pt-BR', { minimumFractionDigits: casas, maximumFractionDigits: 3 });
+
+/* ==================== Lógica de abas superiores ==================== */
+const SENHA_CONSULTA = 'pmtaqua';
+let consultaLiberada = false;
+let consultaInicializada = false;
+
+function mostrarPainel(qual) {
+  const abast = qual === 'abast';
+  $('painelAbast').hidden = !abast;
+  $('painelCons').hidden = abast;
+  $('tabAbast').classList.toggle('ativa', abast);
+  $('tabCons').classList.toggle('ativa', !abast);
+  $('tituloTopo').textContent = abast ? '⛽ Abastecimento' : '📋 Registros';
+  $('barraEnviar').hidden = !abast;
+
+  if (!abast) {
+    if (consultaLiberada) {
+      $('telaSenha').hidden = true;
+      $('conteudoCons').hidden = false;
+      if (!consultaInicializada) {
+        consultaInicializada = true;
+        // dispara carregamento da consulta
+        carregarProdutos();
+        buscar();
+      }
+    } else {
+      $('telaSenha').hidden = false;
+      $('conteudoCons').hidden = true;
+      setTimeout(() => $('senhaInput').focus(), 50);
+    }
+  }
+}
+
+$('tabAbast').onclick = () => mostrarPainel('abast');
+$('tabCons').onclick = () => mostrarPainel('consulta');
+
+$('formSenha').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = $('senhaInput').value;
+  if (v === SENHA_CONSULTA) {
+    consultaLiberada = true;
+    $('senhaErro').hidden = true;
+    $('senhaInput').value = '';
+    mostrarPainel('consulta');
+  } else {
+    $('senhaErro').hidden = false;
+    $('senhaInput').value = '';
+    $('senhaInput').focus();
+  }
+});
+
+/* ==================== index.html — Abastecimento ==================== */
+const ALVO_BYTES = 300 * 1024;
+let blobComprimido = null;
+
+$('apiKey').value = localStorage.getItem('gemini_key') || '';
+const fmtKB = n => (n / 1024).toFixed(1) + ' KB';
+
+function carregarImagem(file) {
+  return new Promise((ok, err) => {
+    const img = new Image();
+    img.onload = () => ok(img);
+    img.onerror = () => err(new Error('Não foi possível ler a imagem.'));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+const paraBlob = (canvas, q) => new Promise(r => canvas.toBlob(r, 'image/jpeg', q));
+
+async function comprimir(file) {
+  const img = await carregarImagem(file);
+  let escala = Math.min(1, 1600 / Math.max(img.width, img.height));
+  let melhor = null;
+  for (let tentativa = 0; tentativa < 8; tentativa++) {
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(img.width * escala);
+    canvas.height = Math.round(img.height * escala);
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+    let lo = 0.3, hi = 0.95, cabe = null;
+    for (let i = 0; i < 7; i++) {
+      const q = (lo + hi) / 2;
+      const b = await paraBlob(canvas, q);
+      if (b.size <= ALVO_BYTES) { cabe = b; lo = q; } else { hi = q; }
+    }
+    if (cabe) return cabe;
+    melhor = await paraBlob(canvas, 0.3);
+    escala *= 0.8;
+  }
+  return melhor;
+}
+
+const blobParaBase64 = blob => new Promise(r => {
+  const fr = new FileReader();
+  fr.onload = () => r(fr.result.split(',')[1]);
+  fr.readAsDataURL(blob);
+});
+
+async function escolherArquivo(e) {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  const load = carregando('Preparando a foto…');
+  try {
+    blobComprimido = await comprimir(file);
+    $('imagem').src = URL.createObjectURL(blobComprimido);
+    $('tamanho').textContent = `${fmtKB(file.size)} → ${fmtKB(blobComprimido.size)}`;
+    $('vazio').hidden = true;
+    $('previa').hidden = false;
+    $('enviar').disabled = false;
+    load.fechar();
+  } catch (err) {
+    load.fechar();
+    erro('Foto inválida', err.message);
+  }
+}
+$('camera').addEventListener('change', escolherArquivo);
+$('galeria').addEventListener('change', escolherArquivo);
+
+function limparFoto() {
+  blobComprimido = null;
+  $('previa').hidden = true;
+  $('vazio').hidden = false;
+  $('enviar').disabled = true;
+}
+
+const PROMPT = `Você recebe a foto de um cupom fiscal de abastecimento de combustível. A foto tem uma tarja preta na parte inferior com o texto "VTR: <número da viatura> | <data>-<hora>".
+Extraia os dados e responda somente em JSON:
+- viatura: número após "VTR:" na tarja
+- placa: placa do veículo no cupom
+- data_cupom: data do cupom, formato DD/MM/AAAA
+- quilometragem: quilometragem informada no cupom (somente número)
+- produto: nome do combustível (ex.: ETANOL COMUM, GASOLINA COMUM, DIESEL S10)
+- valor_unitario: preço por litro (número decimal com ponto)
+- valor_total: valor total (número decimal com ponto)
+- mat: matrícula do motorista/condutor
+- numero_cupom: número do cupom fiscal
+Se algum campo não estiver legível, use null. Não invente valores.`;
+
+const SCHEMA = {
+  type: 'OBJECT',
+  properties: {
+    viatura: { type: 'STRING', nullable: true },
+    placa: { type: 'STRING', nullable: true },
+    data_cupom: { type: 'STRING', nullable: true },
+    quilometragem: { type: 'STRING', nullable: true },
+    produto: { type: 'STRING', nullable: true },
+    valor_unitario: { type: 'NUMBER', nullable: true },
+    valor_total: { type: 'NUMBER', nullable: true },
+    mat: { type: 'STRING', nullable: true },
+    numero_cupom: { type: 'STRING', nullable: true },
+  },
+};
+
+async function extrair(key, b64) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent($('modelo').value.trim())}:generateContent`;
+  const resp = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: PROMPT }, { inline_data: { mime_type: 'image/jpeg', data: b64 } }] }],
+      generationConfig: { responseMimeType: 'application/json', responseSchema: SCHEMA, temperature: 0 },
+    }),
+  });
+  const json = await resp.json();
+  if (!resp.ok) throw new Error('Gemini: ' + (json.error?.message || `HTTP ${resp.status}`));
+  const texto = json.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!texto) throw new Error('O Gemini não devolveu resposta. Tente uma foto mais nítida.');
+  return JSON.parse(texto);
+}
+
+async function resolverViatura(d) {
+  if (!d.placa && d.viatura) {
+    const r = await sb(`viaturas?select=placa&prefixo=eq.${encodeURIComponent(d.viatura)}&limit=1`);
+    if (r.length) d.placa = r[0].placa;
+  }
+  if (!d.placa) return 'Outra';
+  const r = await sb(`viaturas?select=prefixo&placa=eq.${encodeURIComponent(normalizarPlaca(d.placa))}&limit=1`);
+  return r[0]?.prefixo ?? 'Outra';
+}
+
+const ROTULOS = {
+  placa: 'Placa', data_cupom: 'Data do cupom', quilometragem: 'Quilometragem',
+  produto: 'Produto', valor_unitario: 'Valor unitário', valor_total: 'Valor total', mat: 'MAT', numero_cupom: 'Nº do cupom',
+};
+
+function validar(d) {
+  const faltando = Object.keys(ROTULOS).filter(k => d[k] == null || String(d[k]).trim() === '');
+  if (faltando.length) {
+    let msg = 'Não consegui ler: ' + faltando.map(k => ROTULOS[k]).join(', ') + '.';
+    if (faltando.includes('placa')) msg += '\n\nA placa não veio no cupom e a viatura não está cadastrada. Cadastre-a em Consultar > Viaturas.';
+    else msg += '\n\nTire outra foto, mais nítida e com o cupom inteiro.';
+    throw new Error(msg);
+  }
+  const [dia, mes, ano] = String(d.data_cupom).split('/');
+  return {
+    placa: normalizarPlaca(d.placa),
+    data_cupom: `${ano}-${mes}-${dia}`,
+    quilometragem: parseInt(String(d.quilometragem).replace(/\D/g, ''), 10),
+    produto: d.produto.trim(),
+    valor_unitario: d.valor_unitario,
+    valor_total: d.valor_total,
+    mat: String(d.mat).trim(),
+    numero_cupom: String(d.numero_cupom).trim(),
+  };
+}
+
+async function gravar(registro) {
+  try {
+    const [salvo] = await sb('abastecimentos', { method: 'POST', body: registro, prefer: 'return=representation' });
+    return salvo;
+  } catch (err) {
+    throw new Error(err.code === '23505' ? 'Este cupom já foi registrado.' : 'Erro ao salvar: ' + err.message);
+  }
+}
+
+$('enviar').addEventListener('click', async () => {
+  const key = $('apiKey').value.trim();
+  if (!key) {
+    $('cfg').open = true;
+    $('apiKey').focus();
+    return erro('Falta a chave do Gemini', 'Informe a chave em Configurações para ler o cupom.');
+  }
+  localStorage.setItem('gemini_key', key);
+
+  const inicio = performance.now();
+  const load = carregando('Lendo o cupom…');
+  try {
+    const b64 = await blobParaBase64(blobComprimido);
+    const dados = await extrair(key, b64);
+    const prefixo = await resolverViatura(dados);
+    const registro = validar(dados);
+
+    load.atualizar('Salvando…');
+    const salvo = await gravar(registro);
+
+    load.atualizar('Enviando ao Telegram…');
+    let falhaTelegram = null;
+    try {
+      await sb('__fn__enviar-telegram', { method: 'POST', body: { registro, created_at: salvo.created_at, imagem_base64: b64 } });
+    } catch (err) {
+      falhaTelegram = err.message;
+    }
+
+    load.fechar();
+    const segundos = ((performance.now() - inicio) / 1000).toFixed(1).replace('.', ',');
+    const conteudo = listaDados([
+      ['🚓 Viatura', prefixo],
+      ['🚘 Placa', registro.placa],
+      ['📅 Data do cupom', dados.data_cupom],
+      ['🛣️ Quilometragem', registro.quilometragem.toLocaleString('pt-BR')],
+      ['⛽ Produto', registro.produto],
+      ['💵 Valor unitário', brl(registro.valor_unitario, 3)],
+      ['💰 Valor total', brl(registro.valor_total)],
+      ['👤 MAT', registro.mat],
+      ['🧾 Nº do cupom', registro.numero_cupom],
+    ]);
+    limparFoto();
+    if (falhaTelegram) {
+      await aviso('Salvo, mas o Telegram falhou', `O registro foi salvo (${segundos} s), mas a mensagem não foi enviada:\n${falhaTelegram}`, { conteudo });
+    } else {
+      await sucesso('Abastecimento enviado!', { mensagem: `Salvo e enviado ao Telegram em ${segundos} s.`, conteudo });
+    }
+  } catch (err) {
+    load.fechar();
+    await erro('Não foi possível concluir', err.message);
+  }
+});
+
+/* ==================== consulta.html — Registros ==================== */
+const PASSO = 25;
+let limite = PASSO;
+let ultimos = [];
+
+const dataBR = iso => iso.split('-').reverse().join('/');
+const dataHoraBR = iso => new Date(iso).toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+
+function abaReg(reg) {
+  $('painelReg').hidden = !reg;
+  $('painelVtr').hidden = reg;
+  $('tabReg').classList.toggle('ativa', reg);
+  $('tabVtr').classList.toggle('ativa', !reg);
+  if (!reg) carregarViaturas();
+}
+$('tabReg').onclick = () => abaReg(true);
+$('tabVtr').onclick = () => abaReg(false);
+
+function montarQuery() {
+  const f = Object.fromEntries(new FormData($('filtros')));
+  const p = ['select=*'];
+  const like = (col, v) => v.trim() && p.push(`${col}=ilike.${encodeURIComponent('*' + v.trim() + '*')}`);
+  if (f.de) p.push(`data_cupom=gte.${f.de}`);
+  if (f.ate) p.push(`data_cupom=lte.${f.ate}`);
+  like('viatura', f.viatura);
+  if (f.placa.trim()) like('placa', normalizarPlaca(f.placa));
+  if (f.produto) p.push(`produto=eq.${encodeURIComponent(f.produto)}`);
+  like('mat', f.mat);
+  like('numero_cupom', f.numero_cupom);
+  if (f.vmin) p.push(`valor_total=gte.${f.vmin}`);
+  if (f.vmax) p.push(`valor_total=lte.${f.vmax}`);
+  if (f.kmin) p.push(`quilometragem=gte.${f.kmin}`);
+  if (f.kmax) p.push(`quilometragem=lte.${f.kmax}`);
+  p.push(`order=${f.ordem}`, `limit=${limite}`);
+  return 'abastecimentos_view?' + p.join('&');
+}
+
+function cartao(r) {
+  const c = el('article', 'card item');
+  const topo = el('div', 'item-topo');
+  const esq = el('div');
+  esq.append(el('span', 'badge' + (r.viatura === 'Outra' ? ' outra' : ''), r.viatura), el('span', 'placa', r.placa));
+  topo.append(esq, el('span', 'total', brl(r.valor_total)));
+
+  const meta1 = el('div', 'meta');
+  meta1.append(
+    el('span', '', '📅 ' + dataBR(r.data_cupom)),
+    el('span', '', '⛽ ' + r.produto),
+    el('span', '', brl(r.valor_unitario, 3) + '/L'),
+  );
+  const meta2 = el('div', 'meta');
+  meta2.append(
+    el('span', '', '🛣️ ' + r.quilometragem.toLocaleString('pt-BR') + ' km'),
+    el('span', '', '👤 ' + r.mat),
+    el('span', '', '🧾 ' + r.numero_cupom),
+  );
+  const meta3 = el('div', 'meta', 'Enviado em ' + dataHoraBR(r.created_at));
+
+  const acoes = el('div', 'acoes');
+  const ed = el('button', 'btn btn-peq', '✏️ Editar');
+  ed.onclick = () => abrirEdicao(r);
+  const ex = el('button', 'btn btn-peq btn-perigo', '🗑️ Excluir');
+  ex.onclick = () => excluir(r);
+  acoes.append(ed, ex);
+
+  c.append(topo, meta1, meta2, meta3, acoes);
+  return c;
+}
+
+function linha(r) {
+  const tr = document.createElement('tr');
+  const td = (texto, classe) => { const c = el('td', classe || '', texto); tr.appendChild(c); return c; };
+  td(dataHoraBR(r.created_at));
+  const v = td('');
+  v.appendChild(el('span', 'badge' + (r.viatura === 'Outra' ? ' outra' : ''), r.viatura));
+  td(r.placa, 'placa-t').style.fontWeight = '700';
+  td(dataBR(r.data_cupom));
+  td(r.quilometragem.toLocaleString('pt-BR'), 'num');
+  td(r.produto);
+  td(brl(r.valor_unitario, 3), 'num');
+  td(brl(r.valor_total), 'num total');
+  td(r.mat);
+  td(r.numero_cupom);
+  const acoes = td('').appendChild(el('div', 'cel-acoes'));
+  const ed = el('button', 'btn btn-peq', '✏️ Editar');
+  ed.onclick = () => abrirEdicao(r);
+  const ex = el('button', 'btn btn-peq btn-perigo', '🗑️');
+  ex.title = 'Excluir';
+  ex.onclick = () => excluir(r);
+  acoes.append(ed, ex);
+  return tr;
+}
+
+async function buscar(reset = true) {
+  if (reset) limite = PASSO;
+  $('resumo').textContent = 'Buscando…';
+  try {
+    ultimos = await sb(montarQuery());
+  } catch (err) {
+    $('resumo').textContent = '';
+    return erro('Erro na busca', err.message);
+  }
+  const lista = $('lista');
+  lista.replaceChildren();
+  $('semDados').hidden = ultimos.length > 0;
+  $('corpo').replaceChildren(...ultimos.map(linha));
+  for (const r of ultimos) lista.appendChild(cartao(r));
+  const total = ultimos.reduce((s, r) => s + Number(r.valor_total), 0);
+  $('resumo').textContent = `${ultimos.length} lançamento(s) · Total exibido: ${brl(total)}`;
+  $('mais').hidden = ultimos.length < limite;
+}
+
+async function excluir(r) {
+  if (!await confirmar('Excluir lançamento?', `Cupom ${r.numero_cupom} — ${r.placa}\nEsta ação não pode ser desfeita.`, 'Excluir', true)) return;
+  try {
+    await sb(`abastecimentos?id=eq.${r.id}`, { method: 'DELETE' });
+    toast('Lançamento excluído');
+    buscar(false);
+  } catch (err) {
+    erro('Não foi possível excluir', err.message);
+  }
+}
+
+let editando = null;
+
+function abrirEdicao(r) {
+  editando = r;
+  const f = $('formEditar');
+  for (const campo of ['placa', 'data_cupom', 'quilometragem', 'produto', 'valor_unitario', 'valor_total', 'mat', 'numero_cupom']) {
+    f.elements[campo].value = r[campo];
+  }
+  $('editarInfo').textContent = `Enviado em ${dataHoraBR(r.created_at)} · Viatura: ${r.viatura}`;
+  $('dlgEditar').showModal();
+}
+
+$('cancelarEdicao').onclick = () => $('dlgEditar').close();
+$('dlgEditar').addEventListener('click', e => { if (e.target === $('dlgEditar')) $('dlgEditar').close(); });
+
+$('formEditar').onsubmit = async e => {
+  e.preventDefault();
+  const f = e.target.elements;
+  const dados = {
+    placa: normalizarPlaca(f.placa.value),
+    data_cupom: f.data_cupom.value,
+    quilometragem: parseInt(f.quilometragem.value, 10),
+    produto: f.produto.value.trim(),
+    valor_unitario: Number(f.valor_unitario.value),
+    valor_total: Number(f.valor_total.value),
+    mat: f.mat.value.trim(),
+    numero_cupom: f.numero_cupom.value.trim(),
+  };
+  try {
+    await sb(`abastecimentos?id=eq.${editando.id}`, { method: 'PATCH', body: dados });
+    $('dlgEditar').close();
+    toast('Lançamento atualizado');
+    buscar(false);
+  } catch (err) {
+    erro('Não foi possível salvar', err.code === '23505' ? 'Já existe um lançamento com este cupom, data e placa.' : err.message);
+  }
+};
+
+async function carregarProdutos() {
+  try {
+    const r = await sb('abastecimentos?select=produto&order=produto.asc&limit=1000');
+    const sel = document.querySelector('select[name=produto]');
+    for (const p of [...new Set(r.map(x => x.produto))]) sel.add(new Option(p, p));
+  } catch { /* o filtro continua funcionando sem a lista */ }
+}
+
+function exportarCSV() {
+  const cols = ['created_at', 'viatura', 'placa', 'data_cupom', 'quilometragem', 'produto', 'valor_unitario', 'valor_total', 'mat', 'numero_cupom'];
+  const esc = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
+  const linhas = [cols.join(';'), ...ultimos.map(r => cols.map(c => esc(r[c])).join(';'))];
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\ufeff' + linhas.join('\n')], { type: 'text/csv;charset=utf-8' }));
+  a.download = 'abastecimentos.csv';
+  a.click();
+}
+
+$('filtros').onsubmit = e => { e.preventDefault(); buscar(); };
+$('limpar').onclick = () => { $('filtros').reset(); buscar(); };
+$('csv').onclick = exportarCSV;
+$('mais').onclick = () => { limite += PASSO; buscar(false); };
+
+async function carregarViaturas() {
+  try {
+    const lista = await sb('viaturas?select=*&order=prefixo.asc');
+    const box = $('listaVtr');
+    box.replaceChildren();
+    if (!lista.length) box.appendChild(el('div', 'vazio-msg', 'Nenhuma viatura cadastrada.'));
+    for (const v of lista) {
+      const c = el('article', 'card item');
+      const topo = el('div', 'item-topo');
+      const esq = el('div');
+      esq.append(el('span', 'badge', v.prefixo), el('span', 'placa', v.placa));
+      topo.appendChild(esq);
+      const acoes = el('div', 'acoes');
+      const ed = el('button', 'btn btn-peq', '✏️ Editar');
+      ed.onclick = () => {
+        const f = $('formVtr').elements;
+        f.prefixo.value = v.prefixo;
+        f.placa.value = v.placa;
+        $('tituloVtr').textContent = 'Editar viatura';
+        f.placa.focus();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      };
+      const ex = el('button', 'btn btn-peq btn-perigo', '🗑️ Excluir');
+      ex.onclick = async () => {
+        if (!await confirmar('Excluir viatura?', `${v.prefixo} — ${v.placa}`, 'Excluir', true)) return;
+        try { await sb(`viaturas?id=eq.${v.id}`, { method: 'DELETE' }); toast('Viatura excluída'); carregarViaturas(); }
+        catch (err) { erro('Não foi possível excluir', err.message); }
+      };
+      acoes.append(ed, ex);
+      c.append(topo, acoes);
+      box.appendChild(c);
+    }
+  } catch (err) {
+    erro('Erro ao carregar viaturas', err.message);
+  }
+}
+
+$('formVtr').onsubmit = async e => {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target));
+  try {
+    await sb('viaturas?on_conflict=prefixo', {
+      method: 'POST',
+      prefer: 'resolution=merge-duplicates',
+      body: { prefixo: f.prefixo.trim(), placa: normalizarPlaca(f.placa) },
+    });
+    e.target.reset();
+    $('tituloVtr').textContent = 'Cadastrar viatura';
+    toast('Viatura salva');
+    carregarViaturas();
+  } catch (err) {
+    erro('Não foi possível salvar', err.code === '23505' ? 'Esta placa já está cadastrada em outra viatura.' : err.message);
+  }
+};
+
+/* ==================== Inicialização ==================== */
+if (matchMedia('(min-width:900px)').matches) document.querySelector('#painelReg details').open = true;
+
+// Abre por padrão o painel Abastecimento (index)
+mostrarPainel('abast');
+</script>
+</body>
+</html>
