@@ -177,7 +177,7 @@ dialog.modal::backdrop { background:rgba(2,6,23,.6); backdrop-filter:blur(2px); 
       <div style="display:grid;gap:12px;margin-top:14px">
         <div>
           <label class="campo" for="apiKey">Chave da API do Gemini</label>
-          <input type="password" id="apiKey" placeholder="AIza..." value="AQ.Ab8RN6L4F_SzC3on6_Wte0U594xBX3hH6-Aai5wCGm5wiNz01Q" autocomplete="off">
+          <input type="password" id="apiKey" placeholder="AIza..." autocomplete="off">
           <p class="dica">Fica guardada apenas neste aparelho.</p>
         </div>
         <div>
@@ -462,7 +462,7 @@ $('formSenha').addEventListener('submit', e => {
 const ALVO_BYTES = 300 * 1024;
 let blobComprimido = null;
 
-$('apiKey').value = localStorage.getItem('gemini_key') || '';
+$('apiKey').value = "AQ.Ab8RN6L-S9qB6SY0lGToxxn4rvDc6h7SdokXlyOTGK8Basthnw" || '';
 const fmtKB = n => (n / 1024).toFixed(1) + ' KB';
 
 function carregarImagem(file) {
@@ -623,12 +623,8 @@ async function gravar(registro) {
 }
 
 $('enviar').addEventListener('click', async () => {
-  const key = $('apiKey').value.trim();
-  if (!key) {
-    $('cfg').open = true;
-    $('apiKey').focus();
-    return erro('Falta a chave do Gemini', 'Informe a chave em Configurações para ler o cupom.');
-  }
+  const key = "AQ.Ab8RN6L-S9qB6SY0lGToxxn4rvDc6h7SdokXlyOTGK8Basthnw";
+  
   localStorage.setItem('gemini_key', key);
 
   const inicio = performance.now();
